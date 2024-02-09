@@ -1,0 +1,17 @@
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0; /* Add some vertical padding */
+  display: flex; /* Use flex for better alignment */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  background-color: #a8a8a8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow for a more 3D effect */
+  transition: all 0.3s ease; /* Add transition for smoother feel */
+  z-index: 1000; /* Ensure the header stays on top of other content */
+}
+.sticky-header button {
+  margin: 0 10px; /* Add horizontal margin */
+}
