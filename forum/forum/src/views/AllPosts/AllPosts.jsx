@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getAllposts from "../../services/post.service";
+import {getAllPosts} from "../../services/post.services";
 import Post from "../../components/Post";
 import { useSearchParams } from "react-router-dom";
 
@@ -14,7 +14,7 @@ export default function AllPosts() {
   };
 
   useEffect(() => {
-    getAllposts(search).then(setPosts);
+    getAllPosts(search).then(setPosts);
   }, [search]);
 
   const togglePostLike = (handle, id) => {

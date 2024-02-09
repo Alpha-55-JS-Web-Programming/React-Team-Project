@@ -20,7 +20,7 @@ export const addPost = async (author, title, content) => {
   });
 };
 
-export const getAllposts = async (search) => {
+export const getAllPosts = async (search) => {
   const snapshot = await get(query(ref(db, 'posts'), orderByChild('createdOn')));
   if (!snapshot.exists()) {
     return [];
