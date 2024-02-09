@@ -10,10 +10,18 @@ import { Register } from "./views/Register/Register";
 import { Header } from "./components/Header/Header";
 import { CreatePost } from "./views/CreatePost/CreatePost";
 import { Footer } from "./components/Footer/Footer";
+import { AppContext } from "./Context/AppContext"; //???
 
 function App() {
+  const [context, setContext] = useState({
+    user: null,
+    userData: null,
+});
+
+
   return (
     <Router>
+      <AppContext.Provider value={{ ...context, setContext }} />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
