@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 /**
  * @param {{children:any, onClick:function}} props
  */
-export function Button({ children = null, onClick = () => {} }) {
+export default function Button({ children = null, onClick = () => {} }) {
   return (
     <>
       <button onClick={onClick}>{children}</button>

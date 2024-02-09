@@ -1,4 +1,4 @@
-export function Latest() {
+export default function Latest() {
   return (
     <>
       <title>Latest</title>

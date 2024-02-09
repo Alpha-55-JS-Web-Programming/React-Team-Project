@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 import "./Header.css";
 
-export function Header() {
+export default function Header() {
   return (
     <>
       <header className="sticky-header">

@@ -1,4 +1,4 @@
-export function Trending() {
+export default function Trending() {
   return (
     <>
       <title>Trending</title>

@@ -1,5 +1,5 @@
 import { isValidElement, useContext, useEffect, useState } from "react";
-import { Button } from "../../components/Button/Button";
+import Button from "../../components/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext"; //???
 import { loginUser } from "../../services/auth.service";
@@ -27,6 +27,7 @@ export default function Login() {
     try {
       const credentials = await loginUser(form.email, form.password);
       setContext({ user: credentials.user, userData: null });
+      navigate('/');
     } catch (error) {
       console.log(error);
     }

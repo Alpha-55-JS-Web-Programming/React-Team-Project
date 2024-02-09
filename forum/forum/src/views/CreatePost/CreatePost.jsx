@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../components/Button/Button";
+import Button from "../../components/Button/Button";
 
-export function CreatePost() {
+export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   // const [newPost, setNewPost] = useState([]);
