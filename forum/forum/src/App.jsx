@@ -30,7 +30,6 @@ function App() {
           <Route path="/Latest" element={<Latest />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/allposts" element={<AllPosts />} />
-
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
