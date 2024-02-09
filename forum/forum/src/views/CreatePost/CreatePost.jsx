@@ -1,38 +1,46 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../../components/Button/Button";
+import { addPost } from "../../services/post.services";
+import { AppContext } from "../../Context/AppContext";
 
 export default function CreatePost() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  // const [newPost, setNewPost] = useState([]);
-  // useEffect(()=>{postNewThread().then(setNewPost)},[newPost])
+  const { userData } = useContext(AppContext);
+  const [post, setPost] = useState({
+    title: '',
+    content: '',
+  });
+
+  const updatePost = (value, key) => {
+    setPost({
+      ...post,
+      [key]: value,
+    });
+  };
+
+  const createPost = async () => {
+    if (post.title.length < 3) {
+      return alert('Title must be at least 3 characters long');
+    }
+    if (post.content.length < 5) {
+      return alert('Content must be at least 5 characters long');
+    }
+    
+    await addPost(userData.handle, post.title, post.content);
+
+    setPost({
+      title: '',
+      content: '',
+    });
+  };
 
   return (
     <div>
-      <p>Create a thread</p>
-      <label htmlFor="create-title">Title </label>
-      <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" name="create-title" id="create-title"/>
-      <br /><br />
-      <label htmlFor="create-content">Content </label>
-      <textarea value={content} onChange={(e) => setContent(e.target.value)} name="create-content" id="create-content" cols="30" rows="10"></textarea>
-      <br /><br />
+      <h1>Create post</h1>
+      <label htmlFor="input-title">Title:</label>
+      <input value={post.title} onChange={e => updatePost(e.target.value, 'title')} type="text" name="input-title" id="input-title" /><br/>
+      <label htmlFor="input-content">Content:</label><br/>
+      <textarea value={post.content} onChange={e => updatePost(e.target.value, 'content')} name="input-content" id="input-content" cols="30" rows="10"></textarea><br/><br/>
       <Button onClick={createPost}>Create</Button>
     </div>
   );
 }
-
-// export const postNewThread = async(p)=>{
-// const response = await //not fetch, but firebase method
-// const data = response.json()
-// return data
-// }
-
-const createPost = async () => {
-  await postNewThread({
-    title,
-    content,
-  });
-  setTitle("");
-  setContent("");
-  // then GET the new state from firebase and re-render with useEffect
-};

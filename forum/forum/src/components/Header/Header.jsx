@@ -9,6 +9,7 @@ export default function Header() {
         <NavLink to="/"> <Button>Home</Button> </NavLink>
         <NavLink to="/trending"> <Button>Top 10 Trending</Button> </NavLink>
         <NavLink to="/latest"> <Button>Top 10 Latest</Button> </NavLink>
+        <NavLink to="/allposts"> <Button>AllPosts</Button> </NavLink>
 
         {/* <NavLink to='/login'><Button>Logout</Button></NavLink> */}
         {/* <Autenticate> <NavLink to='/create-post'><Button>Create Post</Button></NavLink></Autenticate> */}
