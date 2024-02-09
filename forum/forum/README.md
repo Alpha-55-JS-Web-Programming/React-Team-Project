@@ -1,6 +1,6 @@
 <img src="https://webassets.telerikacademy.com/images/default-source/logos/telerik-academy.svg" alt="logo" width="300px" style="margin-top: 20px;"/>
 
-# React Forum 
+# React Forum
 
 ### 1. Description
 
@@ -44,7 +44,7 @@ On the home page, anonymous users must be presented with the core features of th
 
 Anonymous users must be able to register and log in.
 
-Anonymous users should be able to see a list of the top 10 most commented posts and a list of the 10 most recently created posts. 
+Anonymous users should be able to see a list of the top 10 most commented posts and a list of the 10 most recently created posts.
 
 <br />
 
@@ -96,7 +96,7 @@ A User must be able to add/remove/edit tags only on its own posts. Admins must b
 
 <br />
 
-## Firebase Realtime Database 
+## Firebase Realtime Database
 
 All data should be stored in the document (NoSQL) database hosted by Google Firebase. You must think of a way to organize your documents to achieve the functionalities described above.
 
@@ -104,12 +104,11 @@ All data should be stored in the document (NoSQL) database hosted by Google Fire
 
 #### Scenario 1
 
-A friend of Pavel’s told him about this amazing forum, where lots of people share their ideas and perspectives on the crypto/stock market. Pavel enters the website and sees a feed of posts. He can sort them by most liked or newest. He can also filter them by a certain word/s. He is an anonymous user so he cannot create a post yet. He registers and then logs in to the forum. He can now start sharing his ideas with his buddy crypto “holders.” 
+A friend of Pavel’s told him about this amazing forum, where lots of people share their ideas and perspectives on the crypto/stock market. Pavel enters the website and sees a feed of posts. He can sort them by most liked or newest. He can also filter them by a certain word/s. He is an anonymous user so he cannot create a post yet. He registers and then logs in to the forum. He can now start sharing his ideas with his buddy crypto “holders.”
 
 #### Scenario 2
 
-
-Your forum has accumulated thousands of new users. Most of them are proactively helpful and positive, but some of them started posting spam or/and irrelevant information to the forum. You hire a moderator. You instruct the moderator to enter the forum and create a first-time registration. You as an admin give admin rights to your moderator through the forum. They can now start deleting posts and ban users that do not follow the forum rules! 
+Your forum has accumulated thousands of new users. Most of them are proactively helpful and positive, but some of them started posting spam or/and irrelevant information to the forum. You hire a moderator. You instruct the moderator to enter the forum and create a first-time registration. You as an admin give admin rights to your moderator through the forum. They can now start deleting posts and ban users that do not follow the forum rules!
 
 <br />
 
