@@ -1,6 +1,16 @@
 import { ref, push, get, query, equalTo, orderByChild, update } from 'firebase/database';
 import { db } from '../config/firebase-config';
 
+/**
+ * 
+ * @param {*} author 
+ * @param {*} title 
+ * @param {*} content 
+ * @param {*} comments // actually on update we will get the comments 
+ * @param {*} likes
+ * @param {*} dislikes 
+ * @returns 
+ */
 export const addPost = async (author, title, content) => {
   return push(ref(db, 'posts'), {
     author,

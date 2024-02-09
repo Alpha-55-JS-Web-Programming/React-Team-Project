@@ -29,7 +29,7 @@ export default function Register() {
       }
 
       const credentials = await registerUser(form.email, form.password);
-      await createUserHandle(form.username, credentials.user.uid, form.email);
+      await createUserHandle(form.username, credentials.user.uid, form.email, form.password);
 
       setContext({ user, userData: null });
       navigate('/');
