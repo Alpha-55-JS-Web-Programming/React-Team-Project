@@ -5,8 +5,8 @@ import { Home } from "./views/Home/Home";
 import { NotFound } from "./views/NotFound/NotFound";
 import { Trending } from "./views/Trending/Trending";
 import { Latest } from "./views/Latest/Latest";
-import { Login } from "./views/Login/Login";
-import { Register } from "./views/Register/Register";
+import Login  from "./views/Login/Login";
+import  Register from "./views/Register/Register";
 import { Header } from "./components/Header/Header";
 import { CreatePost } from "./views/CreatePost/CreatePost";
 import { Footer } from "./components/Footer/Footer";
@@ -16,8 +16,7 @@ function App() {
   const [context, setContext] = useState({
     user: null,
     userData: null,
-});
-
+  });
 
   return (
     <Router>
