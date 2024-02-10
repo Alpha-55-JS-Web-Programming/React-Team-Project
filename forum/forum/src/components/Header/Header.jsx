@@ -12,6 +12,7 @@ export default function Header() {
     await logoutUser();
     setContext({ user: null, userData: null });
   };
+
   return (
       <header className="sticky-header">
         <NavLink to="/"> <Button>Home</Button> </NavLink>
@@ -19,8 +20,7 @@ export default function Header() {
         <NavLink to="/latest"> <Button>Top 10 Latest</Button> </NavLink>
         <NavLink to="/allposts"> <Button>AllPosts</Button> </NavLink>
         { user && <NavLink to="/create-post"> <Button>Create Post</Button> </NavLink>} 
-        { user 
-        ? (
+        { user ? (
           <>
             {`Welcome, ${userData?.handle}`}
             <Button onClick={logout}>Logout</Button>
@@ -30,10 +30,6 @@ export default function Header() {
           <NavLink to="/register"> <Button>Register</Button></NavLink>
           <NavLink to="/login"><Button>Login</Button></NavLink>
         </>) }
-
-
-     {/*<NavLink to="/register"> <Button>Register</Button> </NavLink>
-        <NavLink to="/login"> <Button>Login</Button> </NavLink> */}
-      </header>
+        </header>
   );
 }

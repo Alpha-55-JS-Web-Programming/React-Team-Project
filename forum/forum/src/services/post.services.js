@@ -1,4 +1,4 @@
-import { ref, push, get, query, equalTo, orderByChild, update } from 'firebase/database';
+import { ref, push, get, query, update } from 'firebase/database';
 import { db } from '../config/firebase-config';
 
 /**

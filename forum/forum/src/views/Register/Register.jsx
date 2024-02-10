@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Register() {
   const { setContext } = useContext(AppContext);
   const [form, setForm] = useState({
+    FirstAndLast: '',
     handle: '',
     email: '',
     password: '',
@@ -29,7 +30,7 @@ export default function Register() {
       }
 
       const credentials = await registerUser(form.email, form.password);
-      await createUserHandle(form.handle, credentials.user.uid, form.email);
+      await createUserHandle(form.FirstAndLast, form.handle, credentials.user.uid, form.email);
 
       setContext({ user, userData: null });
       navigate('/');
@@ -41,6 +42,7 @@ export default function Register() {
   return (
     <div>
       <h1>Register</h1>
+      <label htmlFor="first-and-last-name">First name and last name: </label><input value={form.FirstAndLast} onChange={updateForm('first-and-last-name')} type="text" name="first-and-last-name" id="first-and-last-name" /><br/>
       <label htmlFor="handle">Handle: </label><input value={form.handle} onChange={updateForm('handle')} type="text" name="handle" id="handle" /><br/>
       <label htmlFor="email">Email: </label><input value={form.email} onChange={updateForm('email')} type="text" name="email" id="email" /><br/>
       <label htmlFor="password">Password: </label><input value={form.password} onChange={updateForm('password')} type="password" name="password" id="password" /><br/><br/>

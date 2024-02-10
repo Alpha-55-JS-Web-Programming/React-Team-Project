@@ -41,7 +41,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        <AppContext.Provider value={{ ...context, setContext }} />
+        <AppContext.Provider value={{ ...context, setContext }}>
         <Header />
         
         <Routes>
@@ -56,6 +56,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        </AppContext.Provider>
     </BrowserRouter>
   );
 }
