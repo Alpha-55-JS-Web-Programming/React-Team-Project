@@ -14,12 +14,30 @@ import { AppContext } from "./Context/AppContext"; //???
 import Footer from "./components/Footer/Footer";
 import AllPosts from "./views/AllPosts/AllPosts";
 import SinglePost from "./views/SinglePost/SinglePost";
+import Authenticated from "./hoc/Authenticated";
+import { auth } from "./config/firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getUserData } from "./services/users.service";
+
 
 function App() {
   const [context, setContext] = useState({
     user: null,
     userData: null,
   });
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (user) {
+      getUserData(user.uid)
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            setContext({ user, userData: snapshot.val()[Object.keys(snapshot.val())[0]] });
+          }
+        })
+      }
+  }, [user]);
 
   return (
     <BrowserRouter>
@@ -32,9 +50,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/Latest" element={<Latest />} />
           <Route path="/trending" element={<Trending />} />
-          <Route path="/allposts" element={<AllPosts />} />
-          <Route path="/posts/:id" element={<SinglePost />} />
-          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/allposts" element={<Authenticated><AllPosts /></Authenticated>} />
+          <Route path="/posts/:id" element={<Authenticated><SinglePost /></Authenticated>} />
+          <Route path="/create-post" element={<Authenticated><CreatePost /></Authenticated>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
