@@ -2,14 +2,14 @@ import { ref, push, get, query, equalTo, orderByChild, update } from 'firebase/d
 import { db } from '../config/firebase-config';
 
 /**
- * 
- * @param {*} author 
- * @param {*} title 
- * @param {*} content 
- * @param {*} comments // actually on update we will get the comments 
+ *
+ * @param {*} author
+ * @param {*} title
+ * @param {*} content
+ * @param {*} comments // actually on update we will get the comments
  * @param {*} likes
- * @param {*} dislikes 
- * @returns 
+ * @param {*} dislikes
+ * @returns
  */
 export const addPost = async (author, title, content) => {
   return push(ref(db, 'posts'), {
@@ -21,7 +21,7 @@ export const addPost = async (author, title, content) => {
 };
 
 export const getAllPosts = async (search) => {
-  const snapshot = await get(query(ref(db, 'posts'), orderByChild('createdOn')));
+  const snapshot = await get(query(ref(db, 'posts')));
   if (!snapshot.exists()) {
     return [];
   }
