@@ -23,15 +23,35 @@ export default function Register() {
   const register = async () => {
     // TODO: Validate inputs
     try {
+      // Validate inputs
+      if (form.FirstAndLast.length < 4 || form.FirstAndLast.length > 32) {
+        alert("First name and last name must be between 4 and 32 symbols.");
+        return;
+      }
+  
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(form.email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      
+      // TODO: Check if the email is already registered
+  
       const user = await getUserByHandle(form.handle);
       if (user.exists()) {
         console.log(user.val());
         return console.log(`Handle @${form.handle} already exists`);
       }
-
+  
       const credentials = await registerUser(form.email, form.password);
-      await createUserHandle(form.FirstAndLast, form.handle, credentials.user.uid, form.email);
-
+      await createUserHandle(
+        form.FirstAndLast,
+        form.handle,
+        credentials.user.uid,
+        form.email
+      );
+  
       setContext({ user, userData: null });
       navigate('/');
     } catch (error) {
