@@ -25,6 +25,7 @@ function App() {
     <BrowserRouter>
         <AppContext.Provider value={{ ...context, setContext }} />
         <Header />
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
