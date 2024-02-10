@@ -24,8 +24,9 @@ export default function CreatePost() {
     if (post.content.length < 5) {
       return alert('Content must be at least 5 characters long');
     }
-    
-    await addPost(userData.handle, post.title, post.content);
+
+    // TODO: userData should be set when the user logs in
+    await addPost(userData?.handle ?? 'test-user-id', post.title, post.content);
 
     setPost({
       title: '',
