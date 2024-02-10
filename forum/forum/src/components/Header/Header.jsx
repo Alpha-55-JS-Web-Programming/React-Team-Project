@@ -27,7 +27,7 @@ export default function Header() {
           </>
         )
         : (<>
-          <NavLink to="/register"> <Button>Register</Button></NavLink>
+          {/* <NavLink to="/register"> <Button>Register</Button></NavLink> */}
           <NavLink to="/login"><Button>Login</Button></NavLink>
         </>) }
         </header>

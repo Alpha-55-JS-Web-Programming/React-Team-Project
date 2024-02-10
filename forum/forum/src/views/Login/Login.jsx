@@ -1,25 +1,27 @@
-import { isValidElement, useContext, useEffect, useState } from "react";
+// Login.jsx
+
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import { useLocation, useNavigate } from "react-router-dom";
-import { AppContext } from "../../Context/AppContext"; //???
+import { AppContext } from "../../Context/AppContext";
 import { loginUser } from "../../services/auth.service";
 
 export default function Login() {
   const { user, setContext } = useContext(AppContext);
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const navigate = useNavigate();
   const location = useLocation();
 
-  const updateForm = prop => e => {
+  const updateForm = (prop) => (e) => {
     setForm({ ...form, [prop]: e.target.value });
   };
 
   useEffect(() => {
     if (user) {
-      navigate(location.state?.from.pathname || '/');
+      navigate(location.state?.from.pathname || "/");
     }
   }, [user]);
 
@@ -27,7 +29,7 @@ export default function Login() {
     try {
       const credentials = await loginUser(form.email, form.password);
       setContext({ user: credentials.user, userData: null });
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -36,9 +38,34 @@ export default function Login() {
   return (
     <div>
       <h1>Login</h1>
-      <label htmlFor="email">Email: </label><input value={form.email} onChange={updateForm('email')} type="text" id="email" name="email" /><br/><br/>
-      <label htmlFor="password">Password: </label><input value={form.password} onChange={updateForm('password')} type="text" id="password" name="password" /><br/><br/>
+      <label htmlFor="email">Email: </label>
+      <input
+        value={form.email}
+        onChange={updateForm("email")}
+        type="text"
+        id="email"
+        name="email"
+      />
+      <br />
+      <br />
+      <label htmlFor="password">Password: </label>
+      <input
+        value={form.password}
+        onChange={updateForm("password")}
+        type="text"
+        id="password"
+        name="password"
+      />
+      <br />
+      <br />
       <Button onClick={login}>Login</Button>
+      <p>
+        Click{" "}
+        <Link to="/register" style={{ textDecoration: "underline" }}>
+          here
+        </Link>{" "}
+        if you don't have a registration.
+      </p>
     </div>
-  )
+  );
 }
