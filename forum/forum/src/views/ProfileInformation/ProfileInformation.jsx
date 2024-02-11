@@ -2,13 +2,13 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { logoutUser } from "../../services/auth.service";
 import Button from "../../components/Button/Button";
+import { updateUserData } from "../../services/users.service";
 
 export default function ProfileInformation() {
   const { user, userData, setContext } = useContext(AppContext);
   const [form, setForm] = useState({
     FullName: userData?.FullName || "",
     handle: userData?.handle || "",
-    // Add other fields as needed
   });
 
   const updateForm = (prop) => (e) => {
@@ -18,12 +18,10 @@ export default function ProfileInformation() {
   const updateProfile = async () => {
     try {
       // Validate inputs if needed
-
-      // Update user handle
       await updateUserData(form.FullName, form.handle, user.uid);
-
+  
       // Update context to reflect changes
-      setContext({ user, userData: { ...userData, FullName: form.FullName, handle: form.handle } });
+      setContext({ user, userData: { ...userData, FullName: form.FullName, handle: form.handle} });
     } catch (error) {
       console.log(error.message);
     }
@@ -36,8 +34,8 @@ export default function ProfileInformation() {
     } catch (error) {
       console.log(error.message);
     }
-  };
-
+  }; 
+  
   return (
     <div>
       <h1>Profile Information</h1>

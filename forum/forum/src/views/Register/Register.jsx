@@ -8,11 +8,12 @@ import { useNavigate } from "react-router-dom";
 export default function Register() {
   const { setContext } = useContext(AppContext);
   const [form, setForm] = useState({
-    FullName: '',
-    handle: '',
-    email: '',
-    password: '',
+    FullName: userData?.FullName || "",
+    handle: userData?.handle || "",
+    email: "",
+    password: "",
   });
+  
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -37,9 +38,6 @@ export default function Register() {
         setErrorMessage("Please enter a valid email address.");
         return;
       }
-
-      // TODO: Check if the email is already registered
-
       const user = await getUserByHandle(form.handle);
       if (user.exists()) {
         // console.log(user.val());

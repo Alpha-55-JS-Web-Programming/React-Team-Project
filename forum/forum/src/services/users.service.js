@@ -1,17 +1,10 @@
-import { get, set, ref, query, equalTo, orderByChild } from 'firebase/database';
+import { get, set, ref, query, equalTo, orderByChild, update } from 'firebase/database';
 import { db } from '../config/firebase-config';
 import { format } from 'date-fns';
 
 export const getUserByHandle = (handle = 'pesho') => {
-
   return get(ref(db, `users/${handle}`));
 };
-
-// DONT DELETE THIS CODE:
-// export const createUserHandle = (FullName, handle, uid, email) => {
-
-//   return set(ref(db, `users/${handle}`), {FullName, handle, uid, email, createdOn: new Date().valueOf(), likedTweets: {} })
-// };
 
 export const createUserHandle = (FullName, handle, uid, email) => {
   const timestamp = new Date().valueOf();
@@ -30,3 +23,26 @@ export const createUserHandle = (FullName, handle, uid, email) => {
 export const getUserData = (uid) => {
   return get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)));
 };
+
+export const updateUserData = async (FullName, handle, uid) => {
+  const userRef = ref(db, `users/${handle}`);
+
+  const updates = {};
+  updates['/FullName'] = FullName;
+  updates['/handle'] = handle;
+
+  try {
+    await update(userRef, updates);
+    return console.log("User data updated successfully.");
+  } catch (error) {
+    return console.error("Error updating user data:", error);
+  }
+};
+
+
+
+// DONT DELETE THIS CODE:
+// export const createUserHandle = (FullName, handle, uid, email) => {
+
+//   return set(ref(db, `users/${handle}`), {FullName, handle, uid, email, createdOn: new Date().valueOf(), likedTweets: {} })
+// };
