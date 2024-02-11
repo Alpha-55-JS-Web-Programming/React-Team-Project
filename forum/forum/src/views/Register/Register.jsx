@@ -14,6 +14,8 @@ export default function Register() {
     password: '',
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const navigate = useNavigate();
 
   const updateForm = prop => e => {
@@ -25,25 +27,26 @@ export default function Register() {
     try {
       // Validate inputs
       if (form.FirstAndLast.length < 4 || form.FirstAndLast.length > 32) {
-        alert("First name and last name must be between 4 and 32 symbols.");
+        setErrorMessage("First name and last name must be between 4 and 32 symbols.");
         return;
       }
-  
+
       // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(form.email)) {
-        alert("Please enter a valid email address.");
+        setErrorMessage("Please enter a valid email address.");
         return;
       }
-      
+
       // TODO: Check if the email is already registered
-  
+
       const user = await getUserByHandle(form.handle);
       if (user.exists()) {
-        console.log(user.val());
-        return console.log(`Handle @${form.handle} already exists`);
+        // console.log(user.val());
+        setErrorMessage(`Handle @${form.handle} already exists`);
+        return;
       }
-  
+
       const credentials = await registerUser(form.email, form.password);
       await createUserHandle(
         form.FirstAndLast,
@@ -51,10 +54,15 @@ export default function Register() {
         credentials.user.uid,
         form.email
       );
-  
-      setContext({ user, userData: null });
+
+      setContext({ user: credentials.user, userData: null });
       navigate('/');
     } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        setErrorMessage('This email is already in use.');
+      } else {
+        setErrorMessage('An error occurred during registration. Please try again.');
+      }
       console.log(error.message);
     }
   };
@@ -67,6 +75,7 @@ export default function Register() {
       <label htmlFor="email">Email: </label><input value={form.email} onChange={updateForm('email')} type="text" name="email" id="email" /><br/>
       <label htmlFor="password">Password: </label><input value={form.password} onChange={updateForm('password')} type="password" name="password" id="password" /><br/><br/>
       <Button onClick={register}>Register</Button>
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   )
 }
