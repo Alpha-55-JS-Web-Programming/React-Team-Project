@@ -24,20 +24,19 @@ export const getUserData = (uid) => {
   return get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)));
 };
 
-export const updateUserData = async (FullName, handle, uid) => {
-  const userRef = ref(db, `users/${handle}`);
-
+export const updateUserData = async (FullName, newHandle, uid, oldHandle = null) => {
+  const userRef = ref(db, `users/${oldHandle || newHandle}`);
   const updates = {};
   updates['/FullName'] = FullName;
-  updates['/handle'] = handle;
 
   try {
     await update(userRef, updates);
-    return console.log("User data updated successfully.");
+    console.log("User data updated successfully.");
   } catch (error) {
-    return console.error("Error updating user data:", error);
+    console.error("Error updating user data:", error);
   }
 };
+
 
 
 

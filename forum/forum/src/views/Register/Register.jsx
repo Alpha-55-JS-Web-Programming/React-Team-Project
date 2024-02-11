@@ -8,17 +8,14 @@ import { useNavigate } from "react-router-dom";
 export default function Register() {
   const { setContext } = useContext(AppContext);
   const [form, setForm] = useState({
-    FullName: userData?.FullName || "",
-    handle: userData?.handle || "",
+    FullName: "",
+    handle: "",
     email: "",
     password: "",
   });
   
-
   const [errorMessage, setErrorMessage] = useState('');
-
   const navigate = useNavigate();
-
   const updateForm = prop => e => {
     setForm({ ...form, [prop]: e.target.value });
   };
@@ -26,21 +23,19 @@ export default function Register() {
   const register = async () => {
     // TODO: Validate inputs
     try {
-      // Validate inputs
       if (form.FullName.length < 4 || form.FullName.length > 32) {
         setErrorMessage("First name and last name must be between 4 and 32 symbols.");
         return;
       }
-
       // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(form.email)) {
         setErrorMessage("Please enter a valid email address.");
         return;
       }
+
       const user = await getUserByHandle(form.handle);
       if (user.exists()) {
-        // console.log(user.val());
         setErrorMessage(`Handle @${form.handle} already exists`);
         return;
       }

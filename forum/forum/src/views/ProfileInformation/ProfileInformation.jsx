@@ -9,6 +9,7 @@ export default function ProfileInformation() {
   const [form, setForm] = useState({
     FullName: userData?.FullName || "",
     handle: userData?.handle || "",
+    email: userData?.email || "",
   });
 
   const updateForm = (prop) => (e) => {
@@ -18,10 +19,9 @@ export default function ProfileInformation() {
   const updateProfile = async () => {
     try {
       // Validate inputs if needed
-      await updateUserData(form.FullName, form.handle, user.uid);
-  
+      await updateUserData(form.FullName, form.handle, form.email, user.uid);
       // Update context to reflect changes
-      setContext({ user, userData: { ...userData, FullName: form.FullName, handle: form.handle} });
+      setContext({ user, userData: { ...userData, FullName: form.FullName, email: form.email, handle: form.handle} });
     } catch (error) {
       console.log(error.message);
     }
@@ -35,7 +35,7 @@ export default function ProfileInformation() {
       console.log(error.message);
     }
   }; 
-  
+
   return (
     <div>
       <h1>Profile Information</h1>
@@ -45,6 +45,9 @@ export default function ProfileInformation() {
         <br/>
         <label htmlFor="handle">Handle: </label>
         <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br/>
+        <br/>
+        <label htmlFor="email">Email: </label>
+        <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br/>
         <br/>
         {/* Add other input fields as needed for additional information */}
         
