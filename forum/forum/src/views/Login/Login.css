@@ -193,3 +193,13 @@ img {
     font-size: 2rem;
   }
 }
+
+.login__error {
+  color: red;
+  background-color: #fff3f3;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: var(--font-medium);
+}

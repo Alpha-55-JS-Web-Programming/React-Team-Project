@@ -11,11 +11,13 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
   const updateForm = (prop) => (e) => {
     setForm({ ...form, [prop]: e.target.value });
+    setErrorMsg('');
   };
 
   useEffect(() => {
@@ -30,6 +32,13 @@ export default function Login() {
       setContext({ user: credentials.user, userData: null });
       navigate("/");
     } catch (error) {
+      if (error.code === 'auth/invalid-credential') {
+        setErrorMsg("The email or/and password you entered is/are incorrect. Please try again.");
+      } else if (error.code === 'auth/too-many-requests') {
+        setErrorMsg("Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.");
+      } else {
+        setErrorMsg("An error occurred. Please try again.");
+      }
       console.log(error);
     }
   };
@@ -53,7 +62,9 @@ export default function Login() {
       <div action="" className="login__form">
         <h1 className="login__title">Login</h1>
 
+
         <div className="login__content">
+        {errorMsg && <p className="login__error">{errorMsg}</p>}
           <div className="login__box">
             <i className="ri-user-3-line login__icon"></i>
 
