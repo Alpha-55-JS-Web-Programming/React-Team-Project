@@ -27,6 +27,14 @@ export default function PostDetails({ post, togglePostLike }) {
       <h4>{post.title} <Button onClick={toggleLike}>{post.likedBy.includes(userData?.handle) ? 'Dislike' : 'Like'}</Button></h4>
       <p>{post.content}</p>
       <p>{new Date(post.createdOn).toLocaleDateString('bg-BG')}</p>
+        
+      <Button onClick={() => navigate('/allposts')} >Back</Button>
+      {/*  author and admin only */}
+      <Button onClick={() => navigate('/allposts')} >Edit</Button>
+      <Button onClick={() => navigate('/allposts')} >Delete</Button>
+
+      <Button onClick={() => navigate('/allposts')} >Comment</Button>
+
     </div>
   )
 }
