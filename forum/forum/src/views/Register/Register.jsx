@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Register() {
   const { setContext } = useContext(AppContext);
   const [form, setForm] = useState({
-    FirstAndLast: '',
+    FullName: '',
     handle: '',
     email: '',
     password: '',
@@ -26,7 +26,7 @@ export default function Register() {
     // TODO: Validate inputs
     try {
       // Validate inputs
-      if (form.FirstAndLast.length < 4 || form.FirstAndLast.length > 32) {
+      if (form.FullName.length < 4 || form.FullName.length > 32) {
         setErrorMessage("First name and last name must be between 4 and 32 symbols.");
         return;
       }
@@ -49,7 +49,7 @@ export default function Register() {
 
       const credentials = await registerUser(form.email, form.password);
       await createUserHandle(
-        form.FirstAndLast,
+        form.FullName,
         form.handle,
         credentials.user.uid,
         form.email
@@ -70,7 +70,7 @@ export default function Register() {
   return (
     <div>
       <h1>Register</h1>
-      <label htmlFor="first-and-last-name">First name and last name: </label><input value={form.FirstAndLast} onChange={updateForm('FirstAndLast')} type="text" name="first-and-last-name" id="first-and-last-name" /><br/>
+      <label htmlFor="full-name">Full name: </label><input value={form.FullName} onChange={updateForm('FullName')} type="text" name="full-name" id="full-name" /><br/>
       <label htmlFor="handle">Handle: </label><input value={form.handle} onChange={updateForm('handle')} type="text" name="handle" id="handle" /><br/>
       <label htmlFor="email">Email: </label><input value={form.email} onChange={updateForm('email')} type="text" name="email" id="email" /><br/>
       <label htmlFor="password">Password: </label><input value={form.password} onChange={updateForm('password')} type="password" name="password" id="password" /><br/><br/>

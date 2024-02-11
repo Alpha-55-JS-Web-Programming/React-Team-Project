@@ -6,7 +6,7 @@ import Button from "../../components/Button/Button";
 export default function ProfileInformation() {
   const { user, userData, setContext } = useContext(AppContext);
   const [form, setForm] = useState({
-    FirstAndLast: userData?.FirstAndLast || "",
+    FullName: userData?.FullName || "",
     handle: userData?.handle || "",
     // Add other fields as needed
   });
@@ -20,10 +20,10 @@ export default function ProfileInformation() {
       // Validate inputs if needed
 
       // Update user handle
-      await updateUserHandle(form.FirstAndLast, form.handle, user.uid);
+      await updateUserData(form.FullName, form.handle, user.uid);
 
       // Update context to reflect changes
-      setContext({ user, userData: { ...userData, FirstAndLast: form.FirstAndLast, handle: form.handle } });
+      setContext({ user, userData: { ...userData, FullName: form.FullName, handle: form.handle } });
     } catch (error) {
       console.log(error.message);
     }
@@ -42,8 +42,8 @@ export default function ProfileInformation() {
     <div>
       <h1>Profile Information</h1>
       <form>
-        <label htmlFor="first-and-last-name">First name and last name: </label>
-        <input value={form.FirstAndLast} onChange={updateForm("FirstAndLast")} type="text" name="first-and-last-name" id="first-and-last-name" /><br/>
+        <label htmlFor="full-name">Full name: </label>
+        <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br/>
         <br/>
         <label htmlFor="handle">Handle: </label>
         <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br/>
