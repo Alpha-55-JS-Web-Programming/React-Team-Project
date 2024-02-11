@@ -1,8 +1,6 @@
 import { db } from '../../config/firebase-config';
-import { collection, getDocs, orderBy,  } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { query,limitToLast, orderByChild } from 'firebase/database';
-import {  } from 'firebase/database';
 
 
 export default function Latest() {
