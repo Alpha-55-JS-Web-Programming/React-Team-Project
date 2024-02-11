@@ -18,7 +18,7 @@ import Authenticated from "./hoc/Authenticated";
 import { auth } from "./config/firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getUserData } from "./services/users.service";
-
+import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
 
 function App() {
   const [context, setContext] = useState({
@@ -53,6 +53,7 @@ function App() {
           <Route path="/allposts" element={<Authenticated><AllPosts /></Authenticated>} />
           <Route path="/posts/:id" element={<Authenticated><SinglePost /></Authenticated>} />
           <Route path="/create-post" element={<Authenticated><CreatePost /></Authenticated>} />
+          <Route path="/profile-information" element={<Authenticated><ProfileInformation /></Authenticated>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

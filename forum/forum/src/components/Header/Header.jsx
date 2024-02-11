@@ -20,16 +20,15 @@ export default function Header() {
         <NavLink to="/latest"> <Button>Top 10 Latest</Button> </NavLink>
         <NavLink to="/allposts"> <Button>AllPosts</Button> </NavLink>
         { user && <NavLink to="/create-post"> <Button>Create Post</Button> </NavLink>} 
-        { user ? (
-          <>
-            {`Welcome, ${userData?.handle}`}
-            <Button onClick={logout}>Logout</Button>
-          </>
-        )
-        : (<>
-          {/* <NavLink to="/register"> <Button>Register</Button></NavLink> */}
+        {user ? (
+        <>
+          <NavLink to="/profile-information" className={"profile"}>{`Welcome, ${userData?.handle}`}</NavLink>
+        </>
+          ) : (
+        <>
           <NavLink to="/login"><Button>Login</Button></NavLink>
-        </>) }
-        </header>
+        </>
+        )}
+      </header>
   );
 }
