@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {getAllPosts} from "../../services/post.services";
 import PostOverview from "./PostOverview";
 import { useSearchParams } from "react-router-dom";
+import { Sort } from "../../components/Sort/Sort";
 
 export default function AllPosts() {
   const [posts, setPosts] = useState([]);
@@ -30,6 +31,9 @@ export default function AllPosts() {
   return (
     <div>
       <h1>All posts</h1>
+
+        <Sort />
+
         <label htmlFor="search">Search </label>
         <input value={search} onChange={e => setSearch(e.target.value)} type="text" name="search" id="search" /><br/>
         {posts.map((post) => (
