@@ -1,20 +1,25 @@
 import { db } from '../../config/firebase-config';
-import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { collection, getDocs, orderBy,  } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
+import { query,limitToLast, orderByChild } from 'firebase/database';
+import {  } from 'firebase/database';
+
 
 export default function Latest() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchLatestPosts = async () => {
-      const collectionRef = collection(db, `posts/`);
-      const q = query(collectionRef, orderBy('createdAt', 'desc'), limit(10));
-      const querySnapshot = await getDocs(q);
-      const postsData = [];
-      querySnapshot.forEach((doc) => {
-        postsData.push(doc.data());
+
+      const collectionRef = db.ref('posts').orderByChild('createdOn').limitToLast(10);
+      collectionRef.on('value', (snapshot) => {
+        const postsData = [];
+        snapshot.forEach((childSnapshot) => {
+          postsData.push(childSnapshot.val());
+        });
+        setPosts(postsData.reverse()); 
       });
-      setPosts(postsData);
+      return () => postsRef.off('value');
     };
 
     fetchLatestPosts();
