@@ -17,10 +17,10 @@ export default function PostDetails({ post, togglePostLike }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   
-  const addCommentToDatabase = (postId, comment) => {
-    const commentsRef = db.ref(`posts/${id}/comments`);
-    commentsRef.push(comment);
-  };
+  // const addCommentToDatabase = (postId, comment) => {
+  //   const commentsRef = db.ref(`posts/${id}/comments`);
+  //   commentsRef.push(comment);
+  // };
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
   };
@@ -42,14 +42,14 @@ export default function PostDetails({ post, togglePostLike }) {
   
 
   
-  const toggleLike = async () => {
-    if (post.likedBy.includes(userData.handle)) {
-      dislikePost(userData.handle, post.id);
-    } else {
-      likePost(userData.handle, post.id);
-    }
-    togglePostLike(userData.handle, post.id);
-  };
+  // const toggleLike = async () => {
+  //   if (post.likedBy.includes(userData.handle)) {
+  //     dislikePost(userData.handle, post.id);
+  //   } else {
+  //     likePost(userData.handle, post.id);
+  //   }
+  //   togglePostLike(userData.handle, post.id);
+  // };
 
  return (
     <div className="post">
@@ -57,23 +57,25 @@ export default function PostDetails({ post, togglePostLike }) {
       <p>Content: {post.content}</p>
       <p>Posted by: {post.authorDetails?.handle || 'Unknown'}</p> {/* Display author's handle */}
       <p>Date: {new Date(post.createdOnReadable).toLocaleDateString('bg-BG')}</p>
-     
+
+      <textarea value={newComment} onChange={handleCommentChange} placeholder="Add a comment..."/>
+       <Button onClick= {handleAddComment} >Comment</Button>  
 
       <div>
         <h3>Comments:</h3>
         <ul>
           {comments.map((comment, index) => (
             <li key={index}>{comment}</li>
+                  
           ))}
         </ul>
         {post.comments && post.comments.map((comment, index) => (
           <div key={index}>
-            <p>{comment.author}: {comment.text}</p>
+            <p>{comment.author}: {comment.text} { <Button  >reply</Button>  } </p>
           </div>
         ))}
-        <textarea value={newComment} onChange={handleCommentChange} placeholder="Add a comment..."/>
 
-      <Button onClick= {handleAddComment} >Comment</Button>
+
       </div>
       <p>Likes: {post.likedBy.length}</p>
 
