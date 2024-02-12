@@ -66,11 +66,13 @@ export default function PostDetails({ post, togglePostLike }) {
             <li key={index}>{comment}</li>
           ))}
         </ul>
-        <textarea
-          value={newComment}
-          onChange={handleCommentChange}
-          placeholder="Add a comment..."
-        />
+        {post.comments && post.comments.map((comment, index) => (
+          <div key={index}>
+            <p>{comment.author}: {comment.text}</p>
+          </div>
+        ))}
+        <textarea value={newComment} onChange={handleCommentChange} placeholder="Add a comment..."/>
+
       <Button onClick= {handleAddComment} >Comment</Button>
       </div>
       <p>Likes: {post.likedBy.length}</p>

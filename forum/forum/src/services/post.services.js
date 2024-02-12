@@ -53,6 +53,8 @@ export const getPostById = async (id) => {
     ...snapshot.val(),
     createdOn: new Date(snapshot.val().createdOn).toString(),
     likedBy: snapshot.val().likedBy ? Object.keys(snapshot.val().likedBy) : [],
+    // Initialize comments array to handle posts without comments
+    comments: snapshot.val().comments ? Object.values(snapshot.val().comments) : [],
   };
 
   const userSnapshot = await getUserByHandle(post.author);
