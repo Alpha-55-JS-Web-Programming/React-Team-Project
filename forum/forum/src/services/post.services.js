@@ -20,6 +20,8 @@ export const addPost = async (author, title, content) => {
     title,
     content,
     createdOnReadable: readableDate,
+    content: [],
+    likedBy: {},
   });
 };
 
@@ -79,3 +81,7 @@ export const dislikePost = (handle, postId) => {
   return update(ref(db), updateLikes);
 };
 
+export const addCommentToPost = (postId, commentData) => {
+  const commentsRef = ref(db, `posts/${postId}/comments`);
+  return push(commentsRef, commentData);
+};

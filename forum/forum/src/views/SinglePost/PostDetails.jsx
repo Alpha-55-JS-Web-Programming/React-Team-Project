@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../Context/AppContext';
 import { db } from '../../config/firebase-config';
-
+import { addCommentToPost } from '../../services/post.services';
 
 /**
  *
@@ -26,10 +26,18 @@ export default function PostDetails({ post, togglePostLike }) {
   };
   const handleAddComment = () => {
     if (newComment.trim() !== '') {
-      setComments([...comments, newComment]);
-      setNewComment('');
+      const commentData = {
+        author: userData.handle, // Assuming userData contains the current user's data
+        text: newComment,
+        createdOn: new Date().valueOf() // Stores timestamp of the comment
+      };
+      addCommentToPost(post.id, commentData)
+        .then(() => {
+          setComments([...comments, commentData.text]); // Update local state to display the new comment
+          setNewComment(''); // Clear the comment input field
+        })
+        .catch(error => console.error("Error adding comment:", error));
     }
-    addCommentToDatabase(post.id, newComment);
   };
   
 
