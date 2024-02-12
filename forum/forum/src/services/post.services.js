@@ -1,6 +1,7 @@
 import { ref, push, get, query, update } from 'firebase/database';
 import { db } from '../config/firebase-config';
-
+import { format } from 'date-fns';
+import { getUserByHandle } from './users.service';
 /**
  *
  * @param {*} author
@@ -12,11 +13,13 @@ import { db } from '../config/firebase-config';
  * @returns
  */
 export const addPost = async (author, title, content) => {
+  const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+
   return push(ref(db, 'posts'), {
     author,
     title,
     content,
-    createdOn: Date.now(),
+    createdOnReadable: readableDate,
   });
 };
 
@@ -39,7 +42,6 @@ export const getAllPosts = async (search) => {
 };
 
 export const getPostById = async (id) => {
-
   const snapshot = await get(ref(db, `posts/${id}`));
   if (!snapshot.exists()) {
     return null;
@@ -52,7 +54,13 @@ export const getPostById = async (id) => {
     likedBy: snapshot.val().likedBy ? Object.keys(snapshot.val().likedBy) : [],
   };
 
-  return post;
+  const userSnapshot = await getUserByHandle(post.author);
+  if (userSnapshot.exists()) {
+    const user = userSnapshot.val();
+    return { ...post, authorDetails: user };
+  } else {
+    return post;
+  }
 };
 
 export const likePost = (handle, postId) => {

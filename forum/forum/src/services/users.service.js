@@ -7,7 +7,6 @@ export const getUserByHandle = (handle = 'pesho') => {
 };
 
 export const createUserHandle = (FullName, handle, uid, email) => {
-  const timestamp = new Date().valueOf();
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
   
   return set(ref(db, `users/${handle}`), {
@@ -15,7 +14,6 @@ export const createUserHandle = (FullName, handle, uid, email) => {
     handle,
     uid,
     email,
-    createdOn: timestamp,
     createdOnReadable: readableDate,
   })
 };

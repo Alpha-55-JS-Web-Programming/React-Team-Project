@@ -2,7 +2,6 @@ import { db } from '../../config/firebase-config';
 import React, { useEffect, useState } from 'react';
 import { query,limitToLast, orderByChild } from 'firebase/database';
 
-
 export default function Latest() {
   const [posts, setPosts] = useState([]);
 
@@ -17,7 +16,7 @@ export default function Latest() {
         });
         setPosts(postsData.reverse()); 
       });
-      return () => postsRef.off('value');
+      return () => collectionRef.off('value');
     };
 
     fetchLatestPosts();

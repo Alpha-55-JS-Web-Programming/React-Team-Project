@@ -31,6 +31,8 @@ export default function CreatePost() {
     setPost({
       title: '',
       content: '',
+      author: '',
+      
     });
   };
 

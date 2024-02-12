@@ -80,7 +80,7 @@ export default function Login() {
             <label type="login-check" className="login__check-label"> Remember me </label>
           </div>
 
-          <a href="#" class="login__forgot">Forgot Password?</a> 
+          <a href="#" className="login__forgot">Forgot Password?</a> 
         </div>
         <button onClick={login} className="login__button">Login</button>
         <p className="login__register">Don't have an account?{" "}<Link to="/register" style={{ textDecoration: "underline" }}>Register</Link>{" "}

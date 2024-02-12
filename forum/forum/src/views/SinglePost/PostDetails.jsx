@@ -22,30 +22,29 @@ export default function PostDetails({ post, togglePostLike }) {
     togglePostLike(userData.handle, post.id);
   };
 
-  return (
+ return (
     <div className="post">
-      <h4>{post.title} <Button onClick={toggleLike}>{post.likedBy.includes(userData?.handle) ? 'Dislike' : 'Like'}</Button></h4>
-      <p>{post.content}</p>
-      <p>{new Date(post.createdOn).toLocaleDateString('bg-BG')}</p>
-        
+      <h4>{post.title}</h4>
+      <p>Content: {post.content}</p>
+      <p>Posted by: {post.authorDetails?.handle || 'Unknown'}</p> {/* Display author's handle */}
+      <p>Date: {new Date(post.createdOn).toLocaleDateString('bg-BG')}</p>
+     
       <Button onClick={() => navigate('/allposts')} >Back</Button>
-      {/*  author and admin only */}
       <Button onClick={() => navigate('/allposts')} >Edit</Button>
       <Button onClick={() => navigate('/allposts')} >Delete</Button>
-
       <Button onClick={() => navigate('/allposts')} >Comment</Button>
-
     </div>
-  )
+  );
 }
 
 PostDetails.propTypes = {
-    post: PropTypes.shape({
+  post: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.string,
     createdOn: PropTypes.string,
     likedBy: PropTypes.array,
+    authorDetails: PropTypes.object,
   }),
   togglePostLike: PropTypes.func,
 };
