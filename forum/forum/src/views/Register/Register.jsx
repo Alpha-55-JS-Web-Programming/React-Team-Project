@@ -26,7 +26,7 @@ export default function Register() {
   };
 
   function validateDetails(mobile) {
- 
+
     const mobileRegex = /^\d{10}$/;
     if (!mobileRegex.test(mobile)) {
       setErrorMessage("Mobile number must be of 9 digits");
@@ -42,18 +42,18 @@ export default function Register() {
         return;
       }
       // Basic email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(form.email)) {
         setErrorMessage("Please enter a valid email address.");
         return;
       }
     //   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
-  
+
     // if (!passwordRegex.test(password)) {
     //   setErrorMessage("Password error: Length must be 8 with 1 uppercase 1 lowercase and 1 special character");
     //   return false; // Password doesn't meet the criteria.
     // }
-  
+
     if (form.password !== form.confirmPassword) {
       setErrorMessage("Password and Confirm Password do not match");
       return false; // Passwords do not match.
@@ -93,7 +93,7 @@ export default function Register() {
       <div className="login">
         <div action="" className="login__form">
           <h1 className="login__title">Register</h1>
-    
+
           <div className="login__content">
             {/* {errorMsg && <p className="login__error">{errorMsg}</p>} */}
 
@@ -116,7 +116,7 @@ export default function Register() {
             </div>
           </div>
 
-    
+
             <div className="login__box">
             <i className="ri-user-3-line login__icon"></i>
 
@@ -134,7 +134,7 @@ export default function Register() {
               <label htmlFor="password" className="login__label"> Password: </label>
               <i className="ri-eye-off-line login__eye" id="login-eye"></i>
             </div>
-            
+
           </div>
           <div className="login__box">
             <i className="ri-lock-2-line login__icon"></i>
@@ -144,7 +144,7 @@ export default function Register() {
               <label htmlFor="confirm-password" className="login__label"> confirm password: </label>
               <i className="ri-eye-off-line login__eye" id="login-eye"></i>
             </div>
-            
+
           </div>
         </div>
         <div>
