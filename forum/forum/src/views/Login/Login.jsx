@@ -45,7 +45,6 @@ export default function Login() {
 
   return (
     <>
-        {/* <img src="src/img/login-bg.png" alt="login image" className="login__img" /> */}
       <div className="login">
 
       <div action="" className="login__form">
