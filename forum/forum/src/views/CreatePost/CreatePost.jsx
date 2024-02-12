@@ -8,6 +8,7 @@ export default function CreatePost() {
   const [post, setPost] = useState({
     title: '',
     content: '',
+    
   });
 
   const updatePost = (value, key) => {
@@ -32,7 +33,7 @@ export default function CreatePost() {
       title: '',
       content: '',
       author: '',
-      
+      createOn: '',
     });
   };
 

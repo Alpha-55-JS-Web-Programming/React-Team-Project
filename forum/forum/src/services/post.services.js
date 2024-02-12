@@ -20,7 +20,6 @@ export const addPost = async (author, title, content) => {
     title,
     content,
     createdOnReadable: readableDate,
-    content: [],
     likedBy: {},
   });
 };
