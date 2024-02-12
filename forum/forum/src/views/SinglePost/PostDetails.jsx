@@ -51,7 +51,7 @@ export default function PostDetails({ post, togglePostLike }) {
   //   }
   //   togglePostLike(userData.handle, post.id);
   // };
-
+console.log({userData});
  return (
     <div className="post">
       <h4>Author: {post.title}</h4>
@@ -81,7 +81,7 @@ export default function PostDetails({ post, togglePostLike }) {
       <p>Likes: {post.likedBy.length}</p>
 
       <Button onClick={() => navigate('/allposts')} >Back</Button>
-      {user.handle === post.author ? '' : <Button onClick={() => navigate('/allposts')} >Edit</Button> }
+      {userData.handle === post.author && <Button onClick={() => navigate('/allposts')} >Edit</Button> }
       <Button onClick={() => navigate('/allposts')} >Delete</Button>
     </div>
   );
