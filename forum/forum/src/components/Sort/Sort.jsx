@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export function Sort() {
+export default function Sort() {
     const [sort, setSort] = useState('newest');// newest, most-liked, most-commented
 
   return (

@@ -58,7 +58,8 @@ export default function Login() {
     // </div>
 
     <div className="login">
-      {/* <img src={loginBackground} alt="login background" className="login__background" /> */}
+        <img src="src/img/futuristic-background.jpg" alt="login image" className="login__img" />
+
       <div action="" className="login__form">
         <h1 className="login__title">Login</h1>
 
@@ -90,11 +91,12 @@ export default function Login() {
             <input type="checkbox" className="login__check-input" id="login-check" />
             <label type="login-check" className="login__check-label"> Remember me </label>
           </div>
-        </div>
 
-        <Button onClick={login} className="login__button">Login</Button>
-        <p className="login__register">Click{" "}<Link to="/register" style={{ textDecoration: "underline" }}>here</Link>{" "}
-          if you don't have a registration.
+          <a href="#" class="login__forgot">Forgot Password?</a> 
+        </div>
+        <button onClick={login} className="login__button">Login</button>
+        <p className="login__register">Don't have an account?{" "}<Link to="/register" style={{ textDecoration: "underline" }}>Register</Link>{" "}
+        
         </p>
       </div>
     </div>

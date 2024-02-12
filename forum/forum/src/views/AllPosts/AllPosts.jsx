@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {getAllPosts} from "../../services/post.services";
 import PostOverview from "./PostOverview";
 import { useSearchParams } from "react-router-dom";
-import { Sort } from "../../components/Sort/Sort";
+import Sort from "../../components/Sort/Sort";
 
 export default function AllPosts() {
   const [posts, setPosts] = useState([]);
