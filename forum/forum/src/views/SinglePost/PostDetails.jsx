@@ -7,13 +7,14 @@ import { AppContext } from '../../Context/AppContext';
 import { db } from '../../config/firebase-config';
 import { addCommentToPost } from '../../services/post.services';
 
+
 /**
  *
  * @param {{ post: { id: string, title: string, content: string, createdOn: string, liked: boolean }, togglePostLike: function }} props
  */
 export default function PostDetails({ post, togglePostLike }) {
   const navigate = useNavigate();
-  const { userData } = useContext(AppContext);
+  const { userData, user } = useContext(AppContext);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   
@@ -80,7 +81,7 @@ export default function PostDetails({ post, togglePostLike }) {
       <p>Likes: {post.likedBy.length}</p>
 
       <Button onClick={() => navigate('/allposts')} >Back</Button>
-      <Button onClick={() => navigate('/allposts')} >Edit</Button>
+      {user.handle === post.author ? '' : <Button onClick={() => navigate('/allposts')} >Edit</Button> }
       <Button onClick={() => navigate('/allposts')} >Delete</Button>
     </div>
   );
