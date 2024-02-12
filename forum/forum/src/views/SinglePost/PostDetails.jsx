@@ -58,7 +58,8 @@ console.log({userData});
       <p>Content: {post.content}</p>
       <p>Posted by: {post.authorDetails?.handle || 'Unknown'}</p> {/* Display author's handle */}
       <p>Date: {new Date(post.createdOnReadable).toLocaleDateString('bg-BG')}</p>
-
+      <Button onClick={() => togglePostLike(userData.handle, post.id)} >{post.likedBy.includes(userData.handle) ? 'Dislike' : 'Like'}</Button>
+      <br/>
       <textarea value={newComment} onChange={handleCommentChange} placeholder="Add a comment..."/>
        <Button onClick= {handleAddComment} >Comment</Button>  
 
@@ -82,7 +83,7 @@ console.log({userData});
 
       <Button onClick={() => navigate('/allposts')} >Back</Button>
       {userData.handle === post.author && <Button onClick={() => navigate('/allposts')} >Edit</Button> }
-      <Button onClick={() => navigate('/allposts')} >Delete</Button>
+      {userData.handle === post.author && <Button onClick={() => navigate('/allposts')} >Delete</Button>}
     </div>
   );
 }
