@@ -111,7 +111,7 @@ export default function Register() {
           </div>
         </div>
     
-          <Button onClick={register}>Register</Button><br/>
+          <button onClick={register} className="login__button">Register</button><br/>
           <p className="login__register">Have an account?{" "}<Link to="/login" style={{ textDecoration: "underline" }}>Login</Link>{" "}</p>
       </div>
     </div>
