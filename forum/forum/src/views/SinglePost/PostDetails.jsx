@@ -53,10 +53,10 @@ export default function PostDetails({ post, togglePostLike }) {
 
  return (
     <div className="post">
-      <h4>{post.title}</h4>
+      <h4>Author: {post.title}</h4>
       <p>Content: {post.content}</p>
       <p>Posted by: {post.authorDetails?.handle || 'Unknown'}</p> {/* Display author's handle */}
-      <p>Date: {new Date(post.createdOn).toLocaleDateString('bg-BG')}</p>
+      <p>Date: {new Date(post.createdOnReadable).toLocaleDateString('bg-BG')}</p>
      
 
       <div>
