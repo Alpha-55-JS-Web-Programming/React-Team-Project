@@ -63,12 +63,13 @@ export default function PostDetails({ post, togglePostLike }) {
           onChange={handleCommentChange}
           placeholder="Add a comment..."
         />
+      <Button onClick= {handleAddComment} >Comment</Button>
       </div>
+      <p>Likes: {post.likedBy.length}</p>
 
       <Button onClick={() => navigate('/allposts')} >Back</Button>
       <Button onClick={() => navigate('/allposts')} >Edit</Button>
       <Button onClick={() => navigate('/allposts')} >Delete</Button>
-      <Button onClick= {handleAddComment} >Comment</Button>
     </div>
   );
 }
