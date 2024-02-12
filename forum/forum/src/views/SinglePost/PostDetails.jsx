@@ -4,6 +4,7 @@ import { dislikePost, likePost } from '../../services/post.services';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../Context/AppContext';
+import { db } from '../../config/firebase-config';
 
 
 /**
@@ -15,7 +16,11 @@ export default function PostDetails({ post, togglePostLike }) {
   const { userData } = useContext(AppContext);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-
+  
+  const addCommentToDatabase = (postId, comment) => {
+    const commentsRef = db.ref(`posts/${id}/comments`);
+    commentsRef.push(comment);
+  };
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
   };
@@ -24,7 +29,11 @@ export default function PostDetails({ post, togglePostLike }) {
       setComments([...comments, newComment]);
       setNewComment('');
     }
+    addCommentToDatabase(post.id, newComment);
   };
+  
+
+  
   const toggleLike = async () => {
     if (post.likedBy.includes(userData.handle)) {
       dislikePost(userData.handle, post.id);
@@ -39,9 +48,8 @@ export default function PostDetails({ post, togglePostLike }) {
       <h4>{post.title}</h4>
       <p>Content: {post.content}</p>
       <p>Posted by: {post.authorDetails?.handle || 'Unknown'}</p> {/* Display author's handle */}
-      <p>Date: {new Date(post.createdOn).toLocaleDateString()}</p>
-      <p> 
-      </p>
+      <p>Date: {new Date(post.createdOn).toLocaleDateString('bg-BG')}</p>
+     
 
       <div>
         <h3>Comments:</h3>
@@ -55,14 +63,12 @@ export default function PostDetails({ post, togglePostLike }) {
           onChange={handleCommentChange}
           placeholder="Add a comment..."
         />
-      <Button onClick={handleAddComment} >Comment</Button>
       </div>
 
-      <p>Likes: {post.likedBy.length}</p>
-      
       <Button onClick={() => navigate('/allposts')} >Back</Button>
       <Button onClick={() => navigate('/allposts')} >Edit</Button>
       <Button onClick={() => navigate('/allposts')} >Delete</Button>
+      <Button onClick= {handleAddComment} >Comment</Button>
     </div>
   );
 }
