@@ -44,21 +44,9 @@ export default function Login() {
   };
 
   return (
-    // <div class="login__form">
-    //   <h1 class="login__title">Login</h1>
-    //   <div class="login__box-input">
-    //     <input value={form.email} onChange={updateForm("email") } type="text" id="email" name="email" class="login__input" />
-    //     <label htmlFor="email" class="login__label">Email: </label>
-    //   </div>
-    //   <label htmlFor="password" >Password: </label>
-    //   <input value={form.password} onChange={updateForm("password")} type="text" id="password" name="password"/>
-    //   <br /><br />
-    //   <Button onClick={login}>Login</Button>
-    //   <p>Click{" "}<Link to="/register" style={{ textDecoration: "underline" }}>here</Link>{" "}if you don't have a registration.</p>
-    // </div>
-
-    <div className="login">
-        <img src="src/img/futuristic-background.jpg" alt="login image" className="login__img" />
+    <>
+        {/* <img src="src/img/login-bg.png" alt="login image" className="login__img" /> */}
+      <div className="login">
 
       <div action="" className="login__form">
         <h1 className="login__title">Login</h1>
@@ -96,9 +84,22 @@ export default function Login() {
         </div>
         <button onClick={login} className="login__button">Login</button>
         <p className="login__register">Don't have an account?{" "}<Link to="/register" style={{ textDecoration: "underline" }}>Register</Link>{" "}
-        
         </p>
       </div>
     </div>
+    </>
   );
 }
+
+    // <div class="login__form">
+    //   <h1 class="login__title">Login</h1>
+    //   <div class="login__box-input">
+    //     <input value={form.email} onChange={updateForm("email") } type="text" id="email" name="email" class="login__input" />
+    //     <label htmlFor="email" class="login__label">Email: </label>
+    //   </div>
+    //   <label htmlFor="password" >Password: </label>
+    //   <input value={form.password} onChange={updateForm("password")} type="text" id="password" name="password"/>
+    //   <br /><br />
+    //   <Button onClick={login}>Login</Button>
+    //   <p>Click{" "}<Link to="/register" style={{ textDecoration: "underline" }}>here</Link>{" "}if you don't have a registration.</p>
+    // </div>
