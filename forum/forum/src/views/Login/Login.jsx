@@ -5,6 +5,7 @@ import { AppContext } from "../../Context/AppContext";
 import { loginUser } from "../../services/auth.service";
 import "./Login.css";
 import { get, ref } from "firebase/database";
+import { db } from "../../config/firebase-config";
 
 export default function Login() {
   const { user, setContext } = useContext(AppContext);
