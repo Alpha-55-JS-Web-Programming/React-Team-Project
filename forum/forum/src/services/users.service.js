@@ -6,7 +6,8 @@ export const getUserByHandle = (handle = 'pesho') => {
   return get(ref(db, `users/${handle}`));
 };
 
-export const createUserHandle = (FullName, handle, uid, email, mobile, role) => {
+
+export const createUserProfile = (FullName, handle, uid, email, mobile, role = 'user') => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
   
   return set(ref(db, `users/${handle}`), {
@@ -37,7 +38,9 @@ export const updateUserData = async (FullName, newHandle, uid, oldHandle = null)
   }
 };
 
-
+export const updateUserRole = async (uid, newRole) => {
+  return update(ref(db, `users/${uid}`), { role: newRole });
+};
 
 
 // DONT DELETE THIS CODE:

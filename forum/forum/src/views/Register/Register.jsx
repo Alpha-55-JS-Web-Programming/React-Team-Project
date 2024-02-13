@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Button from "../../components/Button/Button";
 import { registerUser } from "../../services/auth.service";
-import { createUserHandle, getUserByHandle} from "../../services/users.service";
+import { createUserProfile, getUserByHandle} from "../../services/users.service";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
@@ -67,15 +67,17 @@ export default function Register() {
         setErrorMessage(`Handle @${form.handle} already exists`);
         return;
       }
+      
 
       const credentials = await registerUser(form.email, form.password);
-      await createUserHandle(
-        form.FullName,
-        form.handle,
-        credentials.user.uid,
-        form.email,
-        form.mobile
-      );
+      await createUserProfile({
+        fullName: form.FullName,
+        handle: form.handle,
+        uid: credentials.user.uid,
+        email: form.email,
+        mobile: form.mobile,
+        role: "user", 
+      });
 
       setContext({ user: credentials.user, userData: null });
       navigate("/");
