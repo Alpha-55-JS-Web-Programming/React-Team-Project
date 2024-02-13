@@ -15,6 +15,8 @@ export const createUserHandle = (FullName, handle, uid, email) => {
     uid,
     email,
     createdOnReadable: readableDate,
+    mobile,
+    role: 'user',
   })
 };
 
