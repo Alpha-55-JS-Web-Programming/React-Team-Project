@@ -136,7 +136,7 @@ export default function Register() {
               <i className="ri-lock-2-line login__icon"></i>
 
               <div className="login__box-input">
-                <input value={form.password} onChange={updateForm("password")} type="text" required className="login__input" id="password" name="password"/>
+                <input value={form.password} onChange={updateForm("password")} type="password" required className="login__input" id="password" name="password"/>
                 <label htmlFor="password" className="login__label"> {" "}Password:{" "} </label>
                 <i className="ri-eye-off-line login__eye" id="login-eye"></i>
               </div>
@@ -147,7 +147,7 @@ export default function Register() {
               <i className="ri-lock-2-line login__icon"></i>
 
               <div className="login__box-input">
-                <input value={form.confirmPassword} onChange={updateForm("confirmPassword")} type="text" required className="login__input" id="confirm-password" name="confirm-password"/>
+                <input value={form.confirmPassword} onChange={updateForm("confirmPassword")} type="password" required className="login__input" id="confirm-password" name="confirm-password"/>
                 <label htmlFor="confirm-password" className="login__label"> {" "}Confirm password:{" "} </label>
                 <i className="ri-eye-off-line login__eye" id="login-eye"></i>
               </div>
