@@ -27,9 +27,16 @@ export default function LoginAdmin() {
   }, [admin]);
 
   const login = async () => {
+    if (!form.mobile || form.mobile.trim() === "") {
+      setErrorMsg("You must enter a phone number.");
+      return; 
+    }
+
     try {
       const credentials = await loginUser(form.email, form.password);
-      setContext({ admin: credentials.admin, userData: null });
+      // You might need to add additional logic here to verify admin status
+      // if your application differentiates between admin and regular users
+      setContext({ admin: credentials.user, userData: null }); // Assuming `credentials.user` holds the necessary admin info; adjust as per your implementation
       navigate("/");
     } catch (error) {
       if (error.code === "auth/invalid-credential") {
@@ -80,7 +87,7 @@ export default function LoginAdmin() {
 
               <div className="login__box-input">
                 {/* <img src={phone}  /> */}
-                <input type="number" placeholder="Phone Number" name="mobile" className="login__input" value={form.mobile} onChange={updateForm("mobile") } required/>
+                <input type="number" placeholder="Phone Number" name="mobile" className="login__input" value={form.mobile} onChange={updateForm("mobile") } required />
               </div>
             </div>
 
@@ -93,8 +100,6 @@ export default function LoginAdmin() {
           </div>
 
           <button onClick={login} className="login__button"> Login </button>
-
-
 
         </div>
       </div>

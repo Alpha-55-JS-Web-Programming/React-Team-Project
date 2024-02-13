@@ -49,6 +49,9 @@ export default function ProfileInformation() {
         <label htmlFor="email">Email: </label>
         <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br/>
         <br/>
+        {/* <label htmlFor="role">Role: </label>
+        <input value={user.role} onChange={updateForm("role")} type="text" name="role" id="role" /><br/>
+        <br/> */}
         {/* Add other input fields as needed for additional information */}
         
         <Button type="button" onClick={updateProfile}>Update Profile</Button>

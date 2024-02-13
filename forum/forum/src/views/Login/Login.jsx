@@ -57,7 +57,7 @@ export default function Login() {
               <i className="ri-user-3-line login__icon"></i>
 
               <div className="login__box-input">
-                <input value={form.email} onChange={updateForm("email")} type="text" id="email" name="email" className="login__input" />
+                <input value={form.email} onChange={updateForm("email")} type="text" id="email" name="email" className="login__input" required/>
                 <label htmlFor="email" className="login__label"> Email:{" "} </label>
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function Login() {
               <i className="ri-lock-2-line login__icon"></i>
 
               <div className="login__box-input">
-                <input value={form.password} onChange={updateForm("password")} type="text" required className="login__input" id="password" name="password" />
+                <input value={form.password} onChange={updateForm("password")} type="text" className="login__input" id="password" name="password" required/>
                 <label htmlFor="password" className="login__label"> {" "}Password:{" "} </label>
                 <i className="ri-eye-off-line login__eye" id="login-eye"></i>
               </div>
