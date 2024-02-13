@@ -67,17 +67,17 @@ export default function Register() {
         setErrorMessage(`Handle @${form.handle} already exists`);
         return;
       }
-      
+
 
       const credentials = await registerUser(form.email, form.password);
-      await createUserProfile({
-        fullName: form.FullName,
-        handle: form.handle,
-        uid: credentials.user.uid,
-        email: form.email,
-        mobile: form.mobile,
-        role: "user", 
-      });
+      await createUserProfile(
+        form.FullName,
+        form.handle,
+        credentials.user.uid,
+        form.email,
+        form.mobile,
+        "user"
+      );
 
       setContext({ user: credentials.user, userData: null });
       navigate("/");
