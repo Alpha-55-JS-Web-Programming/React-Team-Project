@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Button from "../../components/Button/Button";
 import { registerUser } from "../../services/auth.service";
-import { createUserHandle, getUserByHandle } from "../../services/users.service";
+import { createUserHandle, getUserByHandle} from "../../services/users.service";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
@@ -14,19 +14,18 @@ export default function Register() {
     FullName: "",
     handle: "",
     email: "",
-    mobile: '',
+    mobile: "",
     password: "",
-    confirmPassword: '',
+    confirmPassword: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const updateForm = prop => e => {
+  const updateForm = (prop) => (e) => {
     setForm({ ...form, [prop]: e.target.value });
   };
 
   function validateDetails(mobile) {
-
     const mobileRegex = /^\d{10}$/;
     if (!mobileRegex.test(mobile)) {
       setErrorMessage("Mobile number must be of 9 digits");
@@ -38,7 +37,9 @@ export default function Register() {
     // TODO: Validate inputs
     try {
       if (form.FullName.length < 4 || form.FullName.length > 32) {
-        setErrorMessage("First name and last name must be between 4 and 32 symbols.");
+        setErrorMessage(
+          "First name and last name must be between 4 and 32 symbols."
+        );
         return;
       }
       // Basic email validation
@@ -47,18 +48,18 @@ export default function Register() {
         setErrorMessage("Please enter a valid email address.");
         return;
       }
-    //   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
+      //   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
 
-    // if (!passwordRegex.test(password)) {
-    //   setErrorMessage("Password error: Length must be 8 with 1 uppercase 1 lowercase and 1 special character");
-    //   return false; // Password doesn't meet the criteria.
-    // }
+      // if (!passwordRegex.test(password)) {
+      //   setErrorMessage("Password error: Length must be 8 with 1 uppercase 1 lowercase and 1 special character");
+      //   return false; // Password doesn't meet the criteria.
+      // }
 
-    if (form.password !== form.confirmPassword) {
-      setErrorMessage("Password and Confirm Password do not match");
-      return false; // Passwords do not match.
-    }
-      if(!validateDetails(form.mobile)){
+      if (form.password !== form.confirmPassword) {
+        setErrorMessage("Password and Confirm Password do not match");
+        return false; // Passwords do not match.
+      }
+      if (!validateDetails(form.mobile)) {
         setErrorMessage("Mobile number must be of 9 digits");
       }
       const user = await getUserByHandle(form.handle);
@@ -77,12 +78,14 @@ export default function Register() {
       );
 
       setContext({ user: credentials.user, userData: null });
-      navigate('/');
+      navigate("/");
     } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        setErrorMessage('This email is already in use.');
+      if (error.code === "auth/email-already-in-use") {
+        setErrorMessage("This email is already in use.");
       } else {
-        setErrorMessage('An error occurred during registration. Please try again.');
+        setErrorMessage(
+          "An error occurred during registration. Please try again."
+        );
       }
       console.log(error.message);
     }
@@ -97,79 +100,83 @@ export default function Register() {
           <div className="login__content">
             {/* {errorMsg && <p className="login__error">{errorMsg}</p>} */}
 
-          <div className="login__box">
-            <i className="ri-user-3-line login__icon"></i>
-
-            <div className="login__box-input">
-              <input value={form.FullName} onChange={updateForm("FullName")} type="text" id="full-name" name="full-name" className="login__input" />
-              <label htmlFor="full-name" className="login__label">Full name: </label>
-            </div>
-          </div>
-
-          <div className="login__box">
-            <i className="ri-lock-2-line login__icon"></i>
-
-            <div className="login__box-input">
-              <input value={form.handle} onChange={updateForm("handle")} type="text" required className="login__input" id="handle" name="handle" />
-              <label htmlFor="handle" className="login__label"> Handle: </label>
-              <i className="ri-eye-off-line login__eye" id="login-eye"></i>
-            </div>
-          </div>
-
-
+            {/*Full Name*/}
             <div className="login__box">
-            <i className="ri-user-3-line login__icon"></i>
+              <i className="ri-user-3-line login__icon"></i>
 
-            <div className="login__box-input">
-              <input value={form.email} onChange={updateForm("email")} type="text" id="email" name="email" className="login__input" />
-              <label htmlFor="email" className="login__label">Email: </label>
-            </div>
-          </div>
-
-          <div className="login__box">
-            <i className="ri-lock-2-line login__icon"></i>
-
-            <div className="login__box-input">
-              <input value={form.password} onChange={updateForm("password")} type="text" required className="login__input" id="password" name="password" />
-              <label htmlFor="password" className="login__label"> Password: </label>
-              <i className="ri-eye-off-line login__eye" id="login-eye"></i>
+              <div className="login__box-input">
+                <input value={form.FullName} onChange={updateForm("FullName")} type="text" id="full-name" name="full-name" className="login__input"/>
+                <label htmlFor="full-name" className="login__label"> Full name:{" "} </label>
+              </div>
             </div>
 
-          </div>
-          <div className="login__box">
-            <i className="ri-lock-2-line login__icon"></i>
+            {/*Handle*/}
+            <div className="login__box">
+              <i className="ri-lock-2-line login__icon"></i>
 
-            <div className="login__box-input">
-            <input value={form.confirmPassword} onChange={updateForm("confirmPassword")} type="text" required className="login__input" id="confirm-password" name="confirm-password" />
-              <label htmlFor="confirm-password" className="login__label"> confirm password: </label>
-              <i className="ri-eye-off-line login__eye" id="login-eye"></i>
+              <div className="login__box-input">
+                <input value={form.handle} onChange={updateForm("handle")} type="text" required className="login__input" id="handle" name="handle" />
+                <label htmlFor="handle" className="login__label"> {" "}Handle:{" "} </label>
+                <i className="ri-eye-off-line login__eye" id="login-eye"></i>
+              </div>
             </div>
 
+            {/*Email*/}
+            <div className="login__box">
+              <i className="ri-user-3-line login__icon"></i>
+
+              <div className="login__box-input">
+                <input value={form.email} onChange={updateForm("email")} type="text" id="email" name="email" className="login__input"/>
+                <label htmlFor="email" className="login__label"> Email:{" "} </label>
+              </div>
+            </div>
+
+            {/*Password*/}
+            <div className="login__box">
+              <i className="ri-lock-2-line login__icon"></i>
+
+              <div className="login__box-input">
+                <input value={form.password} onChange={updateForm("password")} type="text" required className="login__input" id="password" name="password"/>
+                <label htmlFor="password" className="login__label"> {" "}Password:{" "} </label>
+                <i className="ri-eye-off-line login__eye" id="login-eye"></i>
+              </div>
+            </div>
+
+            {/*Confirm Password*/}
+            <div className="login__box">
+              <i className="ri-lock-2-line login__icon"></i>
+
+              <div className="login__box-input">
+                <input value={form.confirmPassword} onChange={updateForm("confirmPassword")} type="text" required className="login__input" id="confirm-password" name="confirm-password"/>
+                <label htmlFor="confirm-password" className="login__label"> {" "}Confirm password:{" "} </label>
+                <i className="ri-eye-off-line login__eye" id="login-eye"></i>
+              </div>
+            </div>
           </div>
-        </div>
-        <div>
-            <div>
-              <img src={phone} />
+          <div>
+            <div >
+              <img src={phone}  />
             </div>
             <input type="number" placeholder="Phone Number" name="mobile" value={form.mobile} onChange={updateForm("mobile")}/>
           </div>
           <br />
-          <button onClick={register} className="login__button">Register</button><br/>
-          <p className="login__register">Have an account?{" "}<Link to="/login" style={{ textDecoration: "underline" }}>Login</Link>{" "}</p>
+          <button onClick={register} className="login__button"> Register </button>
+          <br />
+          <p className="login__register"> Have an account?{" "} <Link to="/login" style={{ textDecoration: "underline" }}> Login </Link>{" "} </p>
+        </div>
       </div>
-    </div>
     </>
-    );
+  );
 }
 
-  // return (
-  //   <div>
-  //     <h1>Register</h1>
-  //     <label htmlFor="full-name">Full name: </label><input value={form.FullName} onChange={updateForm('FullName')} type="text" name="full-name" id="full-name" /><br/>
-  //     <label htmlFor="handle">Handle: </label><input value={form.handle} onChange={updateForm('handle')} type="text" name="handle" id="handle" /><br/>
-  //     <label htmlFor="email">Email: </label><input value={form.email} onChange={updateForm('email')} type="text" name="email" id="email" /><br/>
-  //     <label htmlFor="password">Password: </label><input value={form.password} onChange={updateForm('password')} type="password" name="password" id="password" /><br/><br/>
-  //     <Button onClick={register}>Register</Button>
-  //     {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-  //   </div>
-  // )
+// return (
+//   <div>
+//     <h1>Register</h1>
+//     <label htmlFor="full-name">Full name: </label><input value={form.FullName} onChange={updateForm('FullName')} type="text" name="full-name" id="full-name" /><br/>
+//     <label htmlFor="handle">Handle: </label><input value={form.handle} onChange={updateForm('handle')} type="text" name="handle" id="handle" /><br/>
+//     <label htmlFor="email">Email: </label><input value={form.email} onChange={updateForm('email')} type="text" name="email" id="email" /><br/>
+//     <label htmlFor="password">Password: </label><input value={form.password} onChange={updateForm('password')} type="password" name="password" id="password" /><br/><br/>
+//     <Button onClick={register}>Register</Button>
+//     {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+//   </div>
+// )
