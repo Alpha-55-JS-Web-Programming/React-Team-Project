@@ -4,6 +4,7 @@ import Button from "../../components/Button/Button";
 import { AppContext } from "../../Context/AppContext";
 import { loginUser } from "../../services/auth.service";
 import "./Login.css";
+import { get, ref } from "firebase/database";
 
 export default function Login() {
   const { user, setContext } = useContext(AppContext);
@@ -41,7 +42,22 @@ export default function Login() {
       }
       console.log(error);
     }
+
+    const credentials = await loginUser(form.email, form.password);
+    const userId = credentials.user.uid;
+    
+    // Fetch user data to check role
+    const snapshot = await get(ref(db, `users/${userId}`));
+  
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      const isAdmin = userData.role === 'admin';
+      setContext({ user: credentials.user, isAdmin, userData }); // Include isAdmin flag based on role
+      navigate(isAdmin ? "/admin-dashboard" : "/");
+    }
   };
+
+
 
   return (
     <>

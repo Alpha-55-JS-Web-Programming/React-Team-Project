@@ -6,7 +6,7 @@ export const getUserByHandle = (handle = 'pesho') => {
   return get(ref(db, `users/${handle}`));
 };
 
-export const createUserHandle = (FullName, handle, uid, email,mobile,role) => {
+export const createUserHandle = (FullName, handle, uid, email, mobile, role) => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
   
   return set(ref(db, `users/${handle}`), {
@@ -16,7 +16,7 @@ export const createUserHandle = (FullName, handle, uid, email,mobile,role) => {
     email,
     createdOnReadable: readableDate,
     mobile,
-    role: 'user',
+    role,
   })
 };
 
