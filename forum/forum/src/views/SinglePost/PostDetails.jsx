@@ -1,89 +1,82 @@
 import PropTypes from 'prop-types';
 import Button from '../../components/Button/Button';
-import { dislikePost, likePost } from '../../services/post.services';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../Context/AppContext';
-import { db } from '../../config/firebase-config';
 import { addCommentToPost } from '../../services/post.services';
+import './PostDetails.css';
 
-
-/**
- *
- * @param {{ post: { id: string, title: string, content: string, createdOn: string, liked: boolean }, togglePostLike: function }} props
- */
 export default function PostDetails({ post, togglePostLike }) {
   const navigate = useNavigate();
-  const { userData, user } = useContext(AppContext);
+  const { userData } = useContext(AppContext);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  
-  // const addCommentToDatabase = (postId, comment) => {
-  //   const commentsRef = db.ref(`posts/${id}/comments`);
-  //   commentsRef.push(comment);
-  // };
+
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
   };
+
   const handleAddComment = () => {
     if (newComment.trim() !== '') {
       const commentData = {
-        author: userData.handle, // Assuming userData contains the current user's data
+        author: userData.handle,
         text: newComment,
-        createdOn: new Date().valueOf() // Stores timestamp of the comment
+        createdOn: new Date().valueOf(),
       };
+
       addCommentToPost(post.id, commentData)
         .then(() => {
-          setComments([...comments, commentData.text]); // Update local state to display the new comment
-          setNewComment(''); // Clear the comment input field
+          setComments([...comments, commentData]);
+          setNewComment('');
         })
-        .catch(error => console.error("Error adding comment:", error));
+        .catch((error) => console.error('Error adding comment:', error));
     }
   };
-  
 
-  
-  // const toggleLike = async () => {
-  //   if (post.likedBy.includes(userData.handle)) {
-  //     dislikePost(userData.handle, post.id);
-  //   } else {
-  //     likePost(userData.handle, post.id);
-  //   }
-  //   togglePostLike(userData.handle, post.id);
-  // };
-console.log({userData});
- return (
-    <div className="post">
-      <h4>Author: {post.title}</h4>
-      <p>Content: {post.content}</p>
-      <p>Posted by: {post.authorDetails?.handle || 'Unknown'}</p> {/* Display author's handle */}
-      <p>Date: {new Date(post.createdOnReadable).toLocaleDateString('bg-BG')}</p>
-      <Button onClick={() => togglePostLike(userData.handle, post.id)} >{post.likedBy.includes(userData.handle) ? 'Dislike' : 'Like'}</Button>
-      <br/>
-      <textarea value={newComment} onChange={handleCommentChange} placeholder="Add a comment..."/>
-       <Button onClick= {handleAddComment} >Comment</Button>  
+  return (
+    <div className="post-details">
+      <h2>{post.title}</h2>
+      <p className="post-content">{post.content}</p>
+      <p className="post-meta">
+        Posted by: {post.authorDetails?.handle || 'Unknown'} | Date: {new Date(post.createdOnReadable).toLocaleDateString('bg-BG')}
+      </p>
+      <Button onClick={() => togglePostLike(userData.handle, post.id)}>{post.likedBy.includes(userData.handle) ? 'Dislike' : 'Like'}</Button>
 
-      <div>
-        <h3>Comments:</h3>
-        <ul>
-          {comments.map((comment, index) => (
-            <li key={index}>{comment}</li>
-                  
-          ))}
-        </ul>
-        {post.comments && post.comments.map((comment, index) => (
-          <div key={index}>
-            <p>{comment.author}: {comment.text} { <Button  >reply</Button>  } </p>
-          </div>
-        ))}
+      <div className="comment-section">
+        <textarea value={newComment} onChange={handleCommentChange} placeholder="Add a comment..." />
+        <Button onClick={handleAddComment}>Comment</Button>
 
+        <div className="comments-list">
+          <h3>Comments:</h3>
+          <ul>
+            {comments.map((comment, index) => (
+              <li key={index}>
+                {comment.author}: {comment.text}
+              </li>
+            ))}
+          </ul>
+        </div>
 
+        <div className="post-comments">
+          {post.comments &&
+            post.comments.map((comment, index) => (
+              <div key={index} className="comment-item">
+                <p>
+                  {comment.author}: {comment.text} <Button>Reply</Button>
+                </p>
+              </div>
+            ))}
+        </div>
       </div>
+
       <p>Likes: {post.likedBy.length}</p>
 
-      <Button onClick={() => navigate('/allposts')} >Back</Button>
-      {userData.handle === post.author && <Button onClick={() => navigate('/allposts')} >Edit</Button> }
-      {userData.handle === post.author && <Button onClick={() => navigate('/allposts')} >Delete</Button>}
+      <div className="button-group">
+        <Button onClick={() => navigate('/allposts')}>Back</Button>
+        {userData.handle === post.author && <Button onClick={() => navigate('/allposts')}>Edit</Button>}
+        
+        {userData.handle === post.author && <Button onClick={() => navigate('/allposts')}>Delete</Button>}
+      </div>
     </div>
   );
 }
@@ -96,6 +89,7 @@ PostDetails.propTypes = {
     createdOn: PropTypes.string,
     likedBy: PropTypes.array,
     authorDetails: PropTypes.object,
+    comments: PropTypes.array,
   }),
   togglePostLike: PropTypes.func,
 };

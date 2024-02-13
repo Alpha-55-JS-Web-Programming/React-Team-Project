@@ -1,0 +1,97 @@
+.post-details {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #3498db;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); /* Enhanced shadow for more depth */
+    background-color: #ecf0f1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+}
+
+h2 {
+    color: #2c3e50;
+    text-transform: uppercase; /* Adds a modern touch */
+    letter-spacing: 1px; /* More spacing for a cleaner look */
+}
+
+.post-content {
+    color: #34495e;
+    line-height: 1.6; /* Improved readability */
+}
+
+.post-meta {
+    color: #7f8c8d;
+    margin-top: 10px;
+    font-size: 0.9rem; /* Slightly smaller text for meta information */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.comment-section {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    transition: border-color 0.3s ease; /* Smooth transition for focus */
+}
+
+textarea:focus {
+    border-color: #3498db; /* Highlighting text area on focus */
+    outline: none; /* Removes the default focus outline */
+}
+
+.comments-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comments-list li {
+    margin-bottom: 10px;
+    background-color: #f9f9f9; /* Slight background for comments */
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners for comment items */
+}
+
+.post-comments {
+    margin-top: 20px;
+}
+
+.comment-item p {
+    margin-bottom: 5px;
+}
+
+/* Button styles with hover and focus effects for a lively UI */
+.button {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for interactive feedback */
+}
+
+.button:hover, .button:focus {
+    background-color: #27ae60;
+    transform: translateY(-2px); /* Slight lift effect on hover/focus */
+}
+
+.button:active {
+    transform: translateY(1px); /* Subtle push effect on click */
+}
+
+/* Enhance the overall experience with slight interactions */
+.post-details:hover {
+    transform: scale(1.02); /* Slightly enlarges the post container */
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.6); /* Deeper shadow for emphasis */
+}
