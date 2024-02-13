@@ -201,6 +201,16 @@ a {
   text-decoration: underline;
 }
 
+.login__error {
+  color: red;
+  background-color: #fff3f3;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: var(--font-medium);
+}
+
 /* Input focus move up label */
 .login__input:focus+.login__label {
   top: -12px;

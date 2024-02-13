@@ -100,7 +100,7 @@ export default function Register() {
           <h1 className="login__title">Register</h1>
 
           <div className="login__content">
-            {/* {errorMsg && <p className="login__error">{errorMsg}</p>} */}
+          {errorMessage && <p className="login__error">{errorMessage}</p>}
 
             {/*Full Name*/}
             <div className="login__box">
