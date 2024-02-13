@@ -20,6 +20,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { getUserData } from "./services/users.service";
 import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
 import LoginAdmin from "./views/Admin/Admin";
+import { AdminView } from "./views/Admin/AdminView";
 
 function App() {
   const [context, setContext] = useState({
@@ -56,6 +57,7 @@ function App() {
           <Route path="/create-post" element={<Authenticated><CreatePost /></Authenticated>} />
           <Route path="/profile-information" element={<Authenticated><ProfileInformation /></Authenticated>} />
           <Route path="/admin" element={<LoginAdmin />} />
+          <Route path="/admin/view" element={<AdminView />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
