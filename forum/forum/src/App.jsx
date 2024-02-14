@@ -19,8 +19,7 @@ import { auth } from "./config/firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getUserData } from "./services/users.service";
 import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
-import LoginAdmin from "./views/Admin/Admin";
-// import { AdminView } from "./views/Admin/AdminView";
+import Admin from "./views/Admin/Admin";
 
 function App() {
   const [context, setContext] = useState({
@@ -45,7 +44,7 @@ function App() {
     <BrowserRouter>
         <AppContext.Provider value={{ ...context, setContext }}>
         <Header />
-        
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -56,7 +55,7 @@ function App() {
           <Route path="/posts/:id" element={<Authenticated><SinglePost /></Authenticated>} />
           <Route path="/create-post" element={<Authenticated><CreatePost /></Authenticated>} />
           <Route path="/profile-information" element={<Authenticated><ProfileInformation /></Authenticated>} />
-          <Route path="/admin" element={<LoginAdmin />} />
+          <Route path="/admin" element={<Admin />} />
           {/* <Route path="/admin/view" element={<AdminView />} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
