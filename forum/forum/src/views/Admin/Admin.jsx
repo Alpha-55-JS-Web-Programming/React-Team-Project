@@ -89,16 +89,15 @@ export default function Admin() {
       <Button onClick={listAllUsers}>List Users</Button>
       {users.length > 0 && users.map((user) => (
           <div key={user.id}>
-            <span>User: {user.handle}</span>
-            <span>UserId: {user.uid}</span>
-            <span>Role: {user.role}</span>
-
-            <Button onClick={() => changeIsBlocked(userRecord.uid)}> Make Admin </Button>
+            <span>User: {user.handle}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>UserId: {user.uid}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>Role: {user.role}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            
             <label htmlFor={`user-role-${user.id}`}>Change role:</label>
             <select id={`user-role-${user.id}`} value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)}>
               <option value="user">user</option>
               <option value="admin">admin</option>
-            </select>
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;
             <Button onClick={() => changeIsBlocked(user.id)}>{user.isBlocked ? "Unblock" : "Block"} </Button>
           </div>
         ))}
