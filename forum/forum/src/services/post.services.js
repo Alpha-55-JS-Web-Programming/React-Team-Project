@@ -98,3 +98,8 @@ export const deletePost = async (postId) => {
     throw error; // Re-throw the error to let the caller handle it
   }
 };
+
+export const getPostsCount = async () => {
+  const snapshot = await get(query(ref(db, 'posts')));
+  return snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+};

@@ -42,6 +42,11 @@ export const updateUserRole = async (uid, newRole) => {
   return update(ref(db, `users/${uid}`), { role: newRole });
 };
 
+export const getUsersCount = async () => {
+  const snapshot = await get(query(ref(db, 'users')));
+  return snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+};
+
 
 // DONT DELETE THIS CODE:
 // export const createUserHandle = (FullName, handle, uid, email) => {
