@@ -156,6 +156,8 @@ export default function Register() {
               </div>
             </div>
           </div>
+          
+            {/*Mobile*/}
           <div>
             <div >
               <img src={phone}  />

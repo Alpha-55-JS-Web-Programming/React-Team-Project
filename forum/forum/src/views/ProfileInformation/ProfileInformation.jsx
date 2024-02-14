@@ -10,6 +10,7 @@ export default function ProfileInformation() {
     FullName: userData?.FullName || "",
     handle: userData?.handle || "",
     email: userData?.email || "",
+    mobile: userData?.mobile || "",
   });
 
   const updateForm = (prop) => (e) => {
@@ -18,12 +19,12 @@ export default function ProfileInformation() {
 
   const updateProfile = async () => {
     try {
-      // Validate inputs if needed
-      await updateUserData(form.FullName, form.handle, form.email, user.uid);
+      await updateUserData(user.uid, { ...form });
       // Update context to reflect changes
-      setContext({ user, userData: { ...userData, FullName: form.FullName, email: form.email, handle: form.handle} });
+      setContext({ user, userData: { ...userData, ...form } });
+      console.log("Profile updated successfully!");
     } catch (error) {
-      console.log(error.message);
+      console.error("Error updating profile:", error.message);
     }
   };
 
@@ -31,6 +32,7 @@ export default function ProfileInformation() {
     try {
       await logoutUser();
       setContext({ user: null, userData: null });
+      console.log("Logout successful!");
     } catch (error) {
       console.log(error.message);
     }
@@ -49,10 +51,10 @@ export default function ProfileInformation() {
         <label htmlFor="email">Email: </label>
         <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br/>
         <br/>
-        {/* <label htmlFor="role">Role: </label>
-        <input value={user.role} onChange={updateForm("role")} type="text" name="role" id="role" /><br/>
-        <br/> */}
-        {/* Add other input fields as needed for additional information */}
+        <label htmlFor="mobile">Mobile: </label>
+        <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br/>
+        <br/> 
+        {/* Add other input fields as needed for additional information*/}
         
         <Button type="button" onClick={updateProfile}>Update Profile</Button>
         <br/> <br/> <br/>
