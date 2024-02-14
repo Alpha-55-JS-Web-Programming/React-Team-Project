@@ -9,21 +9,21 @@ export default function Admin() {
   const { user, userData } = useContext(AppContext);
   const isAdmin = userData?.role === "admin";
   const [users, setUsers] = useState([]);
-  
+
   useEffect(() => {
-    getAllUsers().then(users => setUsers(users));
+    getAllUsers().then((users) => setUsers(users));
   }, []);
 
   const getAllUsers = async () => {
-    const snapshot = await get(query(ref(db, 'users')));
+    const snapshot = await get(query(ref(db, "users")));
     if (!snapshot.exists()) {
       return [];
     }
 
-    const users = Object.keys(snapshot.val()).map(key => ({
+    const users = Object.keys(snapshot.val()).map((key) => ({
       id: key,
       ...snapshot.val()[key],
-    }))
+    }));
 
     console.log(users);
     return users;
@@ -32,16 +32,12 @@ export default function Admin() {
   const listAllUsers = async () => {
     try {
       const listUsers = await getAllUsers();
-      return listUsers.map(userRecord => (
-        <div key={userRecord.id}>
-
-        </div>
-      ));
+      return listUsers.map((userRecord) => <div key={userRecord.id}></div>);
     } catch (error) {
-      console.error('Error listing users:', error);
+      console.error("Error listing users:", error);
       return null;
     }
-  }
+  };
 
   const changeIsBlocked = async (userId) => {
     const userRef = ref(db, `users/${userId}`);
@@ -54,9 +50,9 @@ export default function Admin() {
         isBlocked: !userData.isBlocked,
       });
 
-      console.log('User isBlocked updated successfully.');
+      console.log("User isBlocked updated successfully.");
     } catch (error) {
-      console.error('Error updating user isBlocked:', error);
+      console.error("Error updating user isBlocked:", error);
     }
   };
 
@@ -68,9 +64,9 @@ export default function Admin() {
         role: newRole,
       });
 
-      console.log('User role updated successfully.');
+      console.log("User role updated successfully.");
     } catch (error) {
-      console.error('Error updating user role:', error);
+      console.error("Error updating user role:", error);
     }
   };
 
@@ -85,27 +81,27 @@ export default function Admin() {
 
   return (
     <div>
-      {isAdmin ? <h1>Welcome, admin {userData.FullName}</h1> : <h3>You don't have permission to access this page.</h3>}
+      {isAdmin ? (
+        <h1>Welcome, admin {userData.FullName}</h1>
+      ) : (
+        <h3>You don't have permission to access this page.</h3>
+      )}
       <Button onClick={listAllUsers}>List Users</Button>
-      {users.length > 0 && users.map(user => (
-        <div key={user.id}>
-          <span>User: {user.handle}</span>
-          <span>UserId: {user.uid}</span>
-          <span>Role: {user.role}</span>
+      {users.length > 0 && users.map((user) => (
+          <div key={user.id}>
+            <span>User: {user.handle}</span>
+            <span>UserId: {user.uid}</span>
+            <span>Role: {user.role}</span>
 
-          <Button onClick={() => changeIsBlocked(userRecord.uid)}>Make Admin</Button>
-                    <label htmlFor={`user-role-${user.id}`}>Change role:</label>
-            <select
-              id={`user-role-${user.id}`}
-              value={user.role}
-              onChange={(e) => handleRoleChange(user.id, e.target.value)}
-            >
+            <Button onClick={() => changeIsBlocked(userRecord.uid)}> Make Admin </Button>
+            <label htmlFor={`user-role-${user.id}`}>Change role:</label>
+            <select id={`user-role-${user.id}`} value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)}>
               <option value="user">user</option>
               <option value="admin">admin</option>
             </select>
-            <Button onClick={() => changeIsBlocked(user.id)}>{user.isBlocked ? "Unblock" : "Block"}</Button>
-        </div>
-      ))}
+            <Button onClick={() => changeIsBlocked(user.id)}>{user.isBlocked ? "Unblock" : "Block"} </Button>
+          </div>
+        ))}
     </div>
-  )
+  );
 }
