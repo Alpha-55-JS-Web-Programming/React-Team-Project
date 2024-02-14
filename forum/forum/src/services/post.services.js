@@ -2,6 +2,8 @@ import { ref, push, get, query, update, getDatabase, remove } from 'firebase/dat
 import { db } from '../config/firebase-config';
 import { format } from 'date-fns';
 import { getUserByHandle } from './users.service';
+import { set } from 'firebase/database';
+
 /**
  *
  * @param {*} author
@@ -15,13 +17,23 @@ import { getUserByHandle } from './users.service';
 export const addPost = async (author, title, content) => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
-  return push(ref(db, 'posts'), {
+  // Use push without providing a key to generate a unique ID
+  const newPostRef = push(ref(db, 'posts'));
+
+  // Get the automatically generated key (ID) for the new post
+  const postId = newPostRef.key;
+
+  // Set the post data along with the generated ID
+  await set(newPostRef, {
+    id: postId,
     author,
     title,
     content,
     createdOnReadable: readableDate,
     likedBy: {},
   });
+
+  return postId;
 };
 
 export const getAllPosts = async (search) => {

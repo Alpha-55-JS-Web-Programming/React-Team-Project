@@ -25,7 +25,7 @@ export default function PostOverview({ post, togglePostLike }) {
   return (
     <div className="post">
       <h4>{post.title} <Button onClick={toggleLike}>{post.likedBy.includes(userData?.handle) ? 'Dislike' : 'Like'}</Button></h4>
-      <p>{new Date(post.createdOn).toLocaleDateString('bg-BG')}</p>
+      <p>{new Date(post.createdOnReadable).toLocaleDateString('bg-BG')}</p>
       <Button onClick={() => navigate(`/posts/${post.id}`)}>View</Button>
     </div>
   )
