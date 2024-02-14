@@ -86,7 +86,8 @@ export default function PostDetails({ post, togglePostLike }) {
 
       <div className="button-group">
         <Button onClick={() => navigate("/allposts")}>Back</Button>
-        {userData.handle === post.author || user.isAdmin === "admin" && ( <Button onClick={() => navigate("/allposts")}>Edit</Button> )}
+        {(userData.handle === post.author || userData.role === "admin" ) && ( <Button onClick={() => navigate("/allposts")}>Edit</Button> )}
+        
         {userData.handle === post.author && ( <Button onClick={handleDeletePost}>Delete</Button> )}
       </div>
     </div>
