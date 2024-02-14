@@ -18,6 +18,7 @@ export const createUserProfile = (FullName, handle, uid, email, mobile, password
     mobile,
     password, // Make sure password is stored in the correct field
     createdOnReadable: readableDate,
+    isBlocked: false,
     role,
   });
 };
@@ -27,7 +28,7 @@ export const getUserData = (uid) => {
 };
 
 export const updateUserData = async (uid, data) => {
-  const userRef = ref(db, `users/${uid}`);
+  const userRef = ref(db, `users/${uid}`); // Ensure this path matches your Firebase data structure
   
   try {
     await update(userRef, data);
@@ -37,6 +38,8 @@ export const updateUserData = async (uid, data) => {
     throw error;
   }
 };
+
+
 
 export const updateUserRole = async (uid, newRole) => {
   return update(ref(db, `users/${uid}`), { role: newRole });
