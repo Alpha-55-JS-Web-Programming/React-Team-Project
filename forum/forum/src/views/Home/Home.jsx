@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getUsersCount } from '../../services/users.service';
 import { getPostsCount } from '../../services/post.services';
 import './Home.css'
-import production from "../../../assets/pexels.mp4";
+import production from "../../../assets/production.mp4";
 
 export default function Home() {
   const [usersCount, setUsersCount] = useState(0);
