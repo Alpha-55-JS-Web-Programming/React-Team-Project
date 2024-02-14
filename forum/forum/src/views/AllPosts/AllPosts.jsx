@@ -36,7 +36,7 @@ export default function AllPosts() {
         <Sort />
 
         <label htmlFor="search">Search </label>
-        <input value={search} onChange={e => setSearch(e.target.value)} type="text" name="search" id="search" />
+        <input value={search} onChange={e => setSearch(e.target.value)} type="text" name="search" id="search" className="input-css" />
       </div>
 
       {posts.map((post) => (

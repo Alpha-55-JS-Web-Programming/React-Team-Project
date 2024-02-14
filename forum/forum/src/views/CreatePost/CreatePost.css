@@ -4,19 +4,19 @@
     padding: 20px;
     border: 1px solid #48C9B0; /* Softer green for borders */
     border-radius: 12px; /* Increased for softer edges */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 4px 8px rgba(241, 241, 241, 0.1); /* Subtle shadow for depth */
     background-color: #FAF9F6; /* Warm and light background color */
     transition: all 0.3s ease; /* Smooth transition for hover effects */
   }
   
-  h1 {
-    color: #5D6D7E; /* Warmer, softer color for titles */
+  .h1 {
+    color: #0b0b0b; /* Warmer, softer color for titles */
   }
   
-  label {
+  .label-css {
     display: block;
     margin-bottom: 5px;
-    color: #6E2C00; /* Warmer text color for labels */
+    color: #020202; /* Warmer text color for labels */
   }
   
   input,
@@ -50,15 +50,12 @@
       padding: 15px; /* Adjust padding for smaller screens */
     }
   
-    input, textarea {
-      padding: 8px; /* Adjust padding for smaller screens */
-    }
   }
   
   /* Adding a creative pseudo-class for inputs focus */
   input:focus,
   textarea:focus {
     border-color: #3498DB; /* Highlight color for focus */
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5); /* Adding a glow effect */
+    box-shadow: 0 0 8px rgba(246, 246, 247, 0.5); /* Adding a glow effect */
   }
   

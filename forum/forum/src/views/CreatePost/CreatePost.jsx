@@ -42,7 +42,7 @@ export default function CreatePost() {
       <h1 className="h1">Create post</h1>
       <label htmlFor="input-title">Title:</label>
       <input value={post.title} onChange={(e) => updatePost(e.target.value, 'title')} type="text" name="input-title" id="input-title" /><br />
-      <label htmlFor="input-content">Content:</label><br />
+      <label htmlFor="input-content" className="label-css">Content:</label><br />
       <textarea value={post.content} onChange={(e) => updatePost(e.target.value, 'content')} name="input-content" id="input-content" cols="30" rows="10"></textarea><br /><br />
       <Button onClick={createPost} className="button">Create</Button>
     </div>
