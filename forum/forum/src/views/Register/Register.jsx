@@ -76,6 +76,7 @@ export default function Register() {
         credentials.user.uid,
         form.email,
         form.mobile,
+        form.password,
         "user"
       );
 

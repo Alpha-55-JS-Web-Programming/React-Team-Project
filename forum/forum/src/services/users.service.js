@@ -7,7 +7,7 @@ export const getUserByHandle = (handle = 'pesho') => {
 };
 
 
-export const createUserProfile = (FullName, handle, uid, email, mobile, role = 'user') => {
+export const createUserProfile = (FullName, handle, uid, email, mobile, password, role = 'user') => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
   
   return set(ref(db, `users/${handle}`), {
@@ -15,10 +15,11 @@ export const createUserProfile = (FullName, handle, uid, email, mobile, role = '
     handle,
     uid,
     email,
-    createdOnReadable: readableDate,
     mobile,
+    password, // Make sure password is stored in the correct field
+    createdOnReadable: readableDate,
     role,
-  })
+  });
 };
 
 export const getUserData = (uid) => {
