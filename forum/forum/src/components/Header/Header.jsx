@@ -7,7 +7,7 @@ import "./Header.css";
 
 export default function Header() {
   const { user, userData, setContext } = useContext(AppContext);
-
+  const isAdmin = userData?.role === "admin";
   const logout = async () => {
     await logoutUser();
     setContext({ user: null, userData: null });
@@ -20,6 +20,7 @@ export default function Header() {
         <NavLink to="/latest"> <Button>Top 10 Latest</Button> </NavLink>
         <NavLink to="/allposts"> <Button>AllPosts</Button> </NavLink>
         { user && <NavLink to="/create-post"> <Button>Create Post</Button> </NavLink>} 
+        {isAdmin && <NavLink to="/admin"> <Button>Admin</Button> </NavLink>}
         {user ? (
         <>
           <NavLink to="/profile-information" className={"profile"}>{`Welcome, ${userData?.handle}`}</NavLink>
@@ -29,6 +30,7 @@ export default function Header() {
           <NavLink to="/login"><Button>Login</Button></NavLink>
         </>
         )}
+
       </header>
   );
 }
