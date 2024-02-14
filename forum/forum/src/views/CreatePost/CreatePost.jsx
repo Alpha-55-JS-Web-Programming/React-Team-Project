@@ -5,7 +5,7 @@ import { AppContext } from "../../Context/AppContext";
 import "./CreatePost.css";
 
 export default function CreatePost() {
-  const { userData } = useContext(AppContext);
+  const { user, userData } = useContext(AppContext);
   const [post, setPost] = useState({
     title: '',
     content: '',
@@ -38,7 +38,11 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="create-post-container">
+  <div>
+    {userData.isBlocked ? (
+    <h3>You don't have permission to access this page.</h3>
+    ) : (
+      <div className="create-post-container">
       <h1 className="h1">Create post</h1>
       <label htmlFor="input-title">Title:</label>
       <input value={post.title} onChange={(e) => updatePost(e.target.value, 'title')} type="text" name="input-title" id="input-title" /><br />
@@ -46,5 +50,8 @@ export default function CreatePost() {
       <textarea value={post.content} onChange={(e) => updatePost(e.target.value, 'content')} name="input-content" id="input-content" cols="30" rows="10"></textarea><br /><br />
       <Button onClick={createPost} className="button">Create</Button>
     </div>
+    )}
+
+  </div>
   );
 }
