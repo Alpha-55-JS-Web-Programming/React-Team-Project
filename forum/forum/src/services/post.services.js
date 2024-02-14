@@ -1,4 +1,4 @@
-import { ref, push, get, query, update } from 'firebase/database';
+import { ref, push, get, query, update, getDatabase, remove } from 'firebase/database';
 import { db } from '../config/firebase-config';
 import { format } from 'date-fns';
 import { getUserByHandle } from './users.service';
@@ -85,4 +85,16 @@ export const dislikePost = (handle, postId) => {
 export const addCommentToPost = (postId, commentData) => {
   const commentsRef = ref(db, `posts/${postId}/comments`);
   return push(commentsRef, commentData);
+};
+
+export const deletePost = async (postId) => {
+  const postRef = ref(db, `posts/${postId}`);
+
+  try {
+    await remove(postRef);
+    console.log('Post deleted successfully.');
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    throw error; // Re-throw the error to let the caller handle it
+  }
 };

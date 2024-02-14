@@ -3,7 +3,7 @@ import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../Context/AppContext';
-import { addCommentToPost } from '../../services/post.services';
+import { addCommentToPost, deletePost } from '../../services/post.services';
 import './PostDetails.css';
 
 export default function PostDetails({ post, togglePostLike }) {
@@ -30,6 +30,16 @@ export default function PostDetails({ post, togglePostLike }) {
           setNewComment('');
         })
         .catch((error) => console.error('Error adding comment:', error));
+    }
+  };
+
+  const handleDeletePost = async () => {
+    try {
+      // Assuming deletePost is an async function that deletes a post
+      await deletePost(post.id);
+      navigate('/allposts');
+    } catch (error) {
+      console.error('Error deleting post:', error);
     }
   };
 
@@ -74,8 +84,7 @@ export default function PostDetails({ post, togglePostLike }) {
       <div className="button-group">
         <Button onClick={() => navigate('/allposts')}>Back</Button>
         {userData.handle === post.author && <Button onClick={() => navigate('/allposts')}>Edit</Button>}
-        
-        {userData.handle === post.author && <Button onClick={() => navigate('/allposts')}>Delete</Button>}
+        {userData.handle === post.author && <Button onClick={handleDeletePost}>Delete</Button>}
       </div>
     </div>
   );
