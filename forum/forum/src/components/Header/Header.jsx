@@ -4,6 +4,7 @@ import { AppContext } from "../../Context/AppContext";
 import { useContext } from "react";
 import { logoutUser } from "../../services/auth.service";
 import "./Header.css";
+import wheel from '../../../assets/wheel4.png'
 
 export default function Header() {
   const { user, userData, setContext } = useContext(AppContext);
@@ -15,6 +16,7 @@ export default function Header() {
 
   return (
       <header className="sticky-header">
+        <div className="round"> <img src={wheel} className="spin whalf" /></div>
         <NavLink to="/"> <Button>Home</Button> </NavLink>
         <NavLink to="/trending"> <Button>Top 10 Trending</Button> </NavLink>
         <NavLink to="/latest"> <Button>Top 10 Latest</Button> </NavLink>
