@@ -28,14 +28,15 @@ export default function Register() {
   function validateDetails(mobile) {
     const mobileRegex = /^\d{10}$/;
     if (!mobileRegex.test(mobile)) {
-      setErrorMessage("Mobile number must be of 9 digits");
+      setErrorMessage("Mobile number must be of 10 digits");
       return false; // Show a err if the mobile number format is incorrect
     }
     return true;
   }
+
   const register = async () => {
-    // TODO: Validate inputs
     try {
+      // Basic name validation
       if (form.FullName.length < 4 || form.FullName.length > 32) {
         setErrorMessage(
           "First name and last name must be between 4 and 32 symbols."
@@ -48,20 +49,25 @@ export default function Register() {
         setErrorMessage("Please enter a valid email address.");
         return;
       }
-      //   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
 
+      //   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
       // if (!passwordRegex.test(password)) {
       //   setErrorMessage("Password error: Length must be 8 with 1 uppercase 1 lowercase and 1 special character");
       //   return false; // Password doesn't meet the criteria.
       // }
 
+      // Validate password match
       if (form.password !== form.confirmPassword) {
         setErrorMessage("Password and Confirm Password do not match");
         return false; // Passwords do not match.
       }
+
+      // Validate mobile number
       if (!validateDetails(form.mobile)) {
-        setErrorMessage("Mobile number must be of 9 digits");
+        setErrorMessage("Mobile number must be of 10 digits");
       }
+
+      // Check if handle already exists
       const user = await getUserByHandle(form.handle);
       if (user.exists()) {
         setErrorMessage(`Handle @${form.handle} already exists`);
@@ -156,7 +162,7 @@ export default function Register() {
               </div>
             </div>
           </div>
-          
+
             {/*Mobile*/}
           <div>
             <div >
