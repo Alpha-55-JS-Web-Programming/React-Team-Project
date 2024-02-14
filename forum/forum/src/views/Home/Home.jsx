@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getUsersCount } from '../../services/users.service';
 import { getPostsCount } from '../../services/post.services';
 import './Home.css'
-import production from "../../../assets/production.mp4";
+// import production from "../../../assets/production.mp4";
 
 export default function Home() {
   const [usersCount, setUsersCount] = useState(0);
@@ -25,7 +25,7 @@ export default function Home() {
       <p>{`Number of posts: ${postsCount}`}</p>
       {/* Your existing content goes here */}
 
-  <video src={production} muted loop autoPlay></video>
+  <video src='https://v3.cdnpk.net/videvo_files/video/free/video0467/large_watermarked/_import_61593b9f42edc5.23723719_preview.mp4' muted loop autoPlay></video>
 </section>
 
     </div>
