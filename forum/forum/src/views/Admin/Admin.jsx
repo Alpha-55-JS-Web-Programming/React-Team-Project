@@ -47,10 +47,7 @@ export default function Admin() {
       const listUsers = await getAllUsers();
       return listUsers.map(userRecord => (
         <div key={userRecord.id}>
-          <span>User: {userRecord.handle}</span>
-          <span>UserId: {userRecord.uid}</span>
-          <span>Role: {userRecord.role}</span>
-          <Button onClick={() => ChangeRole(userRecord.uid)}>Make Admin</Button>
+
         </div>
       ));
     } catch (error) {
@@ -68,6 +65,8 @@ export default function Admin() {
           <span>User: {user.handle}</span>
           <span>UserId: {user.uid}</span>
           <span>Role: {user.role}</span>
+          <Button onClick={() => ChangeRole(userRecord.uid)}>Make Admin</Button>
+
         </div>
       ))}
     </div>
