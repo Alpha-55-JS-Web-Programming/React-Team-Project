@@ -55,7 +55,7 @@ export default function Admin() {
     const users = Object.keys(snapshot.val()).map(key => ({
       id: key,
       ...snapshot.val()[key],
-      role: '', //? Am I supposed to get the role like tha?
+       //? Am I supposed to get the role like tha?
     }))
 
     console.log(users);

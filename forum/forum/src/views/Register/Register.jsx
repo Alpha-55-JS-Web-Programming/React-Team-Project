@@ -17,6 +17,7 @@ export default function Register() {
     mobile: "",
     password: "",
     confirmPassword: "",
+    role:"",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -83,7 +84,7 @@ export default function Register() {
         form.email,
         form.mobile,
         form.password,
-        "user"
+        form.role
       );
 
       setContext({ user: credentials.user, userData: null });
