@@ -8,6 +8,7 @@
   justify-content: center; /* Center content horizontally */
   align-items: center; /* Center content vertically */
   background-color: #a8a8a8;
+  background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow for a more 3D effect */
   transition: all 0.3s ease; /* Add transition for smoother feel */
   z-index: 1000; /* Ensure the header stays on top of other content */
