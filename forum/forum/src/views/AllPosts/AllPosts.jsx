@@ -43,25 +43,31 @@ export default function AllPosts() {
         const fetchedPosts = await getAllPosts();
         setPosts(fetchedPosts);
         sortPosts("newest"); // Default sort
-
-        const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase()));
-        setSortedPosts(filteredPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
   
     fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase()));
+    setSortedPosts(filteredPosts);
   }, [posts, search]);
 
 
-  const togglePostLike = (handle, id) => {
+  const togglePostLike = async (handle, id) => {
     setSortedPosts((prevPosts) =>
       prevPosts.map((post) => {
         if (post.id === id) {
-          post.likedBy = post.likedBy.includes(handle)
-            ? post.likedBy.filter((u) => u !== handle)
-            : [...post.likedBy, handle];
+          if (post.likedBy.includes(handle)) {
+            post.likedBy = post.likedBy.filter((u) => u !== handle);
+            dislikePost(id);
+          } else {
+            post.likedBy = [...post.likedBy, handle];
+            likePost(id);
+          }
         }
         return post;
       })
