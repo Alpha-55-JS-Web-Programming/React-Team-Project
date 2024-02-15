@@ -16,21 +16,31 @@ export default function AllPosts() {
   const navigate = useNavigate();
 
   const sortPosts = (sortBy) => {
+    console.log({ posts });
+
     let sorted;
     switch (sortBy) {
-      case "most-liked":
-        sorted = [...posts].sort((a, b) => b.likedBy.length - a.likedBy.length);
-        break;
-      case "most-commented":
-        sorted = [...posts].sort((a, b) => b.comments.length - a.comments.length);
-        break;
-      default:
-        sorted = [...posts].sort((a, b) => new Date(b.createdOnReadable) - new Date(a.createdOnReadable));
-        break;
+        case "most-liked":
+          sorted = [...posts].sort((a, b) => b.likedBy.length - a.likedBy.length);
+          return setSortedPosts(sorted);
+          case "most-commented":
+            sorted = Object.keys(posts).sort((a, b) => {
+                // Check if comments property exists for both posts
+                const commentsA = posts[a].comments ? Object.keys(posts[a].comments).length : 0;
+                const commentsB = posts[b].comments ? Object.keys(posts[b].comments).length : 0;
+                // Compare by the number of comments
+                return commentsB - commentsA;
+            });
+            // Convert the sorted keys back to an array of post objects
+            setSortedPosts(sorted.map(postKey => posts[postKey]));
+            break;
+        default:
+          sorted = [...posts].sort((a, b) => new Date(b.createdOnReadable) - new Date(a.createdOnReadable));
+          return setSortedPosts(sorted);
     }
-    setSortedPosts(sorted);
-  };
-
+    // Convert the sorted keys back to an array of post objects
+    // setSortedPosts(sorted.map(postKey => posts[postKey]));
+};
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearch(value);
