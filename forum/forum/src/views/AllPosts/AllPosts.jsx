@@ -49,7 +49,12 @@ export default function AllPosts() {
     };
   
     fetchPosts();
-  }, [posts]);
+  }, []);
+
+  useEffect(() => {
+    const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase()));
+    setSortedPosts(filteredPosts);
+  }, [posts, search]);
 
   const togglePostLike = (handle, id) => {
     setSortedPosts((prevPosts) =>
