@@ -19,7 +19,13 @@ export default function ProfileInformation() {
 
   const updateProfile = async () => {
     try {
-      await updateUserData(user.uid, { ...form });
+      // Directly use the handle for updates as you might not be able to efficiently map uid to handle
+      await updateUserData(form.handle, {
+        FullName: form.FullName,
+        email: form.email,
+        mobile: form.mobile,
+        // Do not update the handle
+      });
       // Update context to reflect changes
       setContext({ user, userData: { ...userData, ...form } });
       console.log("Profile updated successfully!");
@@ -36,7 +42,7 @@ export default function ProfileInformation() {
     } catch (error) {
       console.log(error.message);
     }
-  }; 
+  };
 
   return (
     <div>
@@ -53,9 +59,9 @@ export default function ProfileInformation() {
         <br/>
         <label htmlFor="mobile">Mobile: </label>
         <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br/>
-        <br/> 
+        <br/>
         {/* Add other input fields as needed for additional information*/}
-        
+
         <Button type="button" onClick={updateProfile}>Update Profile</Button>
         <br/> <br/> <br/>
         <Button onClick={logout}>Logout</Button>

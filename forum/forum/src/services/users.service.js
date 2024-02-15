@@ -9,7 +9,7 @@ export const getUserByHandle = (handle = 'pesho') => {
 
 export const createUserProfile = (FullName, handle, uid, email, mobile, password, role = 'user') => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
-  
+
   return set(ref(db, `users/${handle}`), {
     FullName,
     handle,
@@ -27,9 +27,9 @@ export const getUserData = (uid) => {
   return get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)));
 };
 
-export const updateUserData = async (uid, data) => {
-  const userRef = ref(db, `users/${uid}`); // Ensure this path matches your Firebase data structure
-  
+export const updateUserData = async (handle, data) => {
+  const userRef = ref(db, `users/${handle}`); // Use handle to reference the correct path
+
   try {
     await update(userRef, data);
     console.log("User data updated successfully.");
@@ -38,8 +38,6 @@ export const updateUserData = async (uid, data) => {
     throw error;
   }
 };
-
-
 
 export const updateUserRole = async (uid, newRole) => {
   return update(ref(db, `users/${uid}`), { role: newRole });
