@@ -20,6 +20,8 @@ export default function AllPosts() {
 
     let sorted;
     switch (sortBy) {
+      case "choose-sort":
+        return setSortedPosts(posts);
         case "most-liked":
           sorted = [...posts].sort((a, b) => b.likedBy.length - a.likedBy.length);
           return setSortedPosts(sorted);
@@ -32,11 +34,11 @@ export default function AllPosts() {
                 return commentsB - commentsA;
             });
             // Convert the sorted keys back to an array of post objects
-            setSortedPosts(sorted.map(postKey => posts[postKey]));
-            break;
-        default:
-          sorted = [...posts].sort((a, b) => new Date(b.createdOnReadable) - new Date(a.createdOnReadable));
-          return setSortedPosts(sorted);
+            return setSortedPosts(sorted.map(postKey => posts[postKey]));
+            
+          case "newest":
+              sorted = [...posts].sort((a, b) => new Date(b.createdOnReadable) - new Date(a.createdOnReadable));
+              return setSortedPosts(sorted);
     }
     // Convert the sorted keys back to an array of post objects
     // setSortedPosts(sorted.map(postKey => posts[postKey]));
@@ -52,7 +54,7 @@ export default function AllPosts() {
       try {
         const fetchedPosts = await getAllPosts();
         setPosts(fetchedPosts);
-        sortPosts("newest"); // Default sort
+        sortPosts("choose-sort"); // Default sort
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
