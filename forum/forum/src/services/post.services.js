@@ -16,21 +16,15 @@ import { set } from 'firebase/database';
  */
 export const addPost = async (author, title, content) => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
-
-  // Use push without providing a key to generate a unique ID
   const newPostRef = push(ref(db, 'posts'));
-
-  // Get the automatically generated key (ID) for the new post
   const postId = newPostRef.key;
-
-  // Set the post data along with the generated ID
   await set(newPostRef, {
     id: postId,
     author,
     title,
     content,
     createdOnReadable: readableDate,
-    likedBy: {},
+    likedBy: [],
   });
 
   return postId;
@@ -65,7 +59,6 @@ export const getPostById = async (id) => {
     ...snapshot.val(),
     createdOn: new Date(snapshot.val().createdOn).toString(),
     likedBy: snapshot.val().likedBy ? Object.keys(snapshot.val().likedBy) : [],
-    // Initialize comments array to handle posts without comments
     comments: snapshot.val().comments ? Object.values(snapshot.val().comments) : [],
   };
 

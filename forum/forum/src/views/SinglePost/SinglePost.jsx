@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../../services/post.services";
 import PostDetails from "./PostDetails";
-
+import { likePost, dislikePost } from "../../services/post.services";
 
 export default function SinglePost() {
   const [post, setPost] = useState(null);
@@ -18,10 +18,21 @@ export default function SinglePost() {
   }, [id]);
 
   const togglePostLike = (handle) => {
-    setPost({
-      ...post,
-      likedBy: post.likedBy.includes(handle) ? post.likedBy.filter(u => u !== handle) : [...post.likedBy, handle],
-    });
+    if (post.likedBy.includes(handle)) {
+      dislikePost(handle, post.id).then(() => {
+        setPost({
+          ...post,
+          likedBy: post.likedBy.filter(u => u !== handle),
+        });
+      });
+    } else {
+      likePost(handle, post.id).then(() => {
+        setPost({
+          ...post,
+          likedBy: [...post.likedBy, handle],
+        });
+      });
+    }
   };
 
   return (
