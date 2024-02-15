@@ -9,6 +9,7 @@ export default function Admin() {
   const { user, userData } = useContext(AppContext);
   const isAdmin = userData?.role === "admin";
   const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     getAllUsers().then((users) => setUsers(users));
@@ -25,7 +26,6 @@ export default function Admin() {
       ...snapshot.val()[key],
     }));
 
-    console.log(users);
     return users;
   };
 
@@ -71,36 +71,65 @@ export default function Admin() {
   };
 
   const handleRoleChange = async (userId, newRole) => {
-    // Implement the logic to handle role change
     await changeRole(userId, newRole);
 
-    // Fetch the updated user list after the role change
     const updatedUsers = await getAllUsers();
     setUsers(updatedUsers);
+  };
+
+  const handleSearchChange = async (e) => {
+    const value = e.target.value;
+    setSearch(value);
+  
+    if (value.trim() === "") {
+      // If the search input is empty, fetch all users from the database
+      const updatedUsers = await getAllUsers();
+      setUsers(updatedUsers);
+    } else {
+      // Filter users based on the search input
+      const filteredUsers = users.filter((user) =>
+        user.handle.toLowerCase().includes(value.toLowerCase())
+      );
+      setUsers(filteredUsers);
+    }
   };
 
   return (
     <div>
       {isAdmin ? (
-        <h1>Welcome, admin {userData.FullName}</h1>
+        <>
+          <h1>Welcome, admin {userData.FullName}</h1>
+
+          <label htmlFor="search">Search </label>
+          <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
+
+          {users.length > 0 &&
+            users.map((user) => (
+              <div key={user.id}>
+                <span>User: {user.handle}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>UserId: {user.uid}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>Role: {user.role}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <label htmlFor={`user-role-${user.id}`}>Change role:</label>
+                <select
+                  id={`user-role-${user.id}`}
+                  value={user.role}
+                  onChange={(e) =>
+                    handleRoleChange(user.id, e.target.value)
+                  }
+                >
+                  <option value="user">user</option>
+                  <option value="admin">admin</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button onClick={() => changeIsBlocked(user.id)}>
+                  {user.isBlocked ? "Unblock" : "Block"}{" "}
+                </Button>
+              </div>
+            ))}
+        </>
       ) : (
         <h3>You don't have permission to access this page.</h3>
       )}
-      <Button onClick={listAllUsers}>List Users</Button>
-      {users.length > 0 && users.map((user) => (
-          <div key={user.id}>
-            <span>User: {user.handle}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>UserId: {user.uid}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>Role: {user.role}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            
-            <label htmlFor={`user-role-${user.id}`}>Change role:</label>
-            <select id={`user-role-${user.id}`} value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)}>
-              <option value="user">user</option>
-              <option value="admin">admin</option>
-            </select>&nbsp;&nbsp;&nbsp;&nbsp;
-            <Button onClick={() => changeIsBlocked(user.id)}>{user.isBlocked ? "Unblock" : "Block"} </Button>
-          </div>
-        ))}
     </div>
   );
 }

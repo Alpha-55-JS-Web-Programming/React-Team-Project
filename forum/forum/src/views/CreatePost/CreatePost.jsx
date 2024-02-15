@@ -19,11 +19,11 @@ export default function CreatePost() {
   };
 
   const createPost = async () => {
-    if (post.title.length < 3) {
+    if (post.title.length < 3) { // Updated to check for minimum length
       return alert('Title must be at least 3 characters long');
-    }
-    if (post.content.length < 5) {
-      return alert('Content must be at least 5 characters long');
+    } 
+    if (post.content.length < 5 && post.content.length > 3000) { // Updated to check for minimum length
+      return alert('Content must be at least 5 characters long and maximum 3000 characters long');
     }
 
     // TODO: userData should be set when the user logs in
