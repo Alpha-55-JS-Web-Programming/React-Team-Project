@@ -86,7 +86,6 @@ export default function Admin() {
       ) : (
         <h3>You don't have permission to access this page.</h3>
       )}
-      <Button onClick={listAllUsers}>List Users</Button>
       {users.length > 0 && users.map((user) => (
           <div key={user.id}>
             <span>User: {user.handle}</span>&nbsp;&nbsp;&nbsp;&nbsp;
