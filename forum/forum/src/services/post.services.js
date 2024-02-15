@@ -14,10 +14,11 @@ import { set } from 'firebase/database';
  * @param {*} dislikes
  * @returns
  */
-export const addPost = async (author, title, content) => {
+export const addPost = async (author, title, content, tags) => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
   const newPostRef = push(ref(db, 'posts'));
   const postId = newPostRef.key;
+  
   await set(newPostRef, {
     id: postId,
     author,
@@ -25,6 +26,8 @@ export const addPost = async (author, title, content) => {
     content,
     createdOnReadable: readableDate,
     likedBy: [],
+    comments: [],
+    tags: tags || [],
   });
 
   return postId;

@@ -13,7 +13,7 @@ export default function Sort({ onSortChange }) {
     <div>
       <label htmlFor="sort">Sort by: </label>
       <select onChange={handleSortChange} name="sort" id="sort" value={sort}>
-      <option value="choose-sort">choose sort</option>
+      <option value="choose-sort">---</option>
         <option value="newest">newest</option>
         <option value="most-liked">most likes</option>
         <option value="most-commented">most comments</option>
