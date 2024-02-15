@@ -6,11 +6,14 @@ import { AppContext } from "../../Context/AppContext";
 import { addCommentToPost, deletePost } from "../../services/post.services";
 import "./PostDetails.css";
 
+import { EditPost } from './EditPost';
+
 export default function PostDetails({ post, togglePostLike }) {
   const navigate = useNavigate();
   const { user, userData } = useContext(AppContext);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [editing, setEditing] = useState(false);
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
@@ -86,8 +89,10 @@ export default function PostDetails({ post, togglePostLike }) {
 
       <div className="button-group">
         <Button onClick={() => navigate("/allposts")}>Back</Button>
-        {(userData.handle === post.author || userData.role === "admin" ) && ( <Button onClick={() => navigate("/allposts")}>Edit</Button> )}
+        {(userData.handle === post.author || userData.role === "admin" ) && ( <Button onClick={() => setEditing(true)}>Edit</Button> )}
         {(userData.handle === post.author || userData.role === "admin" )  && ( <Button onClick={handleDeletePost}>Delete</Button> )}
+        {/* Conditional rendering of EditPost component */}
+      {editing && <EditPost postId={post.id} />}
       </div>
     </div>
   );
