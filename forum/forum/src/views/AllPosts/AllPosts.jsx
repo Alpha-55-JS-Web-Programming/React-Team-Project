@@ -40,7 +40,7 @@ export default function AllPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const fetchedPosts = await getAllPosts(search);
+        const fetchedPosts = await getAllPosts();
         setPosts(fetchedPosts);
         sortPosts("newest"); // Default sort
       } catch (error) {
@@ -49,7 +49,7 @@ export default function AllPosts() {
     };
   
     fetchPosts();
-  }, [search]);
+  }, [posts]);
 
   const togglePostLike = (handle, id) => {
     setSortedPosts((prevPosts) =>
