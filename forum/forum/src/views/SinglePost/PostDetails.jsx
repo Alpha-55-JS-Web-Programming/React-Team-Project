@@ -21,7 +21,7 @@ export default function PostDetails({ post, togglePostLike }) {
       const commentData = {
         author: userData.handle,
         text: newComment,
-        createdOn: new Date().valueOf(),
+        createdOn: new Date(post.createdOnReadable).toLocaleDateString("bg-BG"),
       };
 
       addCommentToPost(post.id, commentData)
