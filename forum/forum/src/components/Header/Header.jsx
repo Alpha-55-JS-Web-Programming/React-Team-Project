@@ -16,6 +16,35 @@ export default function Header() {
 
   return (
       <header className="sticky-header">
+        <div className="menu">
+  <ul className="toggle">
+    
+    <li data-content="home" className="spread">
+    <NavLink className={'--i:1'} to='/'><Button>Home</Button></NavLink>
+    </li>
+    
+    <li  data-content="Top 10 Trending" className="spread">
+    <NavLink className={'--i:2'} to='/trending'><Button>Trending</Button></NavLink>
+    </li>
+    
+    <li  data-content="Top 10 Latest" class="spread">
+    <NavLink className={'--i:3'}  to='/latest'><Button>Latest</Button></NavLink>
+    </li>
+    
+    <li  data-content="Register" class="spread">
+    <NavLink  className={'--i:4'} to='/register'><Button>Register</Button></NavLink>
+    </li>
+    
+    <li  data-content="Login" class="spread">
+    <NavLink  className={'--i:5'} to='/login'><Button>Login</Button></NavLink>
+    </li>
+    
+    <li  data-content="Create Post" class="spread">
+    <NavLink  className={'--i:6'} to='/create-post'><Button>Create Post</Button></NavLink>
+    </li>
+    
+  </ul>
+</div>
         <div className="round"> <img src={wheel} className="spin whalf" /></div>
         <NavLink to="/"> <Button>Home</Button> </NavLink>
         <NavLink to="/trending"> <Button>Top 10 Trending</Button> </NavLink>
