@@ -25,7 +25,6 @@ export default function Home() {
       <p>{`Number of posts: ${postsCount}`}</p>
       {/* Your existing content goes here */}
 
-  <video src='https://v3.cdnpk.net/videvo_files/video/free/video0467/large_watermarked/_import_61593b9f42edc5.23723719_preview.mp4' muted loop autoPlay></video>
 </section>
 
     </div>
