@@ -43,18 +43,17 @@ export default function AllPosts() {
         const fetchedPosts = await getAllPosts();
         setPosts(fetchedPosts);
         sortPosts("newest"); // Default sort
+
+        const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase()));
+        setSortedPosts(filteredPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
   
     fetchPosts();
-  }, []);
-
-  useEffect(() => {
-    const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase()));
-    setSortedPosts(filteredPosts);
   }, [posts, search]);
+
 
   const togglePostLike = (handle, id) => {
     setSortedPosts((prevPosts) =>
