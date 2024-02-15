@@ -97,6 +97,7 @@ export default function AllPosts() {
   };
 
   return (
+    <>
     <div className="all-posts-container">
       <h1>All posts</h1>
 
@@ -119,15 +120,20 @@ export default function AllPosts() {
           <h3>Title: {post.title}</h3>
           <p> <strong>Context:</strong> {post.content} </p>
           <p>{new Date(post.createdOnReadable).toLocaleDateString("bg-BG")}</p>
-<Button onClick={() => togglePostLike(userData.handle, post.id)}>
-  {post.likedBy.includes(userData.handle) ? "Dislike" : "Like"}
-</Button>
+          <Button onClick={() => togglePostLike(userData.handle, post.id)}>
+            {post.likedBy.includes(userData.handle) ? "Dislike" : "Like"}
+          </Button>
           <Button onClick={() => navigate(`/posts/${post.id}`)}>
             {" "}Details{" "}
           </Button>
+          <br/><br/><br/>
         </div>
+          
+
       ))}
+      
     </div>
+    </>
   );
 }
 
