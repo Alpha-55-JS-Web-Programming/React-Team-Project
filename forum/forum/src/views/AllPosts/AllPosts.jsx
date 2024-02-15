@@ -47,12 +47,12 @@ export default function AllPosts() {
         console.error("Error fetching posts:", error);
       }
     };
-  
+
     fetchPosts();
   }, []);
 
   useEffect(() => {
-    const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase()));
+    const filteredPosts = posts.filter(post => post.title && post.title.toLowerCase().includes(search.toLowerCase()));
     setSortedPosts(filteredPosts);
   }, [posts, search]);
 
