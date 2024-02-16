@@ -87,6 +87,22 @@ export default function PostDetails({ post, togglePostLike }) {
           )}
         </div>
       </div>
+      <div className="comments-list">
+          <h3>Comments:</h3>
+          <ul>
+            {comments.map((comment, index) => (
+              <li key={index}> {comment.author}: {comment.text}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="post-comments">
+          {post.comments && post.comments.map((comment, index) => (
+              <div key={index} className="comment-item">
+                <p> {comment.author}: {comment.text} </p>
+              </div>
+            ))}
+        </div>
       <p>Likes: {post.likedBy.length}</p>
       <div className="button-group">
         <Button onClick={() => navigate("/allposts")}>Back</Button>
