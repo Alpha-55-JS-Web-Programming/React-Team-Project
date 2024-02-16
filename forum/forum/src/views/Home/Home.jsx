@@ -34,7 +34,7 @@ export default function Home() {
       <Button onClick={() => navigate("/health")}>Health</Button>
       <Button onClick={() => navigate("/wellness")}>Wellness</Button>
 
-      <div class="details">
+      <div className="details">
       <h3>Getting Started</h3>
       <h3>Health and Weight Loss</h3>
       <h3>Food and Nutrition</h3>
