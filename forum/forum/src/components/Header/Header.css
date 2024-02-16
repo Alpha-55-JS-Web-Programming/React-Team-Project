@@ -3,22 +3,20 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 0; /* Add some vertical padding */
-  display: flex; /* Use flex for better alignment */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
+  padding: 10px 0; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   background-color: #a8a8a8;
   background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow for a more 3D effect */
-  transition: all 0.3s ease; /* Add transition for smoother feel */
-  z-index: 1000; /* Ensure the header stays on top of other content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: all 0.3s ease; 
+  z-index: 1000; 
 }
 .sticky-header button {
-  margin: 0 10px; /* Add horizontal margin */
+  margin: 0 10px;
 }
-.profile {
-  /* TODO: Add styles for "Welcome, Username" */
-}
+
 .whalf {
   width: 40%;
   height: 40%;
@@ -37,10 +35,6 @@
   }
   }
   
-  .container{
-    text-align: center;
-    margin-top: 360px;
-  }
   .btn{
     border: 1px solid #3498db;
     background: none;
