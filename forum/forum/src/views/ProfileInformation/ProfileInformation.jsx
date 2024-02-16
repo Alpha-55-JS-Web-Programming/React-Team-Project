@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { logoutUser } from "../../services/auth.service";
 import Button from "../../components/Button/Button";
@@ -13,22 +13,43 @@ export default function ProfileInformation() {
     mobile: userData?.mobile || "",
   });
 
+  const [messages, setMessages] = useState([]);
+
   const updateForm = (prop) => (e) => {
     setForm({ ...form, [prop]: e.target.value });
   };
 
-  const updateProfile = async () => {
+  const updateProfile = async (e) => {
+    e.preventDefault();
     try {
-      // Directly use the handle for updates as you might not be able to efficiently map uid to handle
       await updateUserData(form.handle, {
         FullName: form.FullName,
         email: form.email,
         mobile: form.mobile,
-        // Do not update the handle
       });
-      // Update context to reflect changes
       setContext({ user, userData: { ...userData, ...form } });
       console.log("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile:", error.message);
+    }
+
+    let newMessages = [];
+    try {
+      if (form.FullName !== userData.FullName) {
+        newMessages.push("Your names were updated successfully!");
+      }
+      if (form.email !== userData.email) {
+        newMessages.push("Your email was updated successfully!");
+      }
+      if (form.mobile !== userData.mobile) {
+        newMessages.push("Your mobile number was updated successfully!");
+      }
+      if (form.handle !== userData.handle) {
+        newMessages.push("You are not allowed to update your username!");
+      }
+
+      setMessages(newMessages);
+
     } catch (error) {
       console.error("Error updating profile:", error.message);
     }
@@ -49,21 +70,26 @@ export default function ProfileInformation() {
       <h1>Profile Information</h1>
       <form>
         <label htmlFor="full-name">Full name: </label>
-        <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br/>
-        <br/>
+        <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
+        <br />
         <label htmlFor="handle">Handle: </label>
-        <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br/>
-        <br/>
+        <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br />
+        <br />
         <label htmlFor="email">Email: </label>
-        <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br/>
-        <br/>
+        <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br />
+        <br />
         <label htmlFor="mobile">Mobile: </label>
-        <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br/>
-        <br/>
+        <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
+        <br />
         {/* Add other input fields as needed for additional information*/}
 
-        <Button type="button" onClick={updateProfile}>Update Profile</Button>
-        <br/> <br/> <br/>
+        <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
+        {messages.map((message, index) => (
+          <div key={index} style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
+            {message}
+          </div>
+        ))}
+        <br /> <br /> <br />
         <Button onClick={logout}>Logout</Button>
       </form>
     </div>
