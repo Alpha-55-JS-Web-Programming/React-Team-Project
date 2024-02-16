@@ -17,15 +17,15 @@ export default function Header() {
   return (
       <header className="sticky-header">
         <div className="round"> <img src={wheel} className="spin whalf" /></div>
-        <NavLink to="/"> <Button>Home</Button> </NavLink>
-        <NavLink to="/trending"> <Button>Top 10 Trending</Button> </NavLink>
-        <NavLink to="/latest"> <Button>Top 10 Latest</Button> </NavLink>
-        <NavLink to="/allposts"> <Button>AllPosts</Button> </NavLink>
-        { user && <NavLink to="/create-post"> <Button>Create Post</Button> </NavLink>} 
-        {isAdmin && <NavLink to="/admin"> <Button>Admin</Button> </NavLink>}
+        <NavLink to="/"> <button className="btn btn1">Home</button> </NavLink>
+        <NavLink to="/trending"> <button className="btn btn2">Top 10 Trending</button> </NavLink>
+        <NavLink to="/latest"> <button className="btn btn1">Top 10 Latest</button> </NavLink>
+        <NavLink to="/allposts"> <button className="btn btn2">AllPosts</button> </NavLink>
+        { user && <NavLink to="/create-post"> <button className="btn btn1">Create Post</button> </NavLink>} 
+        {isAdmin && <NavLink to="/admin"> <button className="btn btn2">Admin</button> </NavLink>}
         {user ? (
         <>
-          <NavLink to="/profile-information" className={"profile"}>{`Welcome, ${userData?.handle}`}</NavLink>
+          <NavLink to="/profile-information" className="profile">{`Welcome, ${userData?.handle}`}</NavLink>
         </>
           ) : (
         <>

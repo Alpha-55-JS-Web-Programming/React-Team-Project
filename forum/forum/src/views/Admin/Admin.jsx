@@ -16,7 +16,7 @@ export default function Admin() {
 
   useEffect(() => {
     getAllUsers().then((users) => setUsers(users));
-  }, []);
+  }, [users]);
 
   const getAllUsers = async () => {
     const snapshot = await get(query(ref(db, "users")));
