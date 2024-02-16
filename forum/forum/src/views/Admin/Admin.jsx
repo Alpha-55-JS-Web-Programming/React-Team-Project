@@ -10,6 +10,9 @@ export default function Admin() {
   const isAdmin = userData?.role === "admin";
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [form, setForm] = useState({
+    mobile: "",
+  });
 
   useEffect(() => {
     getAllUsers().then((users) => setUsers(users));
@@ -100,6 +103,9 @@ export default function Admin() {
         <>
           <h1>Welcome, admin {userData.FullName}</h1>
 
+          {/* <label htmlFor="mobile">Mobile: </label>
+          <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br/>
+          <br/>  */}
           <label htmlFor="search">Search </label>
           <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
 

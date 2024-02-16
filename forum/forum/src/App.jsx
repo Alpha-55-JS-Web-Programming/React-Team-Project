@@ -20,6 +20,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { getUserData } from "./services/users.service";
 import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
 import Admin from "./views/Admin/Admin";
+import Health from "./views/HealthAndWellness/Health";
+import Wellness from "./views/HealthAndWellness/Wellness";
 
 function App() {
   const [context, setContext] = useState({
@@ -49,6 +51,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/health" element={<Health />} />
+          <Route path="/wellness" element={<Wellness />} />
           <Route path="/Latest" element={<Latest />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/allposts" element={<Authenticated><AllPosts /></Authenticated>} />
