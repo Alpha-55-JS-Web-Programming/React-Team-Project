@@ -53,7 +53,7 @@ export default function PostDetails({ post, togglePostLike }) {
       <p className="post-meta"> Posted by: {post.authorDetails?.handle || "Unknown"} 
       | Date:{" "} {new Date(post.createdOnReadable).toLocaleDateString("bg-BG")} </p>
       <Button onClick={() => togglePostLike(userData.handle, post.id)}> {post.likedBy.includes(userData.handle) ? "Dislike" : "Like"}</Button>
-
+      {editing && <EditPost postId={post.id} />}
       <div className="comment-section">
 
         <div>
@@ -92,7 +92,7 @@ export default function PostDetails({ post, togglePostLike }) {
         {(userData.handle === post.author || userData.role === "admin" ) && ( <Button onClick={() => setEditing(true)}>Edit</Button> )}
         {(userData.handle === post.author || userData.role === "admin" )  && ( <Button onClick={handleDeletePost}>Delete</Button> )}
         {/* Conditional rendering of EditPost component */}
-      {editing && <EditPost postId={post.id} />}
+      
       </div>
     </div>
   );
