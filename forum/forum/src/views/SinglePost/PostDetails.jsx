@@ -54,6 +54,8 @@ export default function PostDetails({ post, togglePostLike }) {
       | Date:{" "} {new Date(post.createdOnReadable).toLocaleDateString("bg-BG")} </p>
       <Button onClick={() => togglePostLike(userData.handle, post.id)}> {post.likedBy.includes(userData.handle) ? "Dislike" : "Like"}</Button>
       {editing && <EditPost postId={post.id} />}
+      <Button onClick={()=>{setEditing(false)}}> Close </Button>
+
       <div className="comment-section">
 
         <div>
