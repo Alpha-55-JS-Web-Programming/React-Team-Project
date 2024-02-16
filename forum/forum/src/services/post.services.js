@@ -111,3 +111,43 @@ export const getPostsCount = async () => {
   const snapshot = await get(query(ref(db, 'posts')));
   return snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
 };
+
+export const getTopCommentedPosts = async () => {
+  const snapshot = await get(query(ref(db, 'posts')));
+  if (!snapshot.exists()) {
+    return [];
+  }
+
+  const posts = Object.keys(snapshot.val())
+    .map(key => ({
+      id: key,
+      commentsCount: snapshot.val()[key].comments ? Object.keys(snapshot.val()[key].comments).length : 0,
+      likedBy: snapshot.val()[key].likedBy || [],
+      comments: snapshot.val()[key].comments || [],
+      ...snapshot.val()[key],
+    }))
+    .sort((a, b) => b.commentsCount - a.commentsCount)
+    .slice(0, 10);
+
+  return posts;
+};
+
+export const getMostRecentPosts = async () => {
+  const snapshot = await get(query(ref(db, 'posts')));
+  if (!snapshot.exists()) {
+    return [];
+  }
+
+  const posts = Object.keys(snapshot.val())
+    .map(key => ({
+      id: key,
+      createdOn: new Date(snapshot.val()[key].createdOn).getTime(),
+      likedBy: snapshot.val()[key].likedBy || [],
+      comments: snapshot.val()[key].comments || [],
+      ...snapshot.val()[key],
+    }))
+    .sort((a, b) => b.createdOn - a.createdOn)
+    .slice(0, 10);
+
+  return posts;
+};
