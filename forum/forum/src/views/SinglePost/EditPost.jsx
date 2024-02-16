@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { db } from '../../config/firebase-config';
 import { ref, update, get } from 'firebase/database';
+import { useRecoilState } from 'recoil';
+import { edit } from './../../atom/atom';
+
 
 export const EditPost = ({ postId }) => {
   const [post, setPost] = useState(null);
   const [newContent, setNewContent] = useState('');
   const [error, setError] = useState(null);
+  const [editing, setEditing] = useRecoilState(edit);
+
 
   useEffect(() => {
     const postRef = ref(db, `posts/${postId}`);
@@ -33,6 +38,7 @@ export const EditPost = ({ postId }) => {
         content: newContent,
       });
       console.log('Post updated successfully');
+      setEditing()
     } catch (error) {
       setError(error.message);
       console.error('Error updating post:', error);

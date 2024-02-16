@@ -22,6 +22,8 @@ import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
 import Admin from "./views/Admin/Admin";
 import Health from "./views/HealthAndWellness/Health";
 import Wellness from "./views/HealthAndWellness/Wellness";
+import React from 'react';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   const [context, setContext] = useState({
@@ -44,6 +46,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <RecoilRoot>
         <AppContext.Provider value={{ ...context, setContext }}>
         <Header />
 
@@ -65,6 +68,7 @@ function App() {
         </Routes>
         <Footer />
         </AppContext.Provider>
+        </RecoilRoot>
     </BrowserRouter>
   );
 }
