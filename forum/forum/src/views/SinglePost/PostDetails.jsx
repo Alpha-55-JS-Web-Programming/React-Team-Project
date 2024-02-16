@@ -69,7 +69,7 @@ export default function PostDetails({ post, togglePostLike }) {
       ) : (
         <p className="post-content">{post.content}</p>
       )}
-      <p className="post-meta"> Posted by: {post.authorDetails?.handle || "Unknown"} | Date:{" "} {new Date(post.createdOnReadable).toLocaleDateString("bg-BG")} </p>
+      <p className="post-meta"> Posted by: {post.authorDetails?.handle || "Unknown"} |  Date:{" "} {new Date(post.createdOnReadable).toLocaleDateString("bg-BG")} </p>
       <Button onClick={() => togglePostLike(userData.handle, post.id)}> {post.likedBy.includes(userData.handle) ? "Dislike" : "Like"} </Button>
       <div className="comment-section">
         <div>
