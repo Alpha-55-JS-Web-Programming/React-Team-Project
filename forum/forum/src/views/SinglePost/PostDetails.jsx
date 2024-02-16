@@ -16,6 +16,7 @@ export default function PostDetails({ post, togglePostLike }) {
   const [newComment, setNewComment] = useState("");
   const [editedContent, setEditedContent] = useState(post.content);
   const [isEditing, setIsEditing] = useState(false);
+  const [updateSuccessMessage, setUpdateSuccessMessage] = useState('');
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
@@ -49,12 +50,11 @@ export default function PostDetails({ post, togglePostLike }) {
 
   const handleUpdatePost = async () => {
     try {
-      // Update the post content with the edited content
       const postRef = ref(db, `posts/${post.id}`);
-      await update(postRef, {
-        content: editedContent,
-      });
+      await update(postRef, { content: editedContent });
       console.log('Post updated successfully');
+      setUpdateSuccessMessage('Post updated successfully!'); // Set success message
+      setTimeout(() => setUpdateSuccessMessage(''), 3000); // Hide success message after 3 seconds
       setIsEditing(false); // Exit editing mode after updating
     } catch (error) {
       console.error('Error updating post:', error);
@@ -64,6 +64,7 @@ export default function PostDetails({ post, togglePostLike }) {
   return (
     <div className="post-details">
       <h2>{post.title}</h2>
+      {updateSuccessMessage && <div className="success-message">{updateSuccessMessage}</div>}
       {isEditing ? (
         <textarea value={editedContent} onChange={(e) => setEditedContent(e.target.value)}/>
       ) : (
