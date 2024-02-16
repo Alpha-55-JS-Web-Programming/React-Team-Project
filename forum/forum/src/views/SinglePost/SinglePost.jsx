@@ -15,7 +15,7 @@ export default function SinglePost() {
         setPost(postData);
       }
     });
-  }, [id]);
+  }, [id, post]);
 
   const togglePostLike = (handle) => {
     if (post.likedBy.includes(handle)) {
