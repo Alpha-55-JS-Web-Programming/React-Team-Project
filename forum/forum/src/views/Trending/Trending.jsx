@@ -6,7 +6,6 @@ const Trending = () => {
   const [topCommentedPosts, setTopCommentedPosts] = useState([]);
   const [mostRecentPosts, setMostRecentPosts] = useState([]);
   const navigate = useNavigate();
-  const [post, setPost] = useState(null);
   
   useEffect(() => {
     const fetchTopCommentedPosts = async () => {
@@ -26,16 +25,18 @@ const Trending = () => {
   }, []);
 
   const renderPost = (post) => (
+    <>
     <div key={post.id} className="post-item">
       <h3>{post.title}</h3>
-      <p>Author: {post.authorDetails?.handle || 'Unknown'}</p>
+      <p>{`Author: ${post.author }`}</p>
       <p>Created on: {new Date(post.createdOnReadable).toLocaleDateString('bg-BG')}</p>
-      <p>{`Number of Likes: ${post.likedBy ? post.likedBy.length : 0}`}</p>
-      <p>{`Number of Comments: ${post.comments ? post.comments.length : 0}`}</p>
+      <p>{`Number of Likes: ${post.likedBy ? Object.keys(post.likedBy).length : 0}`}</p>
+      <p>{`Number of Comments: ${post.comments ? Object.keys(post.comments).length : 0}`}</p>
       {/* Add any other information you want to display */}
     </div>
+    <br />
+    </>
   );
-  
 
   return (
     <div>
