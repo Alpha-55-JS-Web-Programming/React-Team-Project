@@ -22,8 +22,12 @@ import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
 import Admin from "./views/Admin/Admin";
 import Health from "./views/HealthAndWellness/Health";
 import Wellness from "./views/HealthAndWellness/Wellness";
+import { Toggle } from "./components/Toggle/Toggle";
 
 function App() {
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useState("isDark", preference);
+
   const [context, setContext] = useState({
     user: null,
     userData: null,
@@ -46,6 +50,9 @@ function App() {
     <BrowserRouter>
         <AppContext.Provider value={{ ...context, setContext }}>
         <Header />
+        
+        <div className="App" data-theme={isDark ? "dark" : "light"}>
+        <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -64,6 +71,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        </div>
         </AppContext.Provider>
     </BrowserRouter>
   );
