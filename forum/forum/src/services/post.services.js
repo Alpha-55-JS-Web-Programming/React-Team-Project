@@ -147,7 +147,8 @@ export const getMostRecentPosts = async () => {
       ...snapshot.val()[key],
     }))
     .sort((a, b) => b.createdOn - a.createdOn)
-    .slice(0, 10);
+    .slice(0, 10)
+    .reverse();
 
   return posts;
 };
