@@ -84,7 +84,7 @@ export default function Login() {
               <i className="ri-lock-2-line login__icon"></i>
 
               <div className="login__box-input">
-                <input value={form.password} onChange={updateForm("password")} type="text" className="login__input" id="password" name="password" required/>
+                <input value={form.password} onChange={updateForm("password")} type="password" className="login__input" id="password" name="password" required/>
                 <label htmlFor="password" className="login__label"> {" "}Password:{" "} </label>
                 <i className="ri-eye-off-line login__eye" id="login-eye"></i>
               </div>
