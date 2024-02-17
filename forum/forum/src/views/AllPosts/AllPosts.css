@@ -11,14 +11,30 @@
 .sort-search-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+
 }
 
-.input-css {
-  width: 60%;
-  padding: 10px;
+.search-bar {
+  /* width: 40%; */
   border: 1px solid #bdc3c7;
-  border-radius: 4px;
+  border-radius: 20px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: max-content;
+  display: flex;
+  align-items: center;
+
+}
+.input-css {
+  /* width: 60%; */
+  outline: none;
+  border: none;
+  background: transparent;
+/* 
+  background-image: url('https://freesvg.org/storage/img/thumb/1468834927.png');
+  background-repeat: no-repeat;
+  background-position: 10px center; */
 }
 
 .input-css:focus {
