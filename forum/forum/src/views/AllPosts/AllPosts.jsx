@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import { getAllPosts, dislikePost, likePost} from "../../services/post.services";
+import { getAllPosts, dislikePost, likePost,} from "../../services/post.services";
 import { AppContext } from "../../Context/AppContext";
 import Sort from "../../components/Sort/Sort";
 import "./AllPosts.css";
@@ -14,6 +14,8 @@ export default function AllPosts() {
   const [sortedPosts, setSortedPosts] = useState([]);
   const [search, setSearch] = useState(""); // Updated to use local state for search
   const navigate = useNavigate();
+  const [topCommentedPosts, setTopCommentedPosts] = useState([]);
+  const [mostRecentPosts, setMostRecentPosts] = useState([]);
 
   const sortPosts = (sortBy) => {
     console.log({ posts });
@@ -29,14 +31,13 @@ export default function AllPosts() {
         sorted = Object.keys(posts).sort((a, b) => {
           const commentsA = posts[a].comments ? Object.keys(posts[a].comments).length : 0;
           const commentsB = posts[b].comments ? Object.keys(posts[b].comments).length : 0;
-
           return commentsB - commentsA;
         });
         return setSortedPosts(sorted.map((postKey) => posts[postKey]));
       case "newest":
         sorted = [...posts].sort((a, b) => new Date(b.createdOnReadable) - new Date(a.createdOnReadable));
         return setSortedPosts(sorted);
-      }
+    }
   };
   const handleSearchChange = (e) => {
     const value = e.target.value;
@@ -70,20 +71,14 @@ export default function AllPosts() {
     if (post.likedBy.includes(handle)) {
       dislikePost(handle, postId).then(() => {
         const updatedPosts = [...posts];
-        updatedPosts[postIndex] = {
-          ...post,
-          likedBy: post.likedBy.filter((u) => u !== handle),
-        };
+        updatedPosts[postIndex] = {...post, likedBy: post.likedBy.filter((u) => u !== handle)};
 
         setPosts(updatedPosts);
       });
     } else {
       likePost(handle, postId).then(() => {
         const updatedPosts = [...posts];
-        updatedPosts[postIndex] = {
-          ...post,
-          likedBy: [...post.likedBy, handle],
-        };
+        updatedPosts[postIndex] = {...post,likedBy: [...post.likedBy, handle]};
 
         setPosts(updatedPosts);
       });
@@ -92,28 +87,35 @@ export default function AllPosts() {
 
   return (
     <>
-      <div >
+      <div>
         <h1 className="all-postsi-title">All posts</h1>
 
         <div className="sort-search-container">
-          <Sort onSortChange={sortPosts} className="sort"/>
+          <Sort onSortChange={sortPosts} className="sort" />
 
           <div className="search-bar">
-          <span class="material-symbols-outlined">search</span>
-          <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
+            <span class="material-symbols-outlined">search</span>
+            <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
           </div>
         </div>
-
-        {sortedPosts.map((post) => (
-          <div key={post.id}>
-            <h3>Title: {post.title}</h3>
-            <p> {" "} <strong>Context:</strong> {post.content}{" "} </p>
-            <p> {new Date(post.createdOnReadable).toLocaleDateString("bg-BG")} </p>
-            <Button onClick={() => togglePostLike(userData.handle, post.id)}> {post.likedBy.includes(userData.handle) ? "Dislike" : "Like"} </Button>
-            <Button onClick={() => navigate(`/posts/${post.id}`)}> {" "} Details{" "} </Button>
-            <br /><br /><br />
-          </div>
-        ))}
+        <div className="all-posts">
+         {sortedPosts.map((post) => (
+           <div className="post-id">
+             <div className="post-header">
+               <h2 className="post-author">{post.author}</h2>
+               <h3 className="post-title">{post.title}</h3>
+             </div>
+             <p className="post-created">{post.createdOnReadable}</p>
+             <p><strong>Context:</strong> {post.content}</p>
+             <div className="post-actions">
+               <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike(userData.handle, post.id)}>
+                 {" "}thumb_up{" "} <span className="like-count"> {" "} {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
+               </span>
+               <Button onClick={() => navigate(`/posts/${post.id}`)}> Details </Button>
+             </div>
+           </div>
+         ))}
+        </div>
       </div>
     </>
   );
