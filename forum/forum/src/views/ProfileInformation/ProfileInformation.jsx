@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { logoutUser } from "../../services/auth.service";
 import Button from "../../components/Button/Button";
 import { updateUserData } from "../../services/users.service";
 import  img  from '../../img/default.png';
 import { uploadProfilePicture } from "../../services/storage.service";
+
 
 export default function ProfileInformation() {
   const { user, userData, setContext } = useContext(AppContext);
@@ -17,20 +18,52 @@ export default function ProfileInformation() {
   });
   const [isEditing, setIsEditing] = useState(false); // Track whether in edit mode
   const [messages, setMessages] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
 
+  useEffect(() => {
+    const storedImage = localStorage.getItem("profileImage");
+    if (storedImage) {
+      setForm({ ...form, image: storedImage });
+    }
+  }, []);
   const updateForm = (prop) => (e) => {
     setForm({ ...form, [prop]: e.target.value });
+  };
+
+const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setForm({ ...form, image: reader.result });
+      localStorage.setItem("profileImage", reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
+      // Upload image file if selected
+      if (imageFile) {
+        // const formData = new FormData();
+        // formData.append("image", imageFile);
+        // const uploadedImage = await uploadImage(formData);
+        // setForm({ ...form, image: uploadedImage });
+        await updateUserData(form.handle, {
+          FullName: form.FullName,
+          email: form.email,
+          mobile: form.mobile,
+          image: form.image,
+        });
+      }
       await updateUserData(form.handle, {
         FullName: form.FullName,
         email: form.email,
         mobile: form.mobile,
         image: form.image,
       });
+
       setContext({ user, userData: { ...userData, ...form } });
       console.log("Profile updated successfully!");
     } catch (error) {
@@ -73,17 +106,17 @@ export default function ProfileInformation() {
     setIsEditing(true);
   };
 
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0]; // Get the file from the event
-    if (!file) return;
+  // const handleFileChange = async (e) => {
+  //   const file = e.target.files[0]; // Get the file from the event
+  //   if (!file) return;
 
-    try {
-      const downloadURL = await uploadProfilePicture(file, userData.uid); // Assuming `uid` is available in userData
-      setForm({ ...form, image: downloadURL }); // Update the local form state with the new image URL
-    } catch (error) {
-      console.error("Error uploading file:", error.message);
-    }
-  };
+  //   try {
+  //     const downloadURL = await uploadProfilePicture(file, userData.uid); // Assuming `uid` is available in userData
+  //     setForm({ ...form, image: downloadURL }); // Update the local form state with the new image URL
+  //   } catch (error) {
+  //     console.error("Error uploading file:", error.message);
+  //   }
+  // };
 
   return (
     <div>
@@ -103,6 +136,9 @@ export default function ProfileInformation() {
       {/* Conditionally render edit view when in edit mode */}
       {isEditing ? (
         <form>
+          <label htmlFor="image">Image: </label>
+          <input onChange={handleFileChange} type="file" accept="image/*" name="image" id="image" />
+          <br />
           <label htmlFor="full-name">Full name: </label>
           <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
           <br />
