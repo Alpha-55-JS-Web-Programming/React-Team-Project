@@ -18,6 +18,7 @@ export default function Register() {
     password: "",
     confirmPassword: "",
     role:"",
+    image: '../../img/default.png',
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -84,7 +85,8 @@ export default function Register() {
         form.email,
         form.mobile,
         form.password,
-        form.role
+        form.role,
+        form.image,
       );
 
       setContext({ user: credentials.user, userData: null });

@@ -3,6 +3,7 @@ import { AppContext } from "../../Context/AppContext";
 import { logoutUser } from "../../services/auth.service";
 import Button from "../../components/Button/Button";
 import { updateUserData } from "../../services/users.service";
+import  img  from '../../img/default.png'
 
 export default function ProfileInformation() {
   const { user, userData, setContext } = useContext(AppContext);
@@ -11,6 +12,7 @@ export default function ProfileInformation() {
     handle: userData?.handle || "",
     email: userData?.email || "",
     mobile: userData?.mobile || "",
+    image: userData?.image || img,
   });
   const [isEditing, setIsEditing] = useState(false); // Track whether in edit mode
   const [messages, setMessages] = useState([]);
@@ -26,6 +28,7 @@ export default function ProfileInformation() {
         FullName: form.FullName,
         email: form.email,
         mobile: form.mobile,
+        image: form.image,
       });
       setContext({ user, userData: { ...userData, ...form } });
       console.log("Profile updated successfully!");
@@ -76,6 +79,7 @@ export default function ProfileInformation() {
       {/* Display profile information by default */}
       {!isEditing && (
         <div>
+          <img src={form.image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
           <p><strong>Full name:</strong> {userData.FullName}</p>
           <p><strong>Handle:</strong> {userData.handle}</p>
           <p><strong>Email:</strong> {userData.email}</p>
