@@ -1,0 +1,9 @@
+.first {
+    float: left; 
+    margin: 10px; 
+}
+
+.second {
+    float: right; 
+    margin: 10px; 
+}
