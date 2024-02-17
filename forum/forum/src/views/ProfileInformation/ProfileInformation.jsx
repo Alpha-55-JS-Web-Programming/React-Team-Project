@@ -151,7 +151,6 @@ const handleFileChange = (e) => {
           <label htmlFor="mobile">Mobile: </label>
           <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
           <br />
-          <input type="file" onChange={handleFileChange} />
           <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
         </form>
       ) : (
