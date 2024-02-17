@@ -1,40 +1,66 @@
-.all-posts-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #3498db;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
-  background-color: #ecf0f1;
+.all-postsi-title {
+  text-align: left;
+  font-size: 4em;
+  margin-bottom: 2rem;
+  letter-spacing: 0.03em;
+  word-spacing: 0.2em;
+  font-style: italic;
+  font-family: Arial;
+  padding-top: 20px;
+  padding-left: 30px;
 }
 
 .sort-search-container {
   display: flex;
   justify-content: space-between;
+}
 
+.sort {
+  flex: 1;
+  /* Add your specific styles for Sort component */
 }
 
 .search-bar {
-  /* width: 40%; */
-  border: 1px solid #bdc3c7;
-  border-radius: 20px;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  width: max-content;
+  flex: 1;
+  height: 50px;
   display: flex;
   align-items: center;
-
+  border: 1px solid #bdc3c7;
+  border-radius: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
 }
+
+.search-bar {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #bdc3c7;
+  border-radius: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  width: max-content;
+  background-color: #f4f4f4;
+}
+
+.search-bar:hover {
+  border-color: #3498db;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.material-symbols-outlined {
+  margin-right: 10px;
+  color: #3498db;
+}
+
 .input-css {
-  /* width: 60%; */
-  outline: none;
   border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  width: 100%;
   background: transparent;
-/* 
-  background-image: url('https://freesvg.org/storage/img/thumb/1468834927.png');
-  background-repeat: no-repeat;
-  background-position: 10px center; */
 }
 
 .input-css:focus {

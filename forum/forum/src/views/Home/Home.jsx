@@ -21,9 +21,9 @@ export default function Home() {
 
   return (
     <>
-      <div className="showcase">
+      <div >
         <title>{(document.title = "Home")}</title>
-        <h1>Home</h1>
+        <h1 className="home">Home</h1>
         <section>
           <p>{`Number of users: ${usersCount}`}</p>
           <p>{`Number of posts: ${postsCount}`}</p>
@@ -31,8 +31,8 @@ export default function Home() {
           {/* Your existing content goes here */}
         </section>
       </div>
-      <Button onClick={() => navigate("/health")}>Health</Button>
-      <Button onClick={() => navigate("/wellness")}>Wellness</Button>
+      <button onClick={() => navigate("/health")} className="health">Health</button>
+      <button onClick={() => navigate("/wellness")} className="wellness">Wellness</button>
 
       <div className="details">
       <h3>Getting Started</h3>

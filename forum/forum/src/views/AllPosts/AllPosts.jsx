@@ -92,11 +92,11 @@ export default function AllPosts() {
 
   return (
     <>
-      <div className="all-posts-container">
-        <h1>All posts</h1>
+      <div >
+        <h1 className="all-postsi-title">All posts</h1>
 
         <div className="sort-search-container">
-          <Sort onSortChange={sortPosts} />
+          <Sort onSortChange={sortPosts} className="sort"/>
 
           <div className="search-bar">
           <span class="material-symbols-outlined">search</span>

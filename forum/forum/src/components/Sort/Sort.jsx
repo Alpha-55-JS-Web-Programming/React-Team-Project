@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './Sort.css';
+
 export default function Sort({ onSortChange }) {
   const [sort, setSort] = useState('choose-sort'); // newest, most-liked, most-commented
 
@@ -10,12 +11,12 @@ export default function Sort({ onSortChange }) {
   };
 
   return (
-    <div>
-      <select onChange={handleSortChange} name="sort" id="sort" value={sort}>
-      <option value="choose-sort">Sort by:</option>
-        <option value="newest">newest</option>
-        <option value="most-liked">most likes</option>
-        <option value="most-commented">most comments</option>
+    <div className="sort-container">
+      <select className="sort-select" onChange={handleSortChange} name="sort" id="sort" value={sort}>
+        <option value="choose-sort">Sort by:</option>
+        <option value="newest">Newest</option>
+        <option value="most-liked">Most Likes</option>
+        <option value="most-commented">Most Comments</option>
       </select>
     </div>
   );
