@@ -98,8 +98,10 @@ export default function AllPosts() {
         <div className="sort-search-container">
           <Sort onSortChange={sortPosts} />
 
-          <label htmlFor="search">Search </label>
-          <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
+          <div className="search-bar">
+          <span class="material-symbols-outlined">search</span>
+          <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
+          </div>
         </div>
 
         {sortedPosts.map((post) => (
