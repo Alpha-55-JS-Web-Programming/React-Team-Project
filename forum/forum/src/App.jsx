@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./config/firebase-config";
 import "./App.css";
@@ -22,6 +22,7 @@ import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
 import Admin from "./views/Admin/Admin";
 import Health from "./views/HealthAndWellness/Health";
 import Wellness from "./views/HealthAndWellness/Wellness";
+import ProfileUpdate from "./views/ProfileInformation/ProfileUpdate"; // Adjust the path according to your project structure
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
           <Route path="/create-post" element={<Authenticated><CreatePost /></Authenticated>} />
           <Route path="/profile-information" element={<Authenticated><ProfileInformation /></Authenticated>} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/update-profile" element={<Authenticated><ProfileUpdate /></Authenticated>} />
           {/* <Route path="/admin/view" element={<AdminView />} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
