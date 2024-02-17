@@ -22,6 +22,12 @@
   color: #fff;
 }
 
+.post-tags{
+  padding-left: 10px;
+  display: block;
+  margin-top: 5px;
+}
+
 
 .all-postsi-title {
   text-align: left;

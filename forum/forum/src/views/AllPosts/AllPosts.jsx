@@ -151,11 +151,11 @@ export default function AllPosts() {
               <div className="post-header">
                 <h2 className="post-author">{post.author}</h2>
                 <p className="post-created">{post.createdOnReadable}</p>
+                <br />
+                {post.tags?.length ? (
+                <p className="post-tags"><strong>Tags:</strong> {post.tags?.join(", ")}</p>
+                ) : null}
               </div>
-
-              {post.tags?.length ? (
-               <p><strong>Tags:</strong> {post.tags?.join(", ")}</p>
-              ) : null}
               
               <div className="post-body">
                <h3 className="post-title">{post.title}</h3>
