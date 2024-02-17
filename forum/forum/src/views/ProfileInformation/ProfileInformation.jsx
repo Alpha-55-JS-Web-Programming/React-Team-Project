@@ -12,7 +12,7 @@ export default function ProfileInformation() {
     email: userData?.email || "",
     mobile: userData?.mobile || "",
   });
-
+  const [isEditing, setIsEditing] = useState(false); // Track whether in edit mode
   const [messages, setMessages] = useState([]);
 
   const updateForm = (prop) => (e) => {
@@ -49,7 +49,7 @@ export default function ProfileInformation() {
       }
 
       setMessages(newMessages);
-
+      setIsEditing(false); // Exit edit mode after updating
     } catch (error) {
       console.error("Error updating profile:", error.message);
     }
@@ -65,33 +65,52 @@ export default function ProfileInformation() {
     }
   };
 
+  const enterEditMode = () => {
+    setIsEditing(true);
+  };
+
   return (
     <div>
       <h1>Profile Information</h1>
-      <form>
-        <label htmlFor="full-name">Full name: </label>
-        <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
-        <br />
-        <label htmlFor="handle">Handle: </label>
-        <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br />
-        <br />
-        <label htmlFor="email">Email: </label>
-        <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br />
-        <br />
-        <label htmlFor="mobile">Mobile: </label>
-        <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
-        <br />
-        {/* Add other input fields as needed for additional information*/}
 
-        <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
-        {messages.map((message, index) => (
-          <div key={index} style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
-            {message}
-          </div>
-        ))}
-        <br /> <br /> <br />
-        <Button onClick={logout}>Logout</Button>
-      </form>
+      {/* Display profile information by default */}
+      {!isEditing && (
+        <div>
+          <p><strong>Full name:</strong> {userData.FullName}</p>
+          <p><strong>Handle:</strong> {userData.handle}</p>
+          <p><strong>Email:</strong> {userData.email}</p>
+          <p><strong>Mobile:</strong> {userData.mobile}</p>
+        </div>
+      )}
+
+      {/* Conditionally render edit view when in edit mode */}
+      {isEditing ? (
+        <form>
+          <label htmlFor="full-name">Full name: </label>
+          <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
+          <br />
+          <label htmlFor="handle">Handle: </label>
+          <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br />
+          <br />
+          <label htmlFor="email">Email: </label>
+          <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br />
+          <br />
+          <label htmlFor="mobile">Mobile: </label>
+          <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
+          <br />
+          <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
+        </form>
+      ) : (
+        <Button type="button" onClick={enterEditMode}>Edit Profile</Button>
+      )}
+
+      {messages.map((message, index) => (
+        <div key={index} style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
+          {message}
+        </div>
+      ))}
+      <br /> <br /> <br />
+      <Button onClick={logout}>Logout</Button>
     </div>
   );
 }
