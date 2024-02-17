@@ -3,7 +3,8 @@ import { AppContext } from "../../Context/AppContext";
 import { logoutUser } from "../../services/auth.service";
 import Button from "../../components/Button/Button";
 import { updateUserData } from "../../services/users.service";
-import  img  from '../../img/default.png'
+import  img  from '../../img/default.png';
+import { uploadProfilePicture } from "../../services/storage.service";
 
 export default function ProfileInformation() {
   const { user, userData, setContext } = useContext(AppContext);
@@ -72,6 +73,18 @@ export default function ProfileInformation() {
     setIsEditing(true);
   };
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0]; // Get the file from the event
+    if (!file) return;
+
+    try {
+      const downloadURL = await uploadProfilePicture(file, userData.uid); // Assuming `uid` is available in userData
+      setForm({ ...form, image: downloadURL }); // Update the local form state with the new image URL
+    } catch (error) {
+      console.error("Error uploading file:", error.message);
+    }
+  };
+
   return (
     <div>
       <h1>Profile Information</h1>
@@ -102,6 +115,7 @@ export default function ProfileInformation() {
           <label htmlFor="mobile">Mobile: </label>
           <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
           <br />
+          <input type="file" onChange={handleFileChange} />
           <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
         </form>
       ) : (
