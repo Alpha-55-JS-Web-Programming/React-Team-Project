@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getTopCommentedPosts, getMostRecentPosts } from '../../services/post.services';
 import { useNavigate } from 'react-router-dom';
+import './Trending.css';
 
 const Trending = () => {
   const [topCommentedPosts, setTopCommentedPosts] = useState([]);
@@ -37,14 +38,16 @@ const Trending = () => {
 
   // Now map with key prop at the correct location
   return (
-    <div>
+    <>
+    <div className="first">
       <h2>Top 10 Most Commented Posts</h2>
       {topCommentedPosts.map(post => (
         <React.Fragment key={post.id}>
           {renderPost(post)}
         </React.Fragment>
       ))}
-
+      </div>
+      <div className="second">
       <h2>10 Most Recently Created Posts</h2>
       {mostRecentPosts.map(post => (
         <React.Fragment key={post.id}>
@@ -52,6 +55,7 @@ const Trending = () => {
         </React.Fragment>
       ))}
     </div>
+    </>
   );
 };
 
