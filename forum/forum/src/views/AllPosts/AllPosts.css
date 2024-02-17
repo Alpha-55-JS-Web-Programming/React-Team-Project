@@ -111,10 +111,14 @@
 .post-header {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start; 
   padding: 10px 0;
 }
-
+.post-tags {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
 .post-author {
   font-size: 20px;
   font-weight: bold;
