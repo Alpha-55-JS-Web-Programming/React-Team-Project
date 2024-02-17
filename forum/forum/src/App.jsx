@@ -23,6 +23,8 @@ import Admin from "./views/Admin/Admin";
 import Health from "./views/HealthAndWellness/Health";
 import Wellness from "./views/HealthAndWellness/Wellness";
 import ProfileUpdate from "./views/ProfileInformation/ProfileUpdate"; // Adjust the path according to your project structure
+import { ref, get, query } from 'firebase/database';
+import { db } from './config/firebase-config'; // for dev purposes
 
 function App() {
 
@@ -43,6 +45,11 @@ function App() {
         })
       }
   }, [user]);
+
+  // Uncomment to log db dump to the console for dev purposes
+  // useEffect(() => {
+  //   get(query(ref(db, '/'))).then((posts) => console.log("db dump", posts.val())).catch(console.error);
+  // }, []);
 
   return (
     <BrowserRouter>

@@ -10,6 +10,7 @@ import "./AllPosts.css";
 export default function AllPosts() {
   const { userData } = useContext(AppContext);
   const [posts, setPosts] = useState([]);
+  const [tags, setTags] = useState([]); // {name: "Tag 1", selected: false}
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortedPosts, setSortedPosts] = useState([]);
   const [search, setSearch] = useState(""); // Updated to use local state for search
@@ -39,6 +40,7 @@ export default function AllPosts() {
         return setSortedPosts(sorted);
     }
   };
+
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearch(value);
@@ -60,9 +62,21 @@ export default function AllPosts() {
   }, []);
 
   useEffect(() => {
-    const filteredPosts = posts.filter((post) => post.title && post.title.toLowerCase().includes(search.toLowerCase()));
+    const filteredPosts = posts.filter((post) => {
+      const selectedTagNames = tags.filter((t) => t.selected).map(t => t.name);
+      const searchCriterion = !search || post.title?.toLowerCase().includes(search.toLowerCase());
+      const tagsCriterion = !selectedTagNames.length || post.tags?.some(t => selectedTagNames.includes(t));
+      return searchCriterion && tagsCriterion;
+    });
     setSortedPosts(filteredPosts);
-  }, [posts, search]);
+  }, [posts, search, tags]);
+
+  useEffect(() => {
+    const uniqueTagNames = [... new Set(posts.flatMap(post => post.tags ?? []).filter(Boolean))]; // ["Weather", "Food", "Travel", ...]
+    // Our tags state has the format [{name: "Weather", selected: true, ...}], so we need to map the names to this format:
+    const tags = uniqueTagNames.map(name => ({name, selected: false}));
+    setTags(tags);
+  }, [posts]);
 
   const togglePostLike = (handle, postId) => {
     const postIndex = posts.findIndex((post) => post.id === postId);
@@ -85,6 +99,11 @@ export default function AllPosts() {
     }
   };
 
+  const handleTagSelect = (tag) => {
+    const updatedTags = tags.map((t) => t.name === tag.name ? {...t, selected: !t.selected}: t);
+    setTags(updatedTags);
+  };
+
   return (
     <>
       <div>
@@ -94,9 +113,14 @@ export default function AllPosts() {
           <Sort onSortChange={sortPosts} className="sort" />
 
           <div className="search-bar">
-            <span class="material-symbols-outlined">search</span>
+            <span className="material-symbols-outlined">search</span>
             <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
           </div>
+        </div>
+        <div className="tags-container">
+          {tags.map((tag, i) => (
+            <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
+          ))}
         </div>
         <div className="all-posts">
          {sortedPosts.map((post) => (
@@ -106,6 +130,9 @@ export default function AllPosts() {
                <h3 className="post-title">{post.title}</h3>
              </div>
              <p className="post-created">{post.createdOnReadable}</p>
+             {post.tags?.length ? (
+               <p><strong>Tags:</strong> {post.tags?.join(", ")}</p>
+             ) : null}
              <p><strong>Context:</strong> {post.content}</p>
              <div className="post-actions">
                <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike(userData.handle, post.id)}>

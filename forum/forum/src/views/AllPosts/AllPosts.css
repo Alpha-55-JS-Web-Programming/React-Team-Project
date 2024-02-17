@@ -15,6 +15,30 @@
   justify-content: space-between;
 }
 
+.tags-container {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.tag {
+  border: 1px solid #bdc3c7;
+  border-radius: 20px;
+  padding: 5px 10px; /* padding: top/bottom, left/right, the same as: padding: 5px 10px 5px 10px; */
+  cursor: pointer;
+}
+
+.tag:hover {
+  background-color: #a5cbe2;
+}
+
+.tag.selected {
+  background-color: #3498db;
+  color: #fff;
+}
+
 .sort {
   flex: 1;
   /* Add your specific styles for Sort component */
@@ -101,7 +125,7 @@
   margin-bottom: 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   box-sizing: border-box; /* Ensure padding and border don't increase the width */
-  
+
 }
 
 .post-author{
@@ -115,7 +139,7 @@
 
 .post-title {
   margin-bottom: 10px;
-  color: #4f5052; 
+  color: #4f5052;
 
 }
 
