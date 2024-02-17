@@ -11,16 +11,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-    background-color: black;
+  background-color: black;
 
-    --background-color: #f6f6f6;
-    --foreground-color: #003cff;
-    --primary-text-color: #0a0a0a;
-    --secondary-text-color: #ffffff;
-    --toggle-bg: #f0eb9d;
-    --toggle-fg: #ffd000;
-    
-
+  --background-color: #f6f6f6;
+  --foreground-color: #003cff;
+  --primary-text-color: #0a0a0a;
+  --secondary-text-color: #ffffff;
+  --toggle-bg: #f0eb9d;
+  --toggle-fg: #ffd000;
 }
 
 
@@ -31,32 +29,40 @@
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #283452;
   --toggle-fg: #00a6ff;
-  
+
 }
 
 a.active {
   will-change: filter;
   transition: filter 300ms;
 }
+
 a.active:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
+  padding-top: 15px;
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
+  min-height: 100vh; /* Full height of the viewport */
   min-width: 320px;
-  min-height: 100vh;
-  /* background-color: #03001C; */
+    background-image: url('../src/img/istockphoto.jpg');
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+
 }
 
 h1 {
@@ -75,9 +81,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -88,9 +96,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
