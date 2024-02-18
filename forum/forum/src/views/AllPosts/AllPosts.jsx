@@ -2,13 +2,14 @@ import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import {getAllPosts, dislikePost, likePost} from "../../services/post.services";
+import {getUsers, getAllPosts, dislikePost, likePost} from "../../services/post.services";
 import { AppContext } from "../../Context/AppContext";
 import Sort from "../../components/Sort/Sort";
 import "./AllPosts.css";
 
 export default function AllPosts() {
   const { userData } = useContext(AppContext);
+  const [authors, setAuthors] = useState({});
   const [posts, setPosts] = useState([]);
   const [tags, setTags] = useState([]); // {name: "Tag 1", selected: false}
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,6 +25,7 @@ export default function AllPosts() {
 
   useEffect(() => {
     updateTags();
+    loadAuthors();
   }, [posts]);
 
   useEffect(() => {
@@ -38,6 +40,11 @@ export default function AllPosts() {
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
+  };
+
+  const loadAuthors = async () => {
+    const authors = await getUsers(posts.map(p => p.author));
+    setAuthors((prevAuthors) => ({...prevAuthors, ...authors}));
   };
 
   const applyPostsFilter = () => {
@@ -157,6 +164,10 @@ export default function AllPosts() {
             <div className="post-id">
 
               <div className="post-header">
+                {authors[post.author]?.image ? (
+                  <img className="post-author-avatar" src={authors[post.author].image} />
+                ) : null}
+                {/* <img className="post-author-avatar" src={authors[post.author].image ?? defaultAvatarImage} /> if you want to have a default avatar */}
                 <h2 className="post-author">{post.author}</h2>
                 <p className="post-created">{post.createdOnReadable}</p>
                 <br />
