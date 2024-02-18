@@ -1,4 +1,31 @@
 /* Admin.css */
+
+.adminAll {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+}
+.adminHeader {
+    margin: 20px;
+}
+
+.adminMain {
+    flex: 1;
+    font-family:   'Lucida Grande', Verdana, sans-serif;
+    font-size: large;
+}
+
+.adminUsers {
+
+    margin: 20px 0;
+    background-color: #ffffff82;
+}
+.adminUser:hover {
+    border-color: #00000082;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
 .admin-container {
     display: flex;
     flex-direction: column;
@@ -32,6 +59,7 @@
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: border-color 0.3s ease;
+    margin-bottom: 40px;
 }
 
 .input-css:focus {
