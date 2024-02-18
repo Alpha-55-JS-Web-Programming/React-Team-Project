@@ -18,6 +18,43 @@ export default function AllPosts() {
   const [topCommentedPosts, setTopCommentedPosts] = useState([]);
   const [mostRecentPosts, setMostRecentPosts] = useState([]);
 
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
+  useEffect(() => {
+    updateTags();
+  }, [posts]);
+
+  useEffect(() => {
+    applyPostsFilter();
+  }, [posts, search, tags]);
+
+  const loadPosts = async () => {
+    try {
+      const fetchedPosts = await getAllPosts();
+      setPosts(fetchedPosts);
+      sortPosts("choose-sort"); // Default sort
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
+  const applyPostsFilter = () => {
+    const filteredPosts = posts.filter((post) => {
+      const selectedTagNames = tags
+        .filter((t) => t.selected)
+        .map((t) => t.name);
+      const searchCriterion =
+        !search || post.title?.toLowerCase().includes(search.toLowerCase());
+      const tagsCriterion =
+        !selectedTagNames.length ||
+        post.tags?.some((t) => selectedTagNames.includes(t));
+      return searchCriterion && tagsCriterion;
+    });
+    setSortedPosts(filteredPosts);
+  };
+
   const sortPosts = (sortBy) => {
     console.log({ posts });
 
@@ -54,43 +91,14 @@ export default function AllPosts() {
     setSearchParams({ search: value });
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const fetchedPosts = await getAllPosts();
-        setPosts(fetchedPosts);
-        sortPosts("choose-sort"); // Default sort
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  useEffect(() => {
-    const filteredPosts = posts.filter((post) => {
-      const selectedTagNames = tags
-        .filter((t) => t.selected)
-        .map((t) => t.name);
-      const searchCriterion =
-        !search || post.title?.toLowerCase().includes(search.toLowerCase());
-      const tagsCriterion =
-        !selectedTagNames.length ||
-        post.tags?.some((t) => selectedTagNames.includes(t));
-      return searchCriterion && tagsCriterion;
-    });
-    setSortedPosts(filteredPosts);
-  }, [posts, search, tags]);
-
-  useEffect(() => {
+  const updateTags = () => {
     const uniqueTagNames = [
       ...new Set(posts.flatMap((post) => post.tags ?? []).filter(Boolean)),
     ]; // ["Weather", "Food", "Travel", ...]
     // Our tags state has the format [{name: "Weather", selected: true, ...}], so we need to map the names to this format:
     const tags = uniqueTagNames.map((name) => ({ name, selected: false }));
     setTags(tags);
-  }, [posts]);
+  };
 
   const togglePostLike = (handle, postId) => {
     const postIndex = posts.findIndex((post) => post.id === postId);
@@ -147,7 +155,7 @@ export default function AllPosts() {
         <div className="all-posts">
           {sortedPosts.map((post) => (
             <div className="post-id">
-  
+
               <div className="post-header">
                 <h2 className="post-author">{post.author}</h2>
                 <p className="post-created">{post.createdOnReadable}</p>
@@ -156,12 +164,12 @@ export default function AllPosts() {
                 <p className="post-tags"><strong>Tags:</strong> {post.tags?.join(", ")}</p>
                 ) : null}
               </div>
-              
+
               <div className="post-body">
                <h3 className="post-title">{post.title}</h3>
                <p className="post-content"><strong>Context:</strong> {post.content}</p>
               </div>
-  
+
               <div className="post-actions">
                 <div className="like-section">
                   <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike(userData.handle, post.id)}>
