@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Button from "../../components/Button/Button";
 import { AppContext } from "../../Context/AppContext";
 import { loginUser } from "../../services/auth.service";
 import "./Login.css";
-import { get, ref } from "firebase/database";
-import { db } from "../../config/firebase-config";
 
 export default function Login() {
   const { user, setContext } = useContext(AppContext);
@@ -43,19 +40,6 @@ export default function Login() {
       }
       console.log(error);
     }
-
-    // const credentials = await loginUser(form.email, form.password);
-    // const userId = credentials.user.uid;
-
-    // // Fetch user data to check role
-    // const snapshot = await get(ref(db, `users/${userId}`));
-
-    // if (snapshot.exists()) {
-    //   const userData = snapshot.val();
-    //   const isAdmin = userData.role === 'admin';
-    //   setContext({ user: credentials.user, isAdmin, userData }); // Include isAdmin flag based on role
-    //   navigate(isAdmin ? "/admin" : "/");
-    // }
   };
 
 
@@ -74,7 +58,7 @@ export default function Login() {
               <i className="ri-user-3-line login__icon"></i>
 
               <div className="login__box-input">
-                <input value={form.email} onChange={updateForm("email")} type="text" id="email" name="email" className="login__input" required/>
+                <input value={form.email} onChange={updateForm("email")} type="text" id="email" name="email" className="login__input" required />
                 <label htmlFor="email" className="login__label"> Email:{" "} </label>
               </div>
             </div>
@@ -84,7 +68,7 @@ export default function Login() {
               <i className="ri-lock-2-line login__icon"></i>
 
               <div className="login__box-input">
-                <input value={form.password} onChange={updateForm("password")} type="password" className="login__input" id="password" name="password" required/>
+                <input value={form.password} onChange={updateForm("password")} type="password" className="login__input" id="password" name="password" required />
                 <label htmlFor="password" className="login__label"> {" "}Password:{" "} </label>
                 <i className="ri-eye-off-line login__eye" id="login-eye"></i>
               </div>
@@ -108,16 +92,3 @@ export default function Login() {
     </>
   );
 }
-
-// <div class="login__form">
-//   <h1 class="login__title">Login</h1>
-//   <div class="login__box-input">
-//     <input value={form.email} onChange={updateForm("email") } type="text" id="email" name="email" class="login__input" />
-//     <label htmlFor="email" class="login__label">Email: </label>
-//   </div>
-//   <label htmlFor="password" >Password: </label>
-//   <input value={form.password} onChange={updateForm("password")} type="text" id="password" name="password"/>
-//   <br /><br />
-//   <Button onClick={login}>Login</Button>
-//   <p>Click{" "}<Link to="/register" style={{ textDecoration: "underline" }}>here</Link>{" "}if you don't have a registration.</p>
-// </div>

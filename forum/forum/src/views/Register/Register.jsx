@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import Button from "../../components/Button/Button";
 import { registerUser } from "../../services/auth.service";
 import { createUserProfile, getUserByHandle } from "../../services/users.service";
 import { AppContext } from "../../Context/AppContext";
@@ -31,51 +30,39 @@ export default function Register() {
     const mobileRegex = /^\d{10}$/;
     if (!mobileRegex.test(mobile)) {
       setErrorMessage("Mobile number must be of 10 digits");
-      return false; // Show a err if the mobile number format is incorrect
+      return false;
     }
     return true;
   }
 
   const register = async () => {
     try {
-      // Basic name validation
       if (form.FullName.length < 4 || form.FullName.length > 32) {
         setErrorMessage(
           "First name and last name must be between 4 and 32 symbols."
         );
         return;
       }
-      // Basic email validation
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(form.email)) {
         setErrorMessage("Please enter a valid email address.");
         return;
       }
 
-      //   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
-      // if (!passwordRegex.test(password)) {
-      //   setErrorMessage("Password error: Length must be 8 with 1 uppercase 1 lowercase and 1 special character");
-      //   return false; // Password doesn't meet the criteria.
-      // }
-
-      // Validate password match
       if (form.password !== form.confirmPassword) {
         setErrorMessage("Password and Confirm Password do not match");
-        return false; // Passwords do not match.
+        return false;
       }
 
-      // Validate mobile number
       if (!validateDetails(form.mobile)) {
         setErrorMessage("Mobile number must be of 10 digits");
       }
 
-      // Check if handle already exists
       const user = await getUserByHandle(form.handle);
       if (user.exists()) {
         setErrorMessage(`Handle @${form.handle} already exists`);
         return;
       }
-
 
       const credentials = await registerUser(form.email, form.password);
       await createUserProfile(
@@ -182,15 +169,3 @@ export default function Register() {
     </>
   );
 }
-
-// return (
-//   <div>
-//     <h1>Register</h1>
-//     <label htmlFor="full-name">Full name: </label><input value={form.FullName} onChange={updateForm('FullName')} type="text" name="full-name" id="full-name" /><br/>
-//     <label htmlFor="handle">Handle: </label><input value={form.handle} onChange={updateForm('handle')} type="text" name="handle" id="handle" /><br/>
-//     <label htmlFor="email">Email: </label><input value={form.email} onChange={updateForm('email')} type="text" name="email" id="email" /><br/>
-//     <label htmlFor="password">Password: </label><input value={form.password} onChange={updateForm('password')} type="password" name="password" id="password" /><br/><br/>
-//     <Button onClick={register}>Register</Button>
-//     {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-//   </div>
-// )

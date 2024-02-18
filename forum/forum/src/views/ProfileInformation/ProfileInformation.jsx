@@ -3,8 +3,7 @@ import { AppContext } from "../../Context/AppContext";
 import { logoutUser } from "../../services/auth.service";
 import Button from "../../components/Button/Button";
 import { updateUserData } from "../../services/users.service";
-import  img  from '../../img/default.png';
-import { uploadProfilePicture } from "../../services/storage.service";
+import img from '../../img/default.png';
 import './ProfileInformation.css';
 
 export default function ProfileInformation() {
@@ -30,7 +29,7 @@ export default function ProfileInformation() {
     setForm({ ...form, [prop]: e.target.value });
   };
 
-const handleFileChange = (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
     const reader = new FileReader();
@@ -101,69 +100,55 @@ const handleFileChange = (e) => {
     setIsEditing(true);
   };
 
-  // const handleFileChange = async (e) => {
-  //   const file = e.target.files[0]; // Get the file from the event
-  //   if (!file) return;
-
-  //   try {
-  //     const downloadURL = await uploadProfilePicture(file, userData.uid); // Assuming `uid` is available in userData
-  //     setForm({ ...form, image: downloadURL }); // Update the local form state with the new image URL
-  //   } catch (error) {
-  //     console.error("Error uploading file:", error.message);
-  //   }
-  // };
-
   return (
     <div className="infoAll">
       <div className="infoHeader">
-      <h1>Profile Information</h1>
+        <h1>Profile Information</h1>
       </div>
       <div className="infoMain">
-      {/* Display profile information by default */}
-      {!isEditing && (
-        <div>
-          <img src={form.image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
-          <p><strong>Full name:</strong> {userData.FullName}</p>
-          <p><strong>Handle:</strong> {userData.handle}</p>
-          <p><strong>Email:</strong> {userData.email}</p>
-          <p><strong>Mobile:</strong> {userData.mobile}</p>
-        </div>
-      )}
-
-      {/* Conditionally render edit view when in edit mode */}
-      {isEditing ? (
-        <form>
-          <label htmlFor="image">Image: </label>
-          <br />
-          <div class="file-input-container">
-            <span class="file-input-button">Browse...</span>
-            <input onChange={handleFileChange} type="file" accept="image/*" name="image" id="image" />
+        {!isEditing && (
+          <div>
+            <img src={form.image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+            <p><strong>Full name:</strong> {userData.FullName}</p>
+            <p><strong>Handle:</strong> {userData.handle}</p>
+            <p><strong>Email:</strong> {userData.email}</p>
+            <p><strong>Mobile:</strong> {userData.mobile}</p>
           </div>
-          <br />
+        )}
 
-          <label htmlFor="full-name">Full name: </label>
-          <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
-          <br />
-          <label htmlFor="handle">Handle: </label>
-          <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br />
-          <br />
-          <label htmlFor="email">Email: </label>
-          <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br />
-          <br />
-          <label htmlFor="mobile">Mobile: </label>
-          <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
-          <br />
-          <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
-        </form>
-      ) : (
-        <Button type="button" onClick={enterEditMode}>Edit Profile</Button>
-      )}
+        {isEditing ? (
+          <form>
+            <label htmlFor="image">Image: </label>
+            <br />
+            <div class="file-input-container">
+              <span class="file-input-button">Browse...</span>
+              <input onChange={handleFileChange} type="file" accept="image/*" name="image" id="image" />
+            </div>
+            <br />
 
-      {messages.map((message, index) => (
-        <div key={index} style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
-          {message}
-        </div>
-      ))}
+            <label htmlFor="full-name">Full name: </label>
+            <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
+            <br />
+            <label htmlFor="handle">Handle: </label>
+            <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br />
+            <br />
+            <label htmlFor="email">Email: </label>
+            <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br />
+            <br />
+            <label htmlFor="mobile">Mobile: </label>
+            <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
+            <br />
+            <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
+          </form>
+        ) : (
+          <Button type="button" onClick={enterEditMode}>Edit Profile</Button>
+        )}
+
+        {messages.map((message, index) => (
+          <div key={index} style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
+            {message}
+          </div>
+        ))}
       </div>
       <br /> <br /> <br />
       <Button onClick={logout}>Logout</Button>

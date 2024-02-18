@@ -9,13 +9,12 @@ export default function SinglePost() {
   const { id } = useParams();
 
   useEffect(() => {
-    // Fetch post by ID, which now includes author details
     getPostById(id).then(postData => {
       if (postData) {
         setPost(postData);
       }
     });
-  }, [id]); // Removed post from the dependencies array
+  }, [id]);
 
   const togglePostLike = (handle) => {
     if (post && post.likedBy.includes(handle)) {
@@ -38,7 +37,6 @@ export default function SinglePost() {
   return (
     <div>
       <h1>Single Post</h1>
-      {/* Pass the entire post object, which now includes authorDetails, to PostDetails */}
       {post && <PostDetails post={post} togglePostLike={togglePostLike} updatePost={(updatedPost) => setPost(updatedPost)} />}
     </div>
   );

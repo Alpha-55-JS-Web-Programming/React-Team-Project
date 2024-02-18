@@ -1,6 +1,5 @@
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db } from "../config/firebase-config";
-import { updateUserData } from "./users.service"; // Import the function for updating user data
+import { updateUserData } from "./users.service";
 
 export const uploadProfilePicture = async (file, userId) => {
   const storage = getStorage();
@@ -9,7 +8,7 @@ export const uploadProfilePicture = async (file, userId) => {
   try {
     const snapshot = await uploadBytes(storageReference, file);
     const downloadURL = await getDownloadURL(snapshot.ref);
-    await updateUserData(userId, { image: downloadURL }); // Update user's profile with the image URL
+    await updateUserData(userId, { image: downloadURL });
     return downloadURL;
   } catch (error) {
     console.error("Failed to upload profile picture:", error);

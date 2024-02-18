@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import Button from "../../components/Button/Button";
 import { db } from "../../config/firebase-config";
-import { get, query, ref, orderByChild, equalTo } from "firebase/database";
+import { get, query, ref } from "firebase/database";
 import { update } from "firebase/database";
 import "./Admin.css";
 
@@ -31,16 +31,6 @@ export default function Admin() {
     }));
 
     return users;
-  };
-
-  const listAllUsers = async () => {
-    try {
-      const listUsers = await getAllUsers();
-      return listUsers.map((userRecord) => <div key={userRecord.id}></div>);
-    } catch (error) {
-      console.error("Error listing users:", error);
-      return null;
-    }
   };
 
   const changeIsBlocked = async (userId) => {
@@ -97,9 +87,9 @@ export default function Admin() {
         }));
 
         const filteredUsers = users.filter((user) =>
-            user.handle.toLowerCase().includes(value) ||
-            user.email.toLowerCase().includes(value) || 
-            (user.displayName && user.displayName.toLowerCase().includes(value)) 
+          user.handle.toLowerCase().includes(value) ||
+          user.email.toLowerCase().includes(value) ||
+          (user.displayName && user.displayName.toLowerCase().includes(value))
         );
         setUsers(filteredUsers);
       }
@@ -115,11 +105,8 @@ export default function Admin() {
           </div>
 
           <div className="adminMain">
-            {/* <label htmlFor="mobile">Mobile: </label>
-          <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br/>
-          <br/>  */}
             <label htmlFor="search">Search </label>
-            <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
+            <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css" />
 
             {users.length > 0 &&
               users.map((user) => (
@@ -131,7 +118,7 @@ export default function Admin() {
                   </div>
                   <div className="adminOptions">
                     <label htmlFor={`user-role-${user.id}`}>Change role:</label>
-                    <select id={`user-role-${user.id}`} value={user.role} onChange={(e) =>handleRoleChange(user.id, e.target.value)} className="admin-select">
+                    <select id={`user-role-${user.id}`} value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)} className="admin-select">
                       <option value="user">user</option>
                       <option value="admin">admin</option>
                     </select>

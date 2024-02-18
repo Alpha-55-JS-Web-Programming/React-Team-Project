@@ -10,7 +10,7 @@ export default function CreatePost() {
   const [post, setPost] = useState({
     title: '',
     content: '',
-    tags: [], // Changed to an array to handle multiple tags, even though we're currently only using one
+    tags: [],
   });
 
   const updatePost = (value, key) => {
@@ -20,11 +20,10 @@ export default function CreatePost() {
     });
   };
 
-  // Handler for tag change from SortTags component
   const handleTagChange = (selectedTag) => {
     setPost({
       ...post,
-      tags: selectedTag ? [selectedTag] : [], // Update the tags array with the selected tag or empty it if none is selected
+      tags: selectedTag ? [selectedTag] : [],
     });
   };
 

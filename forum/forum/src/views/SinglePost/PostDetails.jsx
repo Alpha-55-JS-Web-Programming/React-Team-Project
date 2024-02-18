@@ -8,7 +8,6 @@ import "./PostDetails.css";
 import { db } from "../../config/firebase-config";
 import { ref, update } from "firebase/database";
 
-
 export default function PostDetails({ post, togglePostLike, updatePost }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,25 +53,22 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
       const postRef = ref(db, `posts/${post.id}`);
       await update(postRef, { content: editedContent });
       console.log('Post updated successfully');
-      setUpdateSuccessMessage('Post updated successfully!'); // Set success message
-      setTimeout(() => setUpdateSuccessMessage(''), 3000); // Hide success message after 3 seconds
-      setIsEditing(false); // Exit editing mode after updating
+      setUpdateSuccessMessage('Post updated successfully!');
+      setTimeout(() => setUpdateSuccessMessage(''), 3000);
+      setIsEditing(false);
 
-      // Correctly use the updatePost function passed as a prop to update the parent state
       const updatedPost = { ...post, content: editedContent };
-      updatePost(updatedPost); // Directly use updatePost without 'props.'
+      updatePost(updatedPost);
     } catch (error) {
       console.error('Error updating post:', error);
     }
   };
 
   const handleBack = () => {
-    // Check if the navigation state includes a specific origin
     if (location.state?.from === 'trending') {
       navigate('/trending');
     } else {
-      // Fallback to navigating back in history or to a specific default route
-      navigate(-1); // or navigate('/allposts');
+      navigate(-1);
     }
   };
 
@@ -121,7 +117,7 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
       </div>
       <p>Likes: {post.likedBy.length}</p>
       <div className="button-group">
-      <Button onClick={handleBack}>Back</Button>
+        <Button onClick={handleBack}>Back</Button>
         {(userData.handle === post.author || userData.role === "admin") && (
           <>
             <Button onClick={() => setIsEditing(!isEditing)}> {isEditing ? "Cancel" : "Edit"} </Button>

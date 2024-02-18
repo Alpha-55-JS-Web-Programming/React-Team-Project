@@ -9,7 +9,7 @@
 .tag {
   border: 1px solid #bdc3c7;
   border-radius: 20px;
-  padding: 5px 10px; /* padding: top/bottom, left/right, the same as: padding: 5px 10px 5px 10px; */
+  padding: 5px 10px;
   cursor: pointer;
 }
 
@@ -22,12 +22,11 @@
   color: #fff;
 }
 
-.post-tags{
+.post-tags {
   padding-left: 10px;
   display: block;
   margin-top: 5px;
 }
-
 
 .all-postsi-title {
   text-align: left;
@@ -62,19 +61,18 @@
   padding-bottom: 1px;
   background-color: #f4f4f4;
 }
+
 .search-bar .input-css {
   outline: none;
   border: none;
   background: transparent;
   box-shadow: none;
   height: 90%;
-
 }
-
 
 .search-bar:hover {
   border-color: #3498db;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .material-symbols-outlined {
@@ -91,11 +89,6 @@
   background: transparent;
 }
 
-/* .input-css:focus {
-  outline: none;
-  border-color: #3498db;
-} */
-
 .all-posts {
   display: flex;
   flex-direction: column;
@@ -103,7 +96,6 @@
   padding: 20px;
   margin: 0 auto;
   width: 1200px;
-  /* background-color: #f4f4f4; */
 }
 
 .post-id {
@@ -114,7 +106,6 @@
   padding: 15px;
   margin-bottom: 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-
 }
 
 .post-header {
@@ -123,16 +114,19 @@
   align-items: flex-start;
   padding: 10px 0;
 }
+
 .post-tags {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
 }
+
 .post-author {
   font-size: 20px;
   font-weight: bold;
   color: #4b4f56;
 }
+
 .post-author-avatar {
   width: 50px;
   height: 50px;
@@ -147,22 +141,20 @@
   margin-top: 5px;
 }
 
-
 .post-title {
-  font-size: 23px; /* Increase the font size */
-  color: #000; /* Change the color to a darker shade */
+  font-size: 23px;
+  color: #000;
   margin-bottom: 8px;
-  text-align: left; /* Align the text to the left */
+  text-align: left;
   padding-left: 20px;
 }
 
-.post-content{
-  font-size: 28px; /* Increase the font size */
-  color: #333; /* Change the color to a darker shade */
-  line-height: 1.6; /* Increase the line height for better readability */
-  text-align: justify; /* Align the text to both left and right margins */
+.post-content {
+  font-size: 28px;
+  color: #333;
+  line-height: 1.6;
+  text-align: justify;
   padding-left: 35px;
-
 }
 
 .post-actions {
@@ -175,6 +167,7 @@
   padding-top: 15px;
   padding-left: 15px;
 }
+
 .thumb-icon {
   padding-right: 10px;
   color: #3498db;
@@ -184,6 +177,7 @@
 .thumb-icon:hover {
   color: #2980b9;
 }
+
 .like-count {
   font-weight: bold;
   font-family: Arial;

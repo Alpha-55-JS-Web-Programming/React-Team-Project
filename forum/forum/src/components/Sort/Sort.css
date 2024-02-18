@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   margin: 20px;
-
 }
 
 .sort-select {
@@ -20,5 +19,5 @@
 
 .sort-select:hover {
   border-color: #000000;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

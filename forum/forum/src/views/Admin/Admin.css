@@ -1,18 +1,17 @@
-/* Admin.css */
-
 .adminAll {
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 100vh;
 }
+
 .adminHeader {
     margin: 20px;
 }
 
 .adminMain {
     flex: 1;
-    font-family:   'Lucida Grande', Verdana, sans-serif;
+    font-family: 'Lucida Grande', Verdana, sans-serif;
     font-size: large;
 }
 
@@ -21,9 +20,10 @@
     margin: 20px 0;
     background-color: #ffffff82;
 }
+
 .adminUser:hover {
     border-color: #00000082;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .admin-container {
@@ -48,7 +48,7 @@
 
 .admin-select:hover {
     border-color: #000000;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .input-css {
@@ -57,7 +57,7 @@
     border: 1px solid #cccccc;
     padding: 8px 12px;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
     margin-bottom: 40px;
 }
@@ -65,5 +65,5 @@
 .input-css:focus {
     border-color: #007bff;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }

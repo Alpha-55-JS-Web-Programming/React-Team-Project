@@ -2,7 +2,7 @@ import { useState } from "react";
 import './Sort.css';
 
 export default function Sort({ onSortChange }) {
-  const [sort, setSort] = useState('choose-sort'); // newest, most-liked, most-commented
+  const [sort, setSort] = useState('choose-sort');
 
   const handleSortChange = (e) => {
     const selectedSort = e.target.value;

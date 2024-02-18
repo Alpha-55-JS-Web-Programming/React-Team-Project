@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./config/firebase-config";
 import "./App.css";
 import Home from "./views/Home/Home";
 import NotFound from "./views/NotFound/NotFound";
 import Trending from "./views/Trending/Trending";
-import Latest from "./views/Latest/Latest";
 import Login from "./views/Login/Login";
 import Register from "./views/Register/Register";
 import Header from "./components/Header/Header";
 import CreatePost from "./views/CreatePost/CreatePost";
-import { AppContext } from "./Context/AppContext"; //???
+import { AppContext } from "./Context/AppContext";
 import Footer from "./components/Footer/Footer";
 import AllPosts from "./views/AllPosts/AllPosts";
 import SinglePost from "./views/SinglePost/SinglePost";
@@ -22,12 +21,11 @@ import ProfileInformation from "./views/ProfileInformation/ProfileInformation";
 import Admin from "./views/Admin/Admin";
 import Health from "./views/HealthAndWellness/Health";
 import Wellness from "./views/HealthAndWellness/Wellness";
-import ProfileUpdate from "./views/ProfileInformation/ProfileUpdate"; // Adjust the path according to your project structure
+import ProfileUpdate from "./views/ProfileInformation/ProfileUpdate";
 import { ref, get, query } from 'firebase/database';
 import { db } from './config/firebase-config'; // for dev purposes
 
 function App() {
-
   const [context, setContext] = useState({
     user: null,
     userData: null,
@@ -43,17 +41,12 @@ function App() {
             setContext({ user, userData: snapshot.val()[Object.keys(snapshot.val())[0]] });
           }
         })
-      }
+    }
   }, [user]);
-
-  // Uncomment to log db dump to the console for dev purposes
-  // useEffect(() => {
-  //   get(query(ref(db, '/'))).then((posts) => console.log("db dump", posts.val())).catch(console.error);
-  // }, []);
 
   return (
     <BrowserRouter>
-        <AppContext.Provider value={{ ...context, setContext }}>
+      <AppContext.Provider value={{ ...context, setContext }}>
         <Header />
 
         <Routes>
@@ -62,7 +55,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/health" element={<Health />} />
           <Route path="/wellness" element={<Wellness />} />
-          <Route path="/Latest" element={<Latest />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/allposts" element={<Authenticated><AllPosts /></Authenticated>} />
           <Route path="/posts/:id" element={<Authenticated><SinglePost /></Authenticated>} />
@@ -70,11 +62,10 @@ function App() {
           <Route path="/profile-information" element={<Authenticated><ProfileInformation /></Authenticated>} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/update-profile" element={<Authenticated><ProfileUpdate /></Authenticated>} />
-          {/* <Route path="/admin/view" element={<AdminView />} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
-        </AppContext.Provider>
+      </AppContext.Provider>
     </BrowserRouter>
   );
 }

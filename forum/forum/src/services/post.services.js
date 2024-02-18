@@ -1,4 +1,4 @@
-import { ref, push, get, query, update, getDatabase, remove, child } from 'firebase/database';
+import { ref, push, get, query, update, remove, child } from 'firebase/database';
 import { db } from '../config/firebase-config';
 import { format } from 'date-fns';
 import { getUserByHandle } from './users.service';
@@ -9,7 +9,7 @@ import { set } from 'firebase/database';
  * @param {*} author
  * @param {*} title
  * @param {*} content
- * @param {*} comments // actually on update we will get the comments
+ * @param {*} comments
  * @param {*} likes
  * @param {*} dislikes
  * @returns
@@ -36,7 +36,7 @@ export const addPost = async (author, title, content, tags) => {
 export async function getUsers(userIds) {
   const users = {};
   for (const userId of userIds) {
-    const snapshot = await get(child(ref(db, 'users'), userId)); // There may be way to do this more efficiently, i.e. with a single query
+    const snapshot = await get(child(ref(db, 'users'), userId));
     if (snapshot.exists()) {
       users[userId] = snapshot.val();
     } else {
@@ -58,8 +58,6 @@ export const getAllPosts = async (search) => {
     createdOn: new Date(snapshot.val()[key].createdOn).toString(),
     likedBy: snapshot.val()[key].likedBy ? Object.keys(snapshot.val()[key].likedBy) : [],
   }))
-  //   .filter(t => t.title.toLowerCase().includes(search.toLowerCase()));
-  // console.log(posts);
 
   return posts;
 };
@@ -116,7 +114,7 @@ export const deletePost = async (postId) => {
     console.log('Post deleted successfully.');
   } catch (error) {
     console.error('Error deleting post:', error);
-    throw error; // Re-throw the error to let the caller handle it
+    throw error;
   }
 };
 

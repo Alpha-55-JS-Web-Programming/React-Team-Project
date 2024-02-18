@@ -27,33 +27,29 @@ const Trending = () => {
   }, []);
 
   const togglePostLike = async (handle, postId) => {
-    // Define a helper function to update post likes in a given list
     const updatePostLikes = async (postsState, setPostsState) => {
       const postIndex = postsState.findIndex((post) => post.id === postId);
-      if (postIndex === -1) return; // Post not found in this list
+      if (postIndex === -1) return;
 
       const post = postsState[postIndex];
-      // Check if the user has already liked the post by checking the existence of the handle key in the likedBy object
       const alreadyLiked = post.likedBy && post.likedBy[handle];
 
       if (alreadyLiked) {
-        // User already liked the post, so dislike it
         await dislikePost(handle, postId);
         const updatedPosts = [...postsState];
         const updatedLikedBy = { ...post.likedBy };
-        delete updatedLikedBy[handle]; // Remove the user's like
+        delete updatedLikedBy[handle];
         updatedPosts[postIndex] = {
           ...post,
           likedBy: updatedLikedBy,
         };
         setPostsState(updatedPosts);
       } else {
-        // User hasn't liked the post yet, so like it
         await likePost(handle, postId);
         const updatedPosts = [...postsState];
         const updatedLikedBy = {
           ...post.likedBy,
-          [handle]: true, // Add the user's like
+          [handle]: true,
         };
         updatedPosts[postIndex] = {
           ...post,
@@ -63,7 +59,6 @@ const Trending = () => {
       }
     };
 
-    // Attempt to update likes in both topCommentedPosts and mostRecentPosts
     await updatePostLikes(topCommentedPosts, setTopCommentedPosts);
     await updatePostLikes(mostRecentPosts, setMostRecentPosts);
   };

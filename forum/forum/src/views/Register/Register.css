@@ -1,4 +1,3 @@
-/*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
 * {
@@ -11,7 +10,6 @@ button {
   font-size: var(--normal-font-size);
   font-family: var(--body-font);
 }
-
 
 button {
   border: none;
@@ -138,7 +136,7 @@ a {
   top: 18px;
   z-index: 10;
   cursor: pointer;
-} */
+}
 
 .login__box:nth-child(2) input {
   padding-right: 1.8rem;
@@ -211,20 +209,16 @@ a {
   font-weight: var(--font-medium);
 }
 
-/* Input focus move up label */
 .login__input:focus+.login__label {
   top: -12px;
   font-size: var(--small-font-size);
 }
 
-/* Input focus sticky top label */
 .login__input:not(:placeholder-shown).login__input:not(:focus)+.login__label {
   top: -12px;
   font-size: var(--small-font-size);
 }
 
-/*=============== BREAKPOINTS ===============*/
-/* For medium devices */
 @media screen and (min-width: 576px) {
   .login {
     justify-content: center;

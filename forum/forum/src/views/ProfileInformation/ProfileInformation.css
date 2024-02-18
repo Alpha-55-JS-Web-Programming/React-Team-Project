@@ -1,59 +1,51 @@
-
-
 .infoAll {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
 }
+
 .infoHeader {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .infoMain {
-    flex: 0.5;
-    font-size: large;
-
+  flex: 0.5;
+  font-size: large;
 }
 
 p {
-    margin-bottom: 20px;
-    text-align: left;
-    padding-left: 150px;
+  margin-bottom: 20px;
+  text-align: left;
+  padding-left: 150px;
 }
 
 form input {
-    background-color: transparent; /* Set the background color to transparent */
-    border: 2px solid #ccc; /* Add border for visibility */
-    padding: 10px; /* Add padding for spacing */
-    color: #333; /* Set text color */
-  }
+  background-color: transparent;
+  border: 2px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
 
-  /* #image {
-    width: 200px;
-    height: 200px;
-    margin-left: 50px;
-  } */
+.file-input-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
 
-  .file-input-container {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-  }
+.file-input-container input[type="file"] {
+  position: absolute;
+  font-size: 100px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
 
-  .file-input-container input[type="file"] {
-    position: absolute;
-    font-size: 100px;
-    opacity: 0;
-    right: 0;
-    top: 0;
-  }
-
-  .file-input-button {
-    background-color: #007bffc9;
-    border-radius: 50px;
-    color: #fff;
-    padding: 10px 20px;
-    cursor: pointer;
-    display: inline-block;
-  }
+.file-input-button {
+  background-color: #007bffc9;
+  border-radius: 50px;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: inline-block;
+}

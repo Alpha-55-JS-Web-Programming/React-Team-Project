@@ -1,61 +1,58 @@
 .create-post-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #48C9B0; /* Softer green for borders */
-    border-radius: 12px; /* Increased for softer edges */
-    box-shadow: 0 4px 8px rgba(241, 241, 241, 0.1); /* Subtle shadow for depth */
-    background-color: #FAF9F6; /* Warm and light background color */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #48C9B0;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(241, 241, 241, 0.1);
+  background-color: #FAF9F6;
+  transition: all 0.3s ease;
+}
+
+.h1 {
+  color: #0b0b0b;
+}
+
+.label-css {
+  display: block;
+  margin-bottom: 5px;
+  color: #020202;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #AED6F1;
+  border-radius: 6px;
+  background-color: #FEF5E7;
+  color: #0E6251;
+}
+
+.button {
+  background-color: #58D68D;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #FFFFFF;
+}
+
+.button:hover {
+  background-color: #45B39D;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .create-post-container {
+    padding: 15px;
   }
-  
-  .h1 {
-    color: #0b0b0b; /* Warmer, softer color for titles */
-  }
-  
-  .label-css {
-    display: block;
-    margin-bottom: 5px;
-    color: #020202; /* Warmer text color for labels */
-  }
-  
-  input,
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #AED6F1; /* Light blue for inputs, soothing to the eye */
-    border-radius: 6px; /* Softer edges for inputs */
-    background-color: #FEF5E7; /* Light and warm background for inputs */
-    color: #0E6251; /* Pleasant text color for inputs */
-  }
-  
-  .button {
-    background-color: #58D68D; /* Vibrant, energetic green */
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px; /* Softer edges for buttons */
-    cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transition for background color and scale */
-    color: #FFFFFF; /* Contrast text color for better readability */
-  }
-  
-  .button:hover {
-    background-color: #45B39D; /* Darker shade of green on hover */
-    transform: scale(1.05); /* Slight increase in size for interaction feedback */
-  }
-  
-  @media (max-width: 768px) {
-    .create-post-container {
-      padding: 15px; /* Adjust padding for smaller screens */
-    }
-  
-  }
-  
-  /* Adding a creative pseudo-class for inputs focus */
-  input:focus,
-  textarea:focus {
-    border-color: #3498DB; /* Highlight color for focus */
-    box-shadow: 0 0 8px rgba(246, 246, 247, 0.5); /* Adding a glow effect */
-  }
-  
+}
+
+input:focus,
+textarea:focus {
+  border-color: #3498DB;
+  box-shadow: 0 0 8px rgba(246, 246, 247, 0.5);
+}

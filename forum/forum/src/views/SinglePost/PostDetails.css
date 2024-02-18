@@ -4,26 +4,26 @@
     padding: 20px;
     border: 1px solid #3498db;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); /* Enhanced shadow for more depth */
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
     background-color: #ecf0f1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 h2 {
     color: #2c3e50;
-    text-transform: uppercase; /* Adds a modern touch */
-    letter-spacing: 1px; /* More spacing for a cleaner look */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .post-content {
     color: #34495e;
-    line-height: 1.6; /* Improved readability */
+    line-height: 1.6;
 }
 
 .post-meta {
     color: #7f8c8d;
     margin-top: 10px;
-    font-size: 0.9rem; /* Slightly smaller text for meta information */
+    font-size: 0.9rem;
 }
 
 .button-group {
@@ -42,12 +42,12 @@ textarea {
     margin-bottom: 10px;
     border: 1px solid #bdc3c7;
     border-radius: 4px;
-    transition: border-color 0.3s ease; /* Smooth transition for focus */
+    transition: border-color 0.3s ease;
 }
 
 textarea:focus {
-    border-color: #3498db; /* Highlighting text area on focus */
-    outline: none; /* Removes the default focus outline */
+    border-color: #3498db;
+    outline: none;
 }
 
 .comments-list ul {
@@ -57,9 +57,9 @@ textarea:focus {
 
 .comments-list li {
     margin-bottom: 10px;
-    background-color: #f9f9f9; /* Slight background for comments */
+    background-color: #f9f9f9;
     padding: 10px;
-    border-radius: 4px; /* Rounded corners for comment items */
+    border-radius: 4px;
 }
 
 .post-comments {
@@ -70,7 +70,6 @@ textarea:focus {
     margin-bottom: 5px;
 }
 
-/* Button styles with hover and focus effects for a lively UI */
 .button {
     background-color: #2ecc71;
     color: #fff;
@@ -78,20 +77,20 @@ textarea:focus {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for interactive feedback */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.button:hover, .button:focus {
+.button:hover,
+.button:focus {
     background-color: #27ae60;
-    transform: translateY(-2px); /* Slight lift effect on hover/focus */
+    transform: translateY(-2px);
 }
 
 .button:active {
-    transform: translateY(1px); /* Subtle push effect on click */
+    transform: translateY(1px);
 }
 
-/* Enhance the overall experience with slight interactions */
 .post-details:hover {
-    transform: scale(1.02); /* Slightly enlarges the post container */
-    box-shadow: 0 0 20px rgba(52, 152, 219, 0.6); /* Deeper shadow for emphasis */
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.6);
 }

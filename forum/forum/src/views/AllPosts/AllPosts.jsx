@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import Button from "../../components/Button/Button";
 import {getUsers, getAllPosts, dislikePost, likePost} from "../../services/post.services";
 import { AppContext } from "../../Context/AppContext";
 import Sort from "../../components/Sort/Sort";
@@ -11,13 +10,11 @@ export default function AllPosts() {
   const { userData } = useContext(AppContext);
   const [authors, setAuthors] = useState({});
   const [posts, setPosts] = useState([]);
-  const [tags, setTags] = useState([]); // {name: "Tag 1", selected: false}
+  const [tags, setTags] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortedPosts, setSortedPosts] = useState([]);
-  const [search, setSearch] = useState(""); // Updated to use local state for search
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const [topCommentedPosts, setTopCommentedPosts] = useState([]);
-  const [mostRecentPosts, setMostRecentPosts] = useState([]);
 
   useEffect(() => {
     loadPosts();
@@ -36,7 +33,7 @@ export default function AllPosts() {
     try {
       const fetchedPosts = await getAllPosts();
       setPosts(fetchedPosts);
-      sortPosts("choose-sort"); // Default sort
+      sortPosts("choose-sort");
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
@@ -101,8 +98,7 @@ export default function AllPosts() {
   const updateTags = () => {
     const uniqueTagNames = [
       ...new Set(posts.flatMap((post) => post.tags ?? []).filter(Boolean)),
-    ]; // ["Weather", "Food", "Travel", ...]
-    // Our tags state has the format [{name: "Weather", selected: true, ...}], so we need to map the names to this format:
+    ];
     const tags = uniqueTagNames.map((name) => ({ name, selected: false }));
     setTags(tags);
   };

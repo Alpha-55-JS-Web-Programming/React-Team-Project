@@ -16,7 +16,7 @@ export const createUserProfile = (FullName, handle, uid, email, mobile, password
     uid,
     email,
     mobile,
-    password, // Make sure password is stored in the correct field
+    password,
     createdOnReadable: readableDate,
     isBlocked: false,
     role,
@@ -28,7 +28,7 @@ export const getUserData = (uid) => {
 };
 
 export const updateUserData = async (handle, data) => {
-  const userRef = ref(db, `users/${handle}`); // Use handle to reference the correct path
+  const userRef = ref(db, `users/${handle}`);
 
   try {
     await update(userRef, data);
@@ -47,10 +47,3 @@ export const getUsersCount = async () => {
   const snapshot = await get(query(ref(db, 'users')));
   return snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
 };
-
-
-// DONT DELETE THIS CODE:
-// export const createUserHandle = (FullName, handle, uid, email) => {
-
-//   return set(ref(db, `users/${handle}`), {FullName, handle, uid, email, createdOn: new Date().valueOf(), likedTweets: {} })
-// };
