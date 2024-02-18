@@ -7,13 +7,13 @@ import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAFdNNpJKkQ7FfN12MTnVJFY90WZwHmTeA",
-  authDomain: "health-wellness-project-90261.firebaseapp.com",
-  projectId: "health-wellness-project-90261",
-  storageBucket: "health-wellness-project-90261.appspot.com",
-  messagingSenderId: "833535286049",
-  appId: "1:833535286049:web:92df25584550019335bc60",
-  databaseURL:"https://health-wellness-project-90261-default-rtdb.europe-west1.firebasedatabase.app/",
+  apiKey: "AIzaSyAMT894NEbdh5ua_PX29z2JEX2PcWjXi90",
+  authDomain: "forum-health-wellness.firebaseapp.com",
+  projectId: "forum-health-wellness",
+  storageBucket: "forum-health-wellness.appspot.com",
+  messagingSenderId: "453826420634",
+  appId: "1:453826420634:web:55e38cf78cadc8a57ca423",
+    databaseURL:'https://forum-health-wellness-default-rtdb.europe-west1.firebasedatabase.app/',
 };
 
 // Initialize Firebase
