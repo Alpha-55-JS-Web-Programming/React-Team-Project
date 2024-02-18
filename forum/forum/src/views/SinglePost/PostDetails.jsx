@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Button from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { addCommentToPost, deletePost } from "../../services/post.services";
@@ -11,6 +11,7 @@ import { ref, update } from "firebase/database";
 
 export default function PostDetails({ post, togglePostLike, updatePost }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, userData } = useContext(AppContext);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -65,6 +66,16 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
     }
   };
 
+  const handleBack = () => {
+    // Check if the navigation state includes a specific origin
+    if (location.state?.from === 'trending') {
+      navigate('/trending');
+    } else {
+      // Fallback to navigating back in history or to a specific default route
+      navigate(-1); // or navigate('/allposts');
+    }
+  };
+
   return (
     <div className="post-details">
       <h2>{post.title}</h2>
@@ -110,7 +121,7 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
       </div>
       <p>Likes: {post.likedBy.length}</p>
       <div className="button-group">
-        <Button onClick={() => navigate("/allposts")}>Back</Button>
+      <Button onClick={handleBack}>Back</Button>
         {(userData.handle === post.author || userData.role === "admin") && (
           <>
             <Button onClick={() => setIsEditing(!isEditing)}> {isEditing ? "Cancel" : "Edit"} </Button>
