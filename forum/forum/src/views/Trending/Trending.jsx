@@ -27,28 +27,45 @@ const Trending = () => {
   }, []);
 
   const togglePostLike = async (handle, postId) => {
-    const postIndex = topLikedPosts.findIndex((post) => post.id === postId);
-    const post = topLikedPosts[postIndex];
+    // Define a helper function to update post likes in a given list
+    const updatePostLikes = async (postsState, setPostsState) => {
+      const postIndex = postsState.findIndex((post) => post.id === postId);
+      if (postIndex === -1) return; // Post not found in this list
 
-    if (post.likedBy.includes(handle)) {
-      // User already liked the post, so dislike it
-      await dislikePost(handle, postId);
-      const updatedPosts = [...topLikedPosts];
-      updatedPosts[postIndex] = {
-        ...post,
-        likedBy: post.likedBy.filter((u) => u !== handle),
-      };
-      setTopLikedPosts(updatedPosts);
-    } else {
-      // User hasn't liked the post yet, so like it
-      await likePost(handle, postId);
-      const updatedPosts = [...topLikedPosts];
-      updatedPosts[postIndex] = {
-        ...post,
-        likedBy: [...post.likedBy, handle],
-      };
-      setTopLikedPosts(updatedPosts);
-    }
+      const post = postsState[postIndex];
+      // Check if the user has already liked the post by checking the existence of the handle key in the likedBy object
+      const alreadyLiked = post.likedBy && post.likedBy[handle];
+
+      if (alreadyLiked) {
+        // User already liked the post, so dislike it
+        await dislikePost(handle, postId);
+        const updatedPosts = [...postsState];
+        const updatedLikedBy = { ...post.likedBy };
+        delete updatedLikedBy[handle]; // Remove the user's like
+        updatedPosts[postIndex] = {
+          ...post,
+          likedBy: updatedLikedBy,
+        };
+        setPostsState(updatedPosts);
+      } else {
+        // User hasn't liked the post yet, so like it
+        await likePost(handle, postId);
+        const updatedPosts = [...postsState];
+        const updatedLikedBy = {
+          ...post.likedBy,
+          [handle]: true, // Add the user's like
+        };
+        updatedPosts[postIndex] = {
+          ...post,
+          likedBy: updatedLikedBy,
+        };
+        setPostsState(updatedPosts);
+      }
+    };
+
+    // Attempt to update likes in both topCommentedPosts and mostRecentPosts
+    await updatePostLikes(topCommentedPosts, setTopCommentedPosts);
+    await updatePostLikes(mostRecentPosts, setMostRecentPosts);
   };
 
   const renderPost = (post) => (
@@ -82,22 +99,22 @@ const Trending = () => {
 
   return (
     <>
-    <div >
-      <h2 className="most-commented">Top 10 Most Commented Posts</h2>
-      {topCommentedPosts.map(post => (
-        <React.Fragment key={post.id}>
-          {renderPost(post)}
-        </React.Fragment>
-      ))}
+      <div >
+        <h2 className="most-commented">Top 10 Most Commented Posts</h2>
+        {topCommentedPosts.map(post => (
+          <React.Fragment key={post.id}>
+            {renderPost(post)}
+          </React.Fragment>
+        ))}
       </div>
       <div>
-      <h2 className="most-recently">10 Most Recently Created Posts</h2>
-      {mostRecentPosts.map(post => (
-        <React.Fragment key={post.id}>
-          {renderPost(post)}
-        </React.Fragment>
-      ))}
-    </div>
+        <h2 className="most-recently">10 Most Recently Created Posts</h2>
+        {mostRecentPosts.map(post => (
+          <React.Fragment key={post.id}>
+            {renderPost(post)}
+          </React.Fragment>
+        ))}
+      </div>
     </>
   );
 };
