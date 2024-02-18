@@ -57,11 +57,18 @@
   height: 50px;
   display: flex;
   border: 1px solid #bdc3c7;
-  border-radius: 20px;
+  border-radius: 30px;
   padding: 10px;
   padding-bottom: 1px;
   background-color: #f4f4f4;
 }
+.search-bar .input-css {
+  outline: none;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
 
 .search-bar:hover {
   border-color: #3498db;
