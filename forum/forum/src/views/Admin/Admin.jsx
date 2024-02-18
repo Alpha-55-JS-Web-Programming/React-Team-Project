@@ -17,7 +17,7 @@ export default function Admin() {
 
   useEffect(() => {
     getAllUsers().then((users) => setUsers(users));
-  }, [users]);
+  }, []);
 
   const getAllUsers = async () => {
     const snapshot = await get(query(ref(db, "users")));
@@ -82,19 +82,27 @@ export default function Admin() {
   };
 
   const handleSearchChange = async (e) => {
-    const value = e.target.value;
+    const value = e.target.value.toLowerCase();
     setSearch(value);
 
     if (value.trim() === "") {
-      // If the search input is empty, fetch all users from the database
       const updatedUsers = await getAllUsers();
       setUsers(updatedUsers);
     } else {
-      // Filter users based on the search input
-      const filteredUsers = users.filter((user) =>
-        user.handle.toLowerCase().includes(value.toLowerCase())
-      );
-      setUsers(filteredUsers);
+      const snapshot = await get(query(ref(db, "users")));
+      if (snapshot.exists()) {
+        const users = Object.keys(snapshot.val()).map((key) => ({
+          id: key,
+          ...snapshot.val()[key],
+        }));
+
+        const filteredUsers = users.filter((user) =>
+          user.handle.toLowerCase().includes(value) ||
+          user.email.toLowerCase().includes(value) || // Assuming user object has email
+          (user.displayName && user.displayName.toLowerCase().includes(value)) // Assuming user object has displayName
+        );
+        setUsers(filteredUsers);
+      }
     }
   };
 
@@ -108,7 +116,7 @@ export default function Admin() {
           <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br/>
           <br/>  */}
           <label htmlFor="search">Search </label>
-          <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
+          <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css" />
 
           {users.length > 0 &&
             users.map((user) => (
