@@ -132,7 +132,7 @@ export const getTopCommentedPosts = async () => {
   return posts;
 };
 
-export const getMostRecentPosts = async () => {
+export const getTopLikedPosts = async () => {
   const snapshot = await get(query(ref(db, 'posts')));
   if (!snapshot.exists()) {
     return [];
@@ -146,9 +146,8 @@ export const getMostRecentPosts = async () => {
       comments: snapshot.val()[key].comments || [],
       ...snapshot.val()[key],
     }))
-    .sort((a, b) => b.createdOn - a.createdOn)
-    .slice(0, 10)
-    .reverse();
+    .sort((a, b) => Object.keys(b.likedBy).length - Object.keys(a.likedBy).length)
+    .slice(0, 10);
 
   return posts;
 };
