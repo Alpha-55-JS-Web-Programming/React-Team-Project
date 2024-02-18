@@ -1,4 +1,4 @@
-import { ref, push, get, query, update, getDatabase, remove } from 'firebase/database';
+import { ref, push, get, query, update, getDatabase, remove, child } from 'firebase/database';
 import { db } from '../config/firebase-config';
 import { format } from 'date-fns';
 import { getUserByHandle } from './users.service';
@@ -18,7 +18,7 @@ export const addPost = async (author, title, content, tags) => {
   const readableDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
   const newPostRef = push(ref(db, 'posts'));
   const postId = newPostRef.key;
-  
+
   await set(newPostRef, {
     id: postId,
     author,
@@ -32,6 +32,19 @@ export const addPost = async (author, title, content, tags) => {
 
   return postId;
 };
+
+export async function getUsers(userIds) {
+  const users = {};
+  for (const userId of userIds) {
+    const snapshot = await get(child(ref(db, 'users'), userId)); // There may be way to do this more efficiently, i.e. with a single query
+    if (snapshot.exists()) {
+      users[userId] = snapshot.val();
+    } else {
+      console.log(`No data available for user ID: ${userId}`);
+    }
+  }
+  return users;
+}
 
 export const getAllPosts = async (search) => {
   const snapshot = await get(query(ref(db, 'posts')));
