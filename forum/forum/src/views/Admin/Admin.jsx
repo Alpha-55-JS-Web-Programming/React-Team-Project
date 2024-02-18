@@ -4,6 +4,7 @@ import Button from "../../components/Button/Button";
 import { db } from "../../config/firebase-config";
 import { get, query, ref, orderByChild, equalTo } from "firebase/database";
 import { update } from "firebase/database";
+import "./Admin.css";
 
 export default function Admin() {
   const { user, userData } = useContext(AppContext);
@@ -83,7 +84,7 @@ export default function Admin() {
   const handleSearchChange = async (e) => {
     const value = e.target.value;
     setSearch(value);
-  
+
     if (value.trim() === "") {
       // If the search input is empty, fetch all users from the database
       const updatedUsers = await getAllUsers();
@@ -123,6 +124,7 @@ export default function Admin() {
                   onChange={(e) =>
                     handleRoleChange(user.id, e.target.value)
                   }
+                  className="admin-select"
                 >
                   <option value="user">user</option>
                   <option value="admin">admin</option>
