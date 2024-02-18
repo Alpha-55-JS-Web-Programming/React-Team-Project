@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { getTopCommentedPosts, getTopLikedPosts } from '../../services/post.services';
+import { getTopCommentedPosts, getMostRecentPosts } from '../../services/post.services';
 import { useNavigate } from 'react-router-dom';
 import './Trending.css';
 import { dislikePost, likePost } from '../../services/post.services';
+
 const Trending = () => {
   const [topCommentedPosts, setTopCommentedPosts] = useState([]);
-  const [topLikedPosts, setTopLikedPosts] = useState([]);
+  const [mostRecentPosts, setMostRecentPosts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopCommentedPosts = async () => {
       const posts = await getTopCommentedPosts();
+      console.log(posts);
       setTopCommentedPosts(posts);
     };
 
-    const fetchTopLikedPosts = async () => {
-      const posts = await getTopLikedPosts();
-      setTopLikedPosts(posts);
+    const fetchMostRecentPosts = async () => {
+      const posts = await getMostRecentPosts();
+      console.log(posts);
+      setMostRecentPosts(posts);
     };
 
     fetchTopCommentedPosts();
-    fetchTopLikedPosts();
+    fetchMostRecentPosts();
   }, []);
 
   const togglePostLike = async (handle, postId) => {
@@ -79,19 +82,22 @@ const Trending = () => {
 
   return (
     <>
-      <div>
-        <h2 className="most-commented">Top 10 Most Commented Posts</h2>
-        {topCommentedPosts.map(post => (
-          <React.Fragment key={post.id} className="comment-post"> {renderPost(post)} </React.Fragment>
-        ))}
+    <div >
+      <h2 className="most-commented">Top 10 Most Commented Posts</h2>
+      {topCommentedPosts.map(post => (
+        <React.Fragment key={post.id}>
+          {renderPost(post)}
+        </React.Fragment>
+      ))}
       </div>
-
       <div>
-        <h2 className="most-liked">Top 10 Most Liked Posts</h2>
-        {topLikedPosts.map(post => (
-          <React.Fragment key={post.id} > {renderPost(post)} </React.Fragment>
-        ))}
-      </div>
+      <h2 className="most-recently">10 Most Recently Created Posts</h2>
+      {mostRecentPosts.map(post => (
+        <React.Fragment key={post.id}>
+          {renderPost(post)}
+        </React.Fragment>
+      ))}
+    </div>
     </>
   );
 };

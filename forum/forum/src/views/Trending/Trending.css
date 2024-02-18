@@ -19,6 +19,17 @@
     padding-top: 20px;
     padding-left: 30px;
 }
+.most-recently{
+    text-align: left;
+    font-size: 4em;
+    margin-bottom: 2rem;
+    letter-spacing: 0.03em;
+    word-spacing: 0.2em;
+    font-style: italic;
+    font-family: Arial;
+    padding-top: 20px;
+    padding-left: 30px;
+}
 
 .comment-post {
     border: 1px solid #ddd;
