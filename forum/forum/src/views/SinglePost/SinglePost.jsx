@@ -15,22 +15,22 @@ export default function SinglePost() {
         setPost(postData);
       }
     });
-  }, [id, post]);
+  }, [id]); // Removed post from the dependencies array
 
   const togglePostLike = (handle) => {
-    if (post.likedBy.includes(handle)) {
+    if (post && post.likedBy.includes(handle)) {
       dislikePost(handle, post.id).then(() => {
-        setPost({
-          ...post,
-          likedBy: post.likedBy.filter(u => u !== handle),
-        });
+        setPost(prevPost => ({
+          ...prevPost,
+          likedBy: prevPost.likedBy.filter(u => u !== handle),
+        }));
       });
     } else {
       likePost(handle, post.id).then(() => {
-        setPost({
-          ...post,
-          likedBy: [...post.likedBy, handle],
-        });
+        setPost(prevPost => ({
+          ...prevPost,
+          likedBy: [...prevPost.likedBy, handle],
+        }));
       });
     }
   };
@@ -39,7 +39,7 @@ export default function SinglePost() {
     <div>
       <h1>Single Post</h1>
       {/* Pass the entire post object, which now includes authorDetails, to PostDetails */}
-      {post && <PostDetails post={post} togglePostLike={togglePostLike} />}
+      {post && <PostDetails post={post} togglePostLike={togglePostLike} updatePost={(updatedPost) => setPost(updatedPost)} />}
     </div>
   );
 }

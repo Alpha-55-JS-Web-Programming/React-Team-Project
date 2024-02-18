@@ -9,7 +9,7 @@ import { db } from "../../config/firebase-config";
 import { ref, update } from "firebase/database";
 
 
-export default function PostDetails({ post, togglePostLike }) {
+export default function PostDetails({ post, togglePostLike, updatePost }) {
   const navigate = useNavigate();
   const { user, userData } = useContext(AppContext);
   const [comments, setComments] = useState([]);
@@ -56,6 +56,10 @@ export default function PostDetails({ post, togglePostLike }) {
       setUpdateSuccessMessage('Post updated successfully!'); // Set success message
       setTimeout(() => setUpdateSuccessMessage(''), 3000); // Hide success message after 3 seconds
       setIsEditing(false); // Exit editing mode after updating
+
+      // Correctly use the updatePost function passed as a prop to update the parent state
+      const updatedPost = { ...post, content: editedContent };
+      updatePost(updatedPost); // Directly use updatePost without 'props.'
     } catch (error) {
       console.error('Error updating post:', error);
     }
@@ -66,7 +70,7 @@ export default function PostDetails({ post, togglePostLike }) {
       <h2>{post.title}</h2>
       {updateSuccessMessage && <div className="success-message">{updateSuccessMessage}</div>}
       {isEditing ? (
-        <textarea value={editedContent} onChange={(e) => setEditedContent(e.target.value)}/>
+        <textarea value={editedContent} onChange={(e) => setEditedContent(e.target.value)} />
       ) : (
         <p className="post-content">{post.content}</p>
       )}
@@ -89,21 +93,21 @@ export default function PostDetails({ post, togglePostLike }) {
         </div>
       </div>
       <div className="comments-list">
-          <h3>Comments:</h3>
-          <ul>
-            {comments.map((comment, index) => (
-              <li key={index}> {comment.author}: {comment.text}</li>
-            ))}
-          </ul>
-        </div>
+        <h3>Comments:</h3>
+        <ul>
+          {comments.map((comment, index) => (
+            <li key={index}> {comment.author}: {comment.text}</li>
+          ))}
+        </ul>
+      </div>
 
-        <div className="post-comments">
-          {post.comments && post.comments.map((comment, index) => (
-              <div key={index} className="comment-item">
-                <p> {comment.author}: {comment.text} </p>
-              </div>
-            ))}
-        </div>
+      <div className="post-comments">
+        {post.comments && post.comments.map((comment, index) => (
+          <div key={index} className="comment-item">
+            <p> {comment.author}: {comment.text} </p>
+          </div>
+        ))}
+      </div>
       <p>Likes: {post.likedBy.length}</p>
       <div className="button-group">
         <Button onClick={() => navigate("/allposts")}>Back</Button>
@@ -121,7 +125,7 @@ export default function PostDetails({ post, togglePostLike }) {
       </div>
     </div>
   );
-        }
+}
 PostDetails.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.string,
