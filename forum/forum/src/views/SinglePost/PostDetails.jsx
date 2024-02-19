@@ -74,7 +74,7 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
 
   return (
     <div className="post-details">
-      <h2>{post.title}</h2>
+      <h2 className="post-details-title">{post.title}</h2>
       {updateSuccessMessage && <div className="success-message">{updateSuccessMessage}</div>}
       {isEditing ? (
         <textarea value={editedContent} onChange={(e) => setEditedContent(e.target.value)} />

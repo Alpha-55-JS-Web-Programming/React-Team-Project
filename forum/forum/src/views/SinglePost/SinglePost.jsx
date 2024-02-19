@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getPostById } from "../../services/post.services";
 import PostDetails from "./PostDetails";
 import { likePost, dislikePost } from "../../services/post.services";
+import "./PostDetails.css";
 
 export default function SinglePost() {
   const [post, setPost] = useState(null);

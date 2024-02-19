@@ -45,9 +45,9 @@ export default function CreatePost() {
   };
 
   return (
-    <div>
+    <div className='all-create-post'>
       {userData.isBlocked ? (
-        <h3>You don't have permission to access this page.</h3>
+        <h3 className='permission'>You don't have permission to access this page.</h3>
       ) : (
         <div className="create-post-container">
           <h1 className="cerate-post">Create post</h1>
