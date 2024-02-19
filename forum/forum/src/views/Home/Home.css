@@ -255,6 +255,7 @@
   border-radius: 5px;
   animation: backgroundPulse 3s infinite ease-in-out;
   margin: 30px 0;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
 }
 
 .usersCount p {
