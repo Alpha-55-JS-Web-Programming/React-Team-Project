@@ -178,7 +178,7 @@ export default function Home() {
                 <p className="post-created">{post.createdOnReadable}</p>
                 <br />
                 {post.tags?.length ? (
-                <p className="post-tags"><strong>Tags:</strong> {post.tags?.join(", ")}</p>
+                <p className="post-tags"><strong>Tags: </strong> {post.tags?.join(", ")}</p>
                 ) : null}
               </div>
 
