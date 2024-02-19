@@ -24,8 +24,12 @@
   padding: 10px;
   color: #333;
   width: 300px;
+  margin-top: 0;
 }
-
+.infoMain form label {
+margin-bottom: 0;
+padding-bottom: 0;
+}
 .file-input-container {
   position: relative;
   overflow: hidden;
