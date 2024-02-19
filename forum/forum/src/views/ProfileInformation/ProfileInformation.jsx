@@ -126,16 +126,16 @@ export default function ProfileInformation() {
             </div>
             <br />
 
-            <label htmlFor="full-name">Full name: </label>
+            {/* <label htmlFor="full-name">Full name: </label> */}
             <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
             <br />
-            <label htmlFor="handle">Handle: </label>
+            {/* <label htmlFor="handle">Handle: </label> */}
             <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br />
             <br />
-            <label htmlFor="email">Email: </label>
+            {/* <label htmlFor="email">Email: </label> */}
             <input value={form.email} onChange={updateForm("email")} type="text" name="email" id="email" /><br />
             <br />
-            <label htmlFor="mobile">Mobile: </label>
+            {/* <label htmlFor="mobile">Mobile: </label> */}
             <input value={form.mobile} onChange={updateForm("mobile")} type="text" name="mobile" id="mobile" /><br />
             <br />
             <Button type="button" onClick={(e) => updateProfile(e)}>Update Profile</Button>
