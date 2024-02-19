@@ -96,7 +96,7 @@ const Trending = () => {
 
   return (
     <>
-      <div >
+      <div className="first">
         <h2 className="most-commented">Top 10 Most Commented Posts</h2>
         {topCommentedPosts.map(post => (
           <React.Fragment key={post.id}>
@@ -104,7 +104,7 @@ const Trending = () => {
           </React.Fragment>
         ))}
       </div>
-      <div>
+      <div className="second">
         <h2 className="most-recently">10 Most Recently Created Posts</h2>
         {mostRecentPosts.map(post => (
           <React.Fragment key={post.id}>
