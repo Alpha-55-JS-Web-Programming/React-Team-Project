@@ -86,7 +86,7 @@ export default function Login() {
           </div>
 
           <button onClick={login} className="login__button"> Login </button>
-          <p className="login__register"> Don't have an account?{" "} <Link to="/register" style={{ textDecoration: "underline" }}> Register </Link>{" "} </p>
+          <div className="login__register"> Don't have an account?{" "} <Link to="/register" style={{ textDecoration: "underline" }}> Register </Link>{" "} </div>
         </div>
       </div>
     </>

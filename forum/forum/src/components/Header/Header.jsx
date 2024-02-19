@@ -23,10 +23,10 @@ export default function Header() {
         {user && <NavLink to="/create-post"> <button className="btn btn1">Create Post</button> </NavLink>}
         {isAdmin && <NavLink to="/admin"> <button className="btn btn2">Admin</button> </NavLink>}
       </div>
-      <div className="login-wellcome">
+      <div>
         {user ? (
           <>
-            <NavLink to="/profile-information" className="login-wellcome">{`Welcome, ${userData?.handle}`}</NavLink>
+           <div className="login-wellcome"> <NavLink to="/profile-information" className="login-wellcome">{`Welcome, ${userData?.handle}`}</NavLink></div>
           </>
         ) : (
           <>
