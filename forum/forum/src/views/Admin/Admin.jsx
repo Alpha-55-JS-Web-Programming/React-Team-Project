@@ -100,13 +100,11 @@ export default function Admin() {
     <div className="adminAll">
       {isAdmin ? (
         <>
-          <div className="adminHeader">
-            <h1>Welcome, admin {userData.FullName}</h1>
-          </div>
+          <div className="adminHeader">Welcome, admin {userData.FullName}</div>
 
           <div className="adminMain">
-            <label htmlFor="search">Search </label>
-            <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="input-css" />
+            <label htmlFor="search" className="admin-search">Search </label>
+            <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="admin-search-bar" />
 
             {users.length > 0 &&
               users.map((user) => (
@@ -114,10 +112,9 @@ export default function Admin() {
                   <div className="adminUsers">
                     <span>User: {user.handle}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>Email: {user.email}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>Role: {user.role}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                   </div>
                   <div className="adminOptions">
-                    <label htmlFor={`user-role-${user.id}`}>Change role:</label>
+                    <label htmlFor={`user-role-${user.id}`} className="change-role">Change role:</label>
                     <select id={`user-role-${user.id}`} value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)} className="admin-select">
                       <option value="user">user</option>
                       <option value="admin">admin</option>
