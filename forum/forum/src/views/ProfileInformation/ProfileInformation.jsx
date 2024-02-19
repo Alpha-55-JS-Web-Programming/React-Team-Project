@@ -3,7 +3,7 @@ import { AppContext } from "../../Context/AppContext";
 import { logoutUser } from "../../services/auth.service";
 import Button from "../../components/Button/Button";
 import { updateUserData } from "../../services/users.service";
-import img from '../../img/default.png';
+import img from '../../../assets/default.png';
 import './ProfileInformation.css';
 
 export default function ProfileInformation() {
