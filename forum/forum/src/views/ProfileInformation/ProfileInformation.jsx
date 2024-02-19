@@ -108,7 +108,7 @@ export default function ProfileInformation() {
       <div className="infoMain">
         {!isEditing && (
           <div>
-            <img src={form.image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+            <img src={form.image} alt="Profile" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
             <p><strong>Full name:</strong> {userData.FullName}</p>
             <p><strong>Handle:</strong> {userData.handle}</p>
             <p><strong>Email:</strong> {userData.email}</p>
@@ -151,7 +151,7 @@ export default function ProfileInformation() {
         ))}
       </div>
       <br /> <br /> <br />
-      <Button onClick={logout}>Logout</Button>
+      <Button className='button-logout' onClick={logout}>Logout</Button>
     </div>
   );
 }
