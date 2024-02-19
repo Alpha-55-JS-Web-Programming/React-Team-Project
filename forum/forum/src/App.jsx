@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./config/firebase-config";
 import "./App.css";
 import NotFound from "./views/NotFound/NotFound";
@@ -23,6 +23,8 @@ import Wellness from "./views/HealthAndWellness/Wellness";
 import ProfileUpdate from "./views/ProfileInformation/ProfileUpdate";
 import { ref, get, query } from 'firebase/database';
 import { db } from './config/firebase-config'; // for dev purposes
+import TopBarProgress from 'react-topbar-progress-indicator';
+
 
 function App() {
   const [context, setContext] = useState({
@@ -48,7 +50,8 @@ function App() {
       <AppContext.Provider value={{ ...context, setContext }}>
         <Header />
 
-        <Routes>
+        {/* <Routes> */}
+        <LoadRoutes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -62,7 +65,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/update-profile" element={<Authenticated><ProfileUpdate /></Authenticated>} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
+          </LoadRoutes>
+        {/* </Routes> */}
         <Footer />
       </AppContext.Provider>
     </BrowserRouter>
@@ -70,3 +74,37 @@ function App() {
 }
 
 export default App;
+
+
+function LoadRoutes({ children }) {
+  const [progress, setProgress] = useState(false);
+  const [prevLoc, setPrevLoc] = useState('');
+  const location = useLocation();
+  TopBarProgress.config({
+    barColors: {
+      0: '#4287f5',
+      1: '#1861d6'
+    },
+    barThickness: 3.5,
+    shadowBlur: 0
+  });
+  useEffect(() => {
+    // console.log(location.pathname, prevLoc);
+    setPrevLoc(location.pathname);
+    setProgress(true);
+    if (location.pathname === prevLoc) {
+      setPrevLoc('');
+    }
+  }, [location]);
+
+  useEffect(() => {
+    // console.log('progress', progress);
+    setProgress(false);
+  }, [prevLoc]);
+  return (
+    <>
+      {progress && <TopBarProgress />}
+      <Routes>{children}</Routes>
+    </>
+  );
+}
