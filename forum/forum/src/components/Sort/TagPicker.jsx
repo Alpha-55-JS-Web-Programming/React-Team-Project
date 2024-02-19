@@ -18,7 +18,6 @@ export default function TagPicker({ onTagChange }) {
                 <option value="exercise">Exercise</option>
                 <option value="rest">Rest</option>
                 <option value="mental-health">Mental health</option>
-                <option value="others">Others</option>
             </select>
         </div>
     );
