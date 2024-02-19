@@ -201,9 +201,11 @@ export default function AllPosts() {
         <div className="together">
         <section className="usersCount">
           <p>{`Number of users: ${usersCount}`}</p>
+          <br />
           <p>{`Number of posts: ${postsCount}`}</p>
           <br /><br />
         </section>
+        <p>Popular Tags:</p>
         <div className="tags-container">
           {tags.map((tag, i) => (
             <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
