@@ -42,7 +42,7 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
   const handleDeletePost = async () => {
     try {
       await deletePost(post.id);
-      navigate("/allposts");
+      navigate("/home");
     } catch (error) {
       console.error("Error deleting post:", error);
     }

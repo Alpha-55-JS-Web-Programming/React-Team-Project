@@ -17,7 +17,7 @@ export default function Header() {
     <header className="sticky-header">
       <div className="round"> <img src={wheel} className="spin whalf" /></div>
       <div className="header-main">
-        <NavLink to="/allposts"> <button className="btn btn1">Home</button> </NavLink>
+        <NavLink to="/home"> <button className="btn btn1">Home</button> </NavLink>
         {/* <NavLink to="/"> <button className="btn btn1">Home</button> </NavLink> */}
         <NavLink to="/trending"> <button className="btn btn2">Top 10 Trending</button> </NavLink>
         {user && <NavLink to="/create-post"> <button className="btn btn1">Create Post</button> </NavLink>}

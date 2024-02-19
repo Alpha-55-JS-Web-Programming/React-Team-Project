@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./config/firebase-config";
 import "./App.css";
-import Home from "./views/Home/Home";
 import NotFound from "./views/NotFound/NotFound";
 import Trending from "./views/Trending/Trending";
 import Login from "./views/Login/Login";
@@ -11,7 +10,7 @@ import Header from "./components/Header/Header";
 import CreatePost from "./views/CreatePost/CreatePost";
 import { AppContext } from "./Context/AppContext";
 import Footer from "./components/Footer/Footer";
-import AllPosts from "./views/AllPosts/AllPosts";
+import Home from "./views/Home/Home";
 import SinglePost from "./views/SinglePost/SinglePost";
 import Authenticated from "./hoc/Authenticated";
 import { auth } from "./config/firebase-config";
@@ -56,8 +55,8 @@ function App() {
           <Route path="/health" element={<Health />} />
           <Route path="/wellness" element={<Wellness />} />
           <Route path="/trending" element={<Trending />} />
-          <Route path="/allposts" element={<Authenticated><AllPosts /></Authenticated>} />
-          <Route path="/posts/:id" element={<Authenticated><SinglePost /></Authenticated>} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/posts/:id" element={<SinglePost />} />
           <Route path="/create-post" element={<Authenticated><CreatePost /></Authenticated>} />
           <Route path="/profile-information" element={<Authenticated><ProfileInformation /></Authenticated>} />
           <Route path="/admin" element={<Admin />} />
