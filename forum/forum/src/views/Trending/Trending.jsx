@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getTopCommentedPosts, getMostRecentPosts } from '../../services/post.services';
 import { useNavigate } from 'react-router-dom';
 import './Trending.css';
 import { dislikePost, likePost } from '../../services/post.services';
+import { AppContext } from "../../Context/AppContext";
+
 
 const Trending = () => {
   const [topCommentedPosts, setTopCommentedPosts] = useState([]);
   const [mostRecentPosts, setMostRecentPosts] = useState([]);
   const navigate = useNavigate();
+  const { userData } = useContext(AppContext);
 
   useEffect(() => {
     const fetchTopCommentedPosts = async () => {
@@ -84,7 +87,7 @@ const Trending = () => {
 
         <div className="post-actions">
           <div className="like-section">
-            <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike("userHandle", post.id)}>
+            <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike(userData.handle, post.id)}>
               {" "}thumb_up{" "} <span className="like-count"> {" "} {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
             </span>
           </div>

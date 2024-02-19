@@ -1,23 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { getUsers, getAllPosts, dislikePost, likePost, getPostsCount } from "../../services/post.services";
+import {getUsers, getAllPosts, dislikePost, likePost} from "../../services/post.services";
 import { AppContext } from "../../Context/AppContext";
 import Sort from "../../components/Sort/Sort";
 import "./Home.css";
 import { getUsersCount } from "../../services/users.service";
+import { getPostsCount } from "../../services/post.services";
 
 export default function Home() {
   const { userData } = useContext(AppContext);
   const [authors, setAuthors] = useState({});
   const [posts, setPosts] = useState([]);
-  const [groupedPosts, setGroupedPosts] = useState({
-    food: [],
-    exercise: [],
-    rest: [],
-    "mental-health": [],
-    others: [],
-  });
   const [tags, setTags] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortedPosts, setSortedPosts] = useState([]);
@@ -30,7 +24,6 @@ export default function Home() {
     getUsersCount().then((count) => setUsersCount(count));
     getPostsCount().then((count) => setPostsCount(count));
   }, []);
-
   useEffect(() => {
     loadPosts();
   }, []);
@@ -48,46 +41,15 @@ export default function Home() {
     try {
       const fetchedPosts = await getAllPosts();
       setPosts(fetchedPosts);
-      const grouped = groupPostsByTags(fetchedPosts);
-      setGroupedPosts(grouped);
       sortPosts("choose-sort");
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
   };
 
-  const groupPostsByTags = (posts) => {
-    const groupedPosts = {
-      food: [],
-      exercise: [],
-      rest: [],
-      "mental-health": [],
-      others: [],
-    };
-
-    posts.forEach(post => {
-      // Provide a default empty array if tags are undefined
-      const tags = post.tags || [];
-      if (tags.length === 0) {
-        groupedPosts.others.push(post);
-      } else {
-        tags.forEach(tag => {
-          if (groupedPosts.hasOwnProperty(tag)) {
-            groupedPosts[tag].push(post);
-          } else {
-            groupedPosts.others.push(post);
-          }
-        });
-      }
-    });
-
-    return groupedPosts;
-  };
-
-
   const loadAuthors = async () => {
     const authors = await getUsers(posts.map(p => p.author));
-    setAuthors((prevAuthors) => ({ ...prevAuthors, ...authors }));
+    setAuthors((prevAuthors) => ({...prevAuthors, ...authors}));
   };
 
   const applyPostsFilter = () => {
@@ -149,26 +111,32 @@ export default function Home() {
     setTags(tags);
   };
 
-  const togglePostLike = async (handle, postId) => {
-    console.log(`Toggling like for post: ${postId} by user: ${handle}`);
-
+  const togglePostLike = (handle, postId) => {
     const postIndex = posts.findIndex((post) => post.id === postId);
-    if (postIndex === -1) {
-      console.error("Post not found");
-      return;
-    }
-
     const post = posts[postIndex];
 
     if (post.likedBy.includes(handle)) {
-      await dislikePost(handle, postId);
-    } else {
-      await likePost(handle, postId);
-    }
+      dislikePost(handle, postId).then(() => {
+        const updatedPosts = [...posts];
+        updatedPosts[postIndex] = {
+          ...post,
+          likedBy: post.likedBy.filter((u) => u !== handle),
+        };
 
-    // Force a refresh of posts data after like/dislike
-    await loadPosts();
-};
+        setPosts(updatedPosts);
+      });
+    } else {
+      likePost(handle, postId).then(() => {
+        const updatedPosts = [...posts];
+        updatedPosts[postIndex] = {
+          ...post,
+          likedBy: [...post.likedBy, handle],
+        };
+
+        setPosts(updatedPosts);
+      });
+    }
+  };
 
   const handleTagSelect = (tag) => {
     const updatedTags = tags.map((t) =>
@@ -179,7 +147,7 @@ export default function Home() {
 
   return (
     <>
-      <div >
+          <div >
         <title>{(document.title = "Home")}</title>
         <h1 className="home">Home</h1>
 
@@ -190,64 +158,66 @@ export default function Home() {
           <Sort onSortChange={sortPosts} className="sort" />
           <div className="search-bar">
             <span className="material-symbols-outlined">search</span>
-            <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css" />
+            <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
           </div>
         </div>
 
+
+
         <div className="all-posts">
-          {Object.entries(groupedPosts).map(([tagName, posts]) => (
+
+          {sortedPosts.map((post) => (
             <div className="post-id">
-              <div key={tagName}>
-                <h2>{tagName.charAt(0).toUpperCase() + tagName.slice(1).replace("-", " ")}</h2>
-                {posts.map((post) => (
-                  <div key={post.id} className="post-id">
-                    <div className="post-header">
-                      {authors[post.author]?.image && (
-                        <img className="post-author-avatar" src={authors[post.author].image} alt="Author Avatar" />
-                      )}
-                      <h2 className="post-author">{post.author}</h2>
-                      <p className="post-created">{post.createdOnReadable}</p>
-                      {post.tags?.length && (
-                        <p className="post-tags"><strong>Tags: </strong>{post.tags.join(", ")}</p>
-                      )}
-                    </div>
-                    <div className="post-body">
-                      <h3 className="post-title">{post.title}</h3>
-                      <p className="post-content">{post.content.length > 250 ? post.content.slice(0, 250) + '...' : post.content}</p>
-                    </div>
-                    <div className="post-actions">
-                      <div className="like-section">
-                        <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike(userData.handle, post.id)}>
-                          {" "}thumb_up{" "} <span className="like-count"> {" "} {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
-                        </span>
-                      </div>
-                      <button onClick={() => navigate(`/posts/${post.id}`)} className="button-details">Details</button>
-                    </div>
-                  </div>
-                ))}
+
+              <div className="post-header">
+                {authors[post.author]?.image ? (
+                  <img className="post-author-avatar" src={authors[post.author].image} />
+                ) : null}
+                {/* <img className="post-author-avatar" src={authors[post.author].image ?? defaultAvatarImage} /> if you want to have a default avatar */}
+                <h2 className="post-author">{post.author}</h2>
+                <p className="post-created">{post.createdOnReadable}</p>
+                <br />
+                {post.tags?.length ? (
+                <p className="post-tags"><strong>Tags: </strong> {post.tags?.join(", ")}</p>
+                ) : null}
+              </div>
+
+              <div className="post-body">
+               <h3 className="post-title">{post.title}</h3>
+               {/* <p className="post-content">{post.content}</p> */}
+                <p className="post-content">{post.content.length > 250 ? post.content.slice(0, 250) + '...' : post.content}</p>
+
+              </div>
+
+              <div className="post-actions">
+                <div className="like-section">
+                  <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike(userData.handle, post.id)}>
+                    {" "}thumb_up{" "} <span className="like-count"> {" "} {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
+                  </span>
+                </div>
+                <button onClick={() => navigate(`/posts/${post.id}`)} className="button-details"> Details </button>
               </div>
             </div>
           ))}
         </div>
-
         <div className="together">
-          <section className="usersCount">
-            <p>{`Number of users: ${usersCount}`}</p>
-            <br />
-            <p>{`Number of posts: ${postsCount}`}</p>
-            <br /><br />
-          </section>
-          <p>Tags: </p>
-          <div className="tags-container">
-            {tags.map((tag, i) => (
-              <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
-            ))}
-          </div>
+        <section className="usersCount">
+          <p>{`Number of users: ${usersCount}`}</p>
+          <br />
+          <p>{`Number of posts: ${postsCount}`}</p>
+          <br /><br />
+        </section>
+        <p>Tags: </p>
+        <div className="tags-container">
+          {tags.map((tag, i) => (
+            <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
+          ))}
+        </div>
         </div>
       </div>
     </>
   );
-}
+  }
 
 Home.propTypes = {
   post: PropTypes.shape({
