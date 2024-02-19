@@ -184,8 +184,8 @@ export default function Home() {
 
               <div className="post-body">
                <h3 className="post-title">{post.title}</h3>
-               <p className="post-content">{post.content}</p>
-                {/* <p className="post-content">{post.content.length > 200 ? post.content.slice(0, 200) + '...' : post.content}</p> */}
+               {/* <p className="post-content">{post.content}</p> */}
+                <p className="post-content">{post.content.length > 250 ? post.content.slice(0, 250) + '...' : post.content}</p>
 
               </div>
 
@@ -207,7 +207,7 @@ export default function Home() {
           <p>{`Number of posts: ${postsCount}`}</p>
           <br /><br />
         </section>
-        <p>Tags:</p>
+        <p>Tags: </p>
         <div className="tags-container">
           {tags.map((tag, i) => (
             <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
