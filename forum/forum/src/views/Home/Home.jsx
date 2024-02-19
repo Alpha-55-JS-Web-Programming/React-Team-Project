@@ -205,7 +205,7 @@ export default function Home() {
           <p>{`Number of posts: ${postsCount}`}</p>
           <br /><br />
         </section>
-        <p>Popular Tags:</p>
+        <p>Tags:</p>
         <div className="tags-container">
           {tags.map((tag, i) => (
             <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
