@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import {getUsers, getAllPosts, dislikePost, likePost} from "../../services/post.services";
+import { getUsers, getAllPosts, dislikePost, likePost } from "../../services/post.services";
 import { AppContext } from "../../Context/AppContext";
 import Sort from "../../components/Sort/Sort";
 import "./Home.css";
@@ -24,6 +24,7 @@ export default function Home() {
     getUsersCount().then((count) => setUsersCount(count));
     getPostsCount().then((count) => setPostsCount(count));
   }, []);
+
   useEffect(() => {
     loadPosts();
   }, []);
@@ -49,7 +50,7 @@ export default function Home() {
 
   const loadAuthors = async () => {
     const authors = await getUsers(posts.map(p => p.author));
-    setAuthors((prevAuthors) => ({...prevAuthors, ...authors}));
+    setAuthors((prevAuthors) => ({ ...prevAuthors, ...authors }));
   };
 
   const applyPostsFilter = () => {
@@ -147,44 +148,58 @@ export default function Home() {
 
   return (
     <>
-          <div >
-        <title>{(document.title = "Home")}</title>
-        <h1 className="home">Home</h1>
-
-      </div>
-      <div>
+      <div className="content">
+        <div>
+          <title>{(document.title = "Home")}</title>
+          <h1 className="home">Home</h1>
+        </div>
         {/* <h1 className="all-postsi-title">All posts</h1> */}
+
         <div className="sort-search-container">
           <Sort onSortChange={sortPosts} className="sort" />
           <div className="search-bar">
             <span className="material-symbols-outlined">search</span>
-            <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css"/>
+            <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="input-css" />
           </div>
         </div>
 
-
+        <div className="together">
+          <section className="usersCount">
+            <p>{`Number of users: ${usersCount}`}</p>
+            <br />
+            <p>{`Number of posts: ${postsCount}`}</p>
+            <br /><br />
+          </section>
+          <div className="tags-box">
+            <p>Tags: </p>
+            <div className="tags-container">
+              {tags.map((tag, i) => (
+                <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
+              ))}
+            </div>
+          </div>
+        </div>
 
         <div className="all-posts">
-
           {sortedPosts.map((post) => (
             <div className="post-id">
 
               <div className="post-header">
-                {authors[post.author]?.image ? (
+                {/* {authors[post.author]?.image ? (
                   <img className="post-author-avatar" src={authors[post.author].image} />
-                ) : null}
-                {/* <img className="post-author-avatar" src={authors[post.author].image ?? defaultAvatarImage} /> if you want to have a default avatar */}
+                ) : null} */}
+                <img className="post-author-avatar" src={authors[post.author]?.image ?? 'assets/default.png'} />
                 <h2 className="post-author">{post.author}</h2>
                 <p className="post-created">{post.createdOnReadable}</p>
                 <br />
                 {post.tags?.length ? (
-                <p className="post-tags"><strong>Tags: </strong> {post.tags?.join(", ")}</p>
+                  <p className="post-tags"><strong>Tags: </strong> {post.tags?.join(", ")}</p>
                 ) : null}
               </div>
 
               <div className="post-body">
-               <h3 className="post-title">{post.title}</h3>
-               {/* <p className="post-content">{post.content}</p> */}
+                <h3 className="post-title">{post.title}</h3>
+                {/* <p className="post-content">{post.content}</p> */}
                 <p className="post-content">{post.content.length > 250 ? post.content.slice(0, 250) + '...' : post.content}</p>
 
               </div>
@@ -200,24 +215,10 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="together">
-        <section className="usersCount">
-          <p>{`Number of users: ${usersCount}`}</p>
-          <br />
-          <p>{`Number of posts: ${postsCount}`}</p>
-          <br /><br />
-        </section>
-        <p>Tags: </p>
-        <div className="tags-container">
-          {tags.map((tag, i) => (
-            <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
-          ))}
-        </div>
-        </div>
       </div>
     </>
   );
-  }
+}
 
 Home.propTypes = {
   post: PropTypes.shape({

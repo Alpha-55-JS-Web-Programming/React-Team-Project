@@ -80,9 +80,10 @@ const Trending = () => {
     <div key={post.id} className="all-posts">
       <div className="post-id">
         <div className="post-header">
-          {authors[post.author]?.image ? (
+          {/* {authors[post.author]?.image ? (
             <img className="post-author-avatar" src={authors[post.author].image} />
-          ) : null}
+          ) : null} */}
+          <img className="post-author-avatar" src={authors[post.author]?.image ?? 'assets/default.png'} />
           <h2 className="post-author">{post.author}</h2>
           <p className="post-created">{post.createdOnReadable}</p>
           <br />

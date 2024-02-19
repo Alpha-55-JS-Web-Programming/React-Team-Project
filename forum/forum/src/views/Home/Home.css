@@ -1,3 +1,8 @@
+.tags-box {
+  display: flex;
+  flex-direction: row;
+}
+
 .tags-container {
   display: flex;
   margin-left: 20px;
@@ -41,7 +46,7 @@
 margin: 0 10px;
 }
 .home {
-  text-align: left;
+  text-align: center;
   font-size: 4em;
   margin-bottom: 2rem;
   letter-spacing: 0.03em;
@@ -58,11 +63,12 @@ margin: 0 10px;
 
 .together {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
+
 .together p {
   text-align: center;
   margin: 0 ;
@@ -78,6 +84,7 @@ margin: 0 10px;
   height: 50px;
   margin-bottom: 20px;
   margin-right: 20%;
+  width: 100%;
 }
 
 .search-bar {
@@ -112,6 +119,11 @@ margin: 0 10px;
   color: #333;
   width: 100%;
   background: transparent;
+}
+
+.content {
+  margin: 0 auto;
+  width: 70%;
 }
 
 .all-posts {

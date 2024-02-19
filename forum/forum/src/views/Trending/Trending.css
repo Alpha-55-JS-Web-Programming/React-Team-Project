@@ -15,7 +15,7 @@
 }
 
 .most-commented {
-  text-align: left;
+  text-align: center;
   font-size: 45px;
   margin-bottom: 2rem;
   word-spacing: 0.1em;
@@ -25,7 +25,7 @@
 }
 
 .most-recently {
-  text-align: left;
+  text-align: center;
   font-size: 45px;
   margin-bottom: 2rem;
   word-spacing: 0.1em;
