@@ -15,8 +15,10 @@ export default function TagPicker({ onTagChange }) {
             <select className="tag-select" onChange={handleTagChange} name="tag" id="tag" value={tag}>
                 <option value="">Choose a tag:</option>
                 <option value="food">Food</option>
-                <option value="fitness">Fitness</option>
-                <option value="anti-stress">Anti-stress tips</option>
+                <option value="exercise">Exercise</option>
+                <option value="rest">Rest</option>
+                <option value="mental-health">Mental health</option>
+                <option value="others">Others</option>
             </select>
         </div>
     );
