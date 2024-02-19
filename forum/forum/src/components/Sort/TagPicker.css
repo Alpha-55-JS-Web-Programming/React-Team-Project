@@ -1,4 +1,4 @@
-.sort-container {
+.tag-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
 
 }
 
-.sort-select {
+.tag-select {
   width: 200px;
   padding: 10px;
   font-size: 16px;
@@ -18,7 +18,7 @@
   border-radius: 20px;
 }
 
-.sort-select:hover {
+.tag-select:hover {
   border-color: #000000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

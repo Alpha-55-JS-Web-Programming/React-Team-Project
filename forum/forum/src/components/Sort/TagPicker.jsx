@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import './SortTags.css';
+import './TagPicker.css';
 
-export default function SortTags({ onSortChange }) {
+export default function TagPicker({ onTagChange }) {
     const [tag, setTag] = useState('');
 
     const handleTagChange = (e) => {
         const selectedTag = e.target.value;
         setTag(selectedTag);
-        onSortChange(selectedTag);
+        onTagChange(selectedTag);
     };
 
     return (
-        <div className="sort-container">
-            <select className="sort-select" onChange={handleTagChange} name="tag" id="tag" value={tag}>
+        <div className="tag-container">
+            <select className="tag-select" onChange={handleTagChange} name="tag" id="tag" value={tag}>
                 <option value="">Choose a tag:</option>
                 <option value="food">Food</option>
                 <option value="fitness">Fitness</option>

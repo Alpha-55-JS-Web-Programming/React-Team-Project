@@ -3,7 +3,7 @@ import Button from '../../components/Button/Button';
 import { addPost } from '../../services/post.services';
 import { AppContext } from '../../Context/AppContext';
 import './CreatePost.css';
-import SortTags from '../../components/Sort/SortTags';
+import TagPicker from '../../components/Sort/TagPicker';
 
 export default function CreatePost() {
   const { user, userData } = useContext(AppContext);
@@ -56,7 +56,7 @@ export default function CreatePost() {
           <label htmlFor="input-content" className="label-css">Content:</label><br />
           <textarea value={post.content} onChange={(e) => updatePost(e.target.value, 'content')} name="input-content" id="input-content" cols="30" rows="10"></textarea><br /><br />
           <label>Tags:</label>
-          <SortTags onSortChange={handleTagChange} /><br />
+          <TagPicker onTagChange={handleTagChange} /><br />
           <Button onClick={createPost} className="button">Create</Button>
         </div>
       )}
