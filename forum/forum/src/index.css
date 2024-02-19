@@ -57,7 +57,7 @@ body {
   align-items: center;
   min-height: 100vh;
   min-width: 320px;
-  background-image: url('../src/img/istockphoto.jpg');
+  /* background-image: url('../src/img/istockphoto.jpg'); */
   background-size: cover;
   background-position: center;
 }
