@@ -5,6 +5,8 @@ import {getUsers, getAllPosts, dislikePost, likePost} from "../../services/post.
 import { AppContext } from "../../Context/AppContext";
 import Sort from "../../components/Sort/Sort";
 import "./AllPosts.css";
+import { getUsersCount } from "../../services/users.service";
+import { getPostsCount } from "../../services/post.services";
 
 export default function AllPosts() {
   const { userData } = useContext(AppContext);
@@ -15,7 +17,13 @@ export default function AllPosts() {
   const [sortedPosts, setSortedPosts] = useState([]);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const [usersCount, setUsersCount] = useState(0);
+  const [postsCount, setPostsCount] = useState(0);
 
+  useEffect(() => {
+    getUsersCount().then((count) => setUsersCount(count));
+    getPostsCount().then((count) => setPostsCount(count));
+  }, []);
   useEffect(() => {
     loadPosts();
   }, []);
@@ -139,8 +147,13 @@ export default function AllPosts() {
 
   return (
     <>
+          <div >
+        <title>{(document.title = "Home")}</title>
+        <h1 className="home">Home</h1>
+        
+      </div>
       <div>
-        <h1 className="all-postsi-title">All posts</h1>
+        {/* <h1 className="all-postsi-title">All posts</h1> */}
         <div className="sort-search-container">
           <Sort onSortChange={sortPosts} className="sort" />
           <div className="search-bar">
@@ -149,13 +162,10 @@ export default function AllPosts() {
           </div>
         </div>
 
-        <div className="tags-container">
-          {tags.map((tag, i) => (
-            <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
-          ))}
-        </div>
+        
 
         <div className="all-posts">
+          
           {sortedPosts.map((post) => (
             <div className="post-id">
 
@@ -187,6 +197,18 @@ export default function AllPosts() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="together">
+        <section className="usersCount">
+          <p>{`Number of users: ${usersCount}`}</p>
+          <p>{`Number of posts: ${postsCount}`}</p>
+          <br /><br />
+        </section>
+        <div className="tags-container">
+          {tags.map((tag, i) => (
+            <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
+          ))}
+        </div>
         </div>
       </div>
     </>
