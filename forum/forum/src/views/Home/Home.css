@@ -77,17 +77,14 @@ margin: 0 10px;
   justify-content: space-between;
   height: 50px;
   margin-bottom: 20px;
-  display: flex;
-  margin-right: 350px;
+  margin-right: 20%;
 }
 
 .search-bar {
-  height: 50px;
   display: flex;
   border: 1px solid #bdc3c7;
   border-radius: 30px;
   padding: 10px;
-  padding-bottom: 1px;
   background-color: #f4f4f4;
 }
 
@@ -96,7 +93,6 @@ margin: 0 10px;
   border: none;
   background: transparent;
   box-shadow: none;
-  height: 90%;
 }
 
 .search-bar:hover {
