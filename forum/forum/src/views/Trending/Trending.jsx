@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { getTopCommentedPosts, getMostRecentPosts } from '../../services/post.services';
+import { getTopCommentedPosts, getMostRecentPosts, dislikePost, likePost, getUsers } from '../../services/post.services';
 import { useNavigate } from 'react-router-dom';
 import './Trending.css';
-import { dislikePost, likePost } from '../../services/post.services';
 import { AppContext } from "../../Context/AppContext";
 
 
 const Trending = () => {
   const [topCommentedPosts, setTopCommentedPosts] = useState([]);
   const [mostRecentPosts, setMostRecentPosts] = useState([]);
+  const [authors, setAuthors] = useState({});
   const navigate = useNavigate();
   const { userData } = useContext(AppContext);
 
@@ -28,6 +28,16 @@ const Trending = () => {
     fetchTopCommentedPosts();
     fetchMostRecentPosts();
   }, []);
+
+  useEffect(() => {
+    getUsers([...topCommentedPosts, ...mostRecentPosts].map(p => p.author)).then(authors => {
+      setAuthors((prevAuthors) => ({ ...prevAuthors, ...authors }))
+    }).catch(console.error)
+  }, [topCommentedPosts, mostRecentPosts]);
+
+  // useEffect(() => {
+  //   console.log('authors', authors);
+  // }, [authors]);
 
   const togglePostLike = async (handle, postId) => {
     const updatePostLikes = async (postsState, setPostsState) => {
@@ -70,6 +80,9 @@ const Trending = () => {
     <div key={post.id} className="all-posts">
       <div className="post-id">
         <div className="post-header">
+          {authors[post.author]?.image ? (
+            <img className="post-author-avatar" src={authors[post.author].image} />
+          ) : null}
           <h2 className="post-author">{post.author}</h2>
           <p className="post-created">{post.createdOnReadable}</p>
           <br />
@@ -99,24 +112,24 @@ const Trending = () => {
 
   return (
     <>
-    <div className="all-trending">
-      <div className="first">
-        <h2 className="most-commented">Top 10 Most Commented Posts</h2>
-        {topCommentedPosts.map(post => (
-          <React.Fragment key={post.id}>
-            {renderPost(post)}
-          </React.Fragment>
-        ))}
+      <div className="all-trending">
+        <div className="first">
+          <h2 className="most-commented">Top 10 Most Commented Posts</h2>
+          {topCommentedPosts.map(post => (
+            <React.Fragment key={post.id}>
+              {renderPost(post)}
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="second">
+          <h2 className="most-recently">10 Most Recently Created Posts</h2>
+          {mostRecentPosts.map(post => (
+            <React.Fragment key={post.id}>
+              {renderPost(post)}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
-      <div className="second">
-        <h2 className="most-recently">10 Most Recently Created Posts</h2>
-        {mostRecentPosts.map(post => (
-          <React.Fragment key={post.id}>
-            {renderPost(post)}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
     </>
   );
 };
