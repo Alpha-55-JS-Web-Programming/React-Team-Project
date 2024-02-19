@@ -107,7 +107,7 @@ export default function ProfileInformation() {
       </div>
       <div className="infoMain">
         {!isEditing && (
-          <div>
+          <div className="info-about-user">
             <img src={form.image} alt="Profile" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
             <p><strong>Full name:</strong> {userData.FullName}</p>
             <p><strong>Handle:</strong> {userData.handle}</p>
@@ -120,8 +120,8 @@ export default function ProfileInformation() {
           <form>
             <label htmlFor="image">Image: </label>
             <br />
-            <div class="file-input-container">
-              <span class="file-input-button">Browse...</span>
+            <div className="file-input-container">
+              <span className="file-input-button">Browse...</span>
               <input onChange={handleFileChange} type="file" accept="image/*" name="image" id="image" />
             </div>
             <br />
@@ -151,7 +151,7 @@ export default function ProfileInformation() {
         ))}
       </div>
       <br /> <br /> <br />
-      <Button className='button-logout' onClick={logout}>Logout</Button>
+      <button className='button-logout' onClick={logout}>Logout</button>
     </div>
   );
 }
