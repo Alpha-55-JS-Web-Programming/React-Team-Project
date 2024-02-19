@@ -65,8 +65,8 @@ margin: 0 10px;
 }
 .together p {
   text-align: center;
-  margin: 0 ; 
-  padding: 10px 0; 
+  margin: 0 ;
+  padding: 10px 0;
   font-size: 25px;
   font-family: 'Arial';
   font-style: italic;
@@ -120,13 +120,13 @@ margin: 0 10px;
   align-items: center;
   padding: 20px;
   margin: 0 auto;
-  width: 1200px;
+  width: 100%;
   float: left;
 }
 .usersCount {
   float: right;
-
 }
+
 .post-id {
   width: 100%;
   background-color: #fff;
