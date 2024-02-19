@@ -104,7 +104,7 @@ export default function Admin() {
 
           <div className="adminMain">
             <label htmlFor="search" className="admin-search">Search </label>
-            <input value={search} onChange={handleSearchChange} type="text" name="search" id="search" className="admin-search-bar" />
+            <input value={search} placeholder="Search" onChange={handleSearchChange} type="text" name="search" id="search" className="admin-search-bar" />
 
             {users.length > 0 &&
               users.map((user) => (
