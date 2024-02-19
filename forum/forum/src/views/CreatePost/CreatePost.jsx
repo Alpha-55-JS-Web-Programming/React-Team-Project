@@ -50,7 +50,7 @@ export default function CreatePost() {
         <h3>You don't have permission to access this page.</h3>
       ) : (
         <div className="create-post-container">
-          <h1 className="h1">Create post</h1>
+          <h1 className="cerate-post">Create post</h1>
           <label htmlFor="input-title">Title:</label>
           <input value={post.title} onChange={(e) => updatePost(e.target.value, 'title')} type="text" name="input-title" id="input-title" /><br />
           <label htmlFor="input-content" className="label-css">Content:</label><br />

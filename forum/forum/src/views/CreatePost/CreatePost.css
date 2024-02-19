@@ -1,58 +1,58 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1, h3, label {
+  color: #333;
+}
+
+/* Container Styles */
 .create-post-container {
-  max-width: 600px;
-  margin: 20px auto;
+  width: 50%;
+  margin: 0 auto;
   padding: 20px;
-  border: 1px solid #48C9B0;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(241, 241, 241, 0.1);
-  background-color: #FAF9F6;
-  transition: all 0.3s ease;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  animation: slideIn 1s ease;
 }
 
-.h1 {
-  color: #0b0b0b;
-}
-
-.label-css {
-  display: block;
-  margin-bottom: 5px;
-  color: #020202;
-}
-
-input,
-textarea {
+/* Input Styles */
+input, textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #AED6F1;
-  border-radius: 6px;
-  background-color: #FEF5E7;
-  color: #0E6251;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
 }
 
+/* Button Styles */
 .button {
-  background-color: #58D68D;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: #FFFFFF;
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {
-  background-color: #45B39D;
-  transform: scale(1.05);
+  background-color: #45a049;
 }
 
-@media (max-width: 768px) {
-  .create-post-container {
-    padding: 15px;
+/* Animations */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
   }
-}
-
-input:focus,
-textarea:focus {
-  border-color: #3498DB;
-  box-shadow: 0 0 8px rgba(246, 246, 247, 0.5);
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

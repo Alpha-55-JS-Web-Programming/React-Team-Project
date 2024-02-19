@@ -96,6 +96,7 @@ const Trending = () => {
 
   return (
     <>
+    <div className="all-trending">
       <div className="first">
         <h2 className="most-commented">Top 10 Most Commented Posts</h2>
         {topCommentedPosts.map(post => (
@@ -112,6 +113,7 @@ const Trending = () => {
           </React.Fragment>
         ))}
       </div>
+    </div>
     </>
   );
 };
