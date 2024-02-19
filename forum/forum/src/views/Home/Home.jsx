@@ -184,7 +184,7 @@ export default function Home() {
 
               <div className="post-body">
                <h3 className="post-title">{post.title}</h3>
-               <p className="post-content"><strong>Context:</strong> {post.content}</p>
+               <p className="post-content">{post.content}</p>
               </div>
 
               <div className="post-actions">
