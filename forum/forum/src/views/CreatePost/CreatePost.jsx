@@ -31,8 +31,8 @@ export default function CreatePost() {
     if (post.title.length < 3) {
       return alert('Title must be at least 3 characters long');
     }
-    if (post.content.length < 5 || post.content.length > 3000) {
-      return alert('Content must be at least 5 characters long and maximum 3000 characters long');
+    if (post.content.length < 5 || post.content.length > 10000) {
+      return alert('Content must be at least 5 characters long and maximum 10000 characters long');
     }
 
     await addPost(userData?.handle ?? 'test-user-id', post.title, post.content, post.tags);
