@@ -14,11 +14,11 @@ export default function TagPicker({ onTagChange }) {
         <div className="tag-container">
             <select className="tag-select" onChange={handleTagChange} name="tag" id="tag" value={tag}>
                 <option value="">Choose a tag:</option>
-                <option value="food">Nutrition and Diet</option>
-                <option value="exercise">Physical Fitness</option>
-                <option value="rest">Mental Well-being</option>
-                <option value="mental-health">Lifestyle and Habits</option>
-                <option value="mental-health">Holistic Health</option>
+                <option value="nutrition-and-diet">Nutrition and Diet</option>
+                <option value="physical-fitness">Physical Fitness</option>
+                <option value="mental-well-being">Mental Well-being</option>
+                <option value="lifestyle-and-habits">Lifestyle and Habits</option>
+                <option value="holistic-health">Holistic Health</option>
             </select>
         </div>
     );
