@@ -182,12 +182,9 @@ export default function Home() {
 
         <div className="all-posts">
           {sortedPosts.map((post) => (
-            <div className="post-id">
+            <div key={post.id} className="post-id">
 
               <div className="post-header">
-                {/* {authors[post.author]?.image ? (
-                  <img className="post-author-avatar" src={authors[post.author].image} />
-                ) : null} */}
                 <img className="post-author-avatar" src={authors[post.author]?.image ?? 'assets/default.png'} />
                 <h2 className="post-author">{post.author}</h2>
                 <p className="post-created">{post.createdOnReadable}</p>
@@ -199,15 +196,13 @@ export default function Home() {
 
               <div className="post-body">
                 <h3 className="post-title">{post.title}</h3>
-                {/* <p className="post-content">{post.content}</p> */}
                 <p className="post-content">{post.content.length > 250 ? post.content.slice(0, 250) + '...' : post.content}</p>
-
               </div>
 
               <div className="post-actions">
                 <div className="like-section">
                   <span className="material-symbols-outlined thumb-icon" onClick={() => togglePostLike(userData.handle, post.id)}>
-                    {" "}thumb_up{" "} <span className="like-count"> {" "} {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
+                    thumb_up <span className="like-count"> {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
                   </span>
                 </div>
                 <button onClick={() => navigate(`/posts/${post.id}`)} className="button-details"> Details </button>
