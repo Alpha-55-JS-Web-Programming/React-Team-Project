@@ -152,14 +152,11 @@ export const getMostRecentPosts = async () => {
   const posts = Object.keys(snapshot.val())
     .map(key => ({
       id: key,
-      createdOn: new Date(snapshot.val()[key].createdOn).getTime(),
-      likedBy: snapshot.val()[key].likedBy || [],
-      comments: snapshot.val()[key].comments || [],
+      createdOn: new Date(snapshot.val()[key].createdOnReadable).getTime(), // Use createdOnReadable or a consistent timestamp
       ...snapshot.val()[key],
     }))
-    .sort((a, b) => b.createdOn - a.createdOn)
-    .slice(0, 10)
-    .reverse();
+    .sort((a, b) => b.createdOn - a.createdOn) // Correctly sort in descending order
+    .slice(0, 10); // Get top 10 without reversing
 
   return posts;
 };
