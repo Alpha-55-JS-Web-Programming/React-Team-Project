@@ -30,11 +30,9 @@
 margin-bottom: 0;
 padding-bottom: 0;
 }
-.file-input-container {
+/* .file-input-container {
   position: relative;
   overflow: hidden;
-  /* display: inline-block; */
-  /* background-color: brown; */
 }
 
 .file-input-container input[type="file"] {
@@ -52,7 +50,7 @@ padding-bottom: 0;
   padding: 10px 20px;
   cursor: pointer;
   display: inline-block;
-}
+} */
 
 .button-logout {
   /* max-width: 25%; */
