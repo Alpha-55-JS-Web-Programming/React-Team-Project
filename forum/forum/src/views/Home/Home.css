@@ -5,18 +5,15 @@
 
 .tags-container {
   display: flex;
-  margin-left: 20px;
-  margin-right: 20px;
-  justify-content: flex-start;
-  gap: 10px;
-  background-color: #fffdfd;
-  padding: 20px;
+  flex-wrap: wrap; /* Ensures items can wrap onto the next line */
+  gap: 10px; /* Space between items */
+  padding: 10px; /* Consistent padding */
+  margin: 0 20px; /* Horizontal margin */
   border: 2px solid #ddd;
   border-radius: 10px;
+  background-color: #fffdfd;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px 10px;
+  width: 75%;
 }
 
 .tag {
