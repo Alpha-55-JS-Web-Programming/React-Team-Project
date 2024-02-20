@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import { addPost } from '../../services/post.services';
 import { AppContext } from '../../Context/AppContext';
@@ -12,6 +12,7 @@ export default function CreatePost() {
     content: '',
     tags: [],
   });
+  const [selectedTag, setSelectedTag] = useState('')
 
   const updatePost = (value, key) => {
     setPost({
@@ -21,6 +22,7 @@ export default function CreatePost() {
   };
 
   const handleTagChange = (selectedTag) => {
+    setSelectedTag(selectedTag); // Update to manage the selected tag from the state
     setPost({
       ...post,
       tags: selectedTag ? [selectedTag] : [],
@@ -42,6 +44,7 @@ export default function CreatePost() {
       content: '',
       tags: [],
     });
+    setSelectedTag('');
   };
 
   return (
@@ -56,7 +59,7 @@ export default function CreatePost() {
           <label htmlFor="input-content" className="label-css">Content:</label><br />
           <textarea value={post.content} onChange={(e) => updatePost(e.target.value, 'content')} name="input-content" id="input-content" cols="30" rows="10"></textarea><br /><br />
           <label>Tags:</label>
-          <TagPicker onTagChange={handleTagChange} /><br />
+          <TagPicker onTagChange={handleTagChange} selectedTag={selectedTag} /><br />
           <Button onClick={createPost} className="button">Create</Button>
         </div>
       )}

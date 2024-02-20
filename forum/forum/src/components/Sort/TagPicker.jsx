@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TagPicker.css';
 
-export default function TagPicker({ onTagChange }) {
+export default function TagPicker({ onTagChange, selectedTag }) {
     const [tag, setTag] = useState('');
+
+    // Update to useEffect to synchronize tag state with prop
+    useEffect(() => {
+        setTag(selectedTag);
+    }, [selectedTag]);
 
     const handleTagChange = (e) => {
         const selectedTag = e.target.value;
