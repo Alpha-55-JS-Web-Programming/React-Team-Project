@@ -84,6 +84,7 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
       <p className="post-meta"> Posted by: {post.authorDetails?.handle || "Unknown"} |  Date:{" "} {new Date(post.createdOnReadable).toLocaleDateString("bg-BG")} </p>
       <Button onClick={() => togglePostLike(userData.handle, post.id)}> {post.likedBy.includes(userData.handle) ? "Dislike" : "Like"} </Button>
       <div className="comment-section">
+      <p>Likes: {post.likedBy.length}</p>
         <div>
           {userData.isBlocked ? (
             <h3>You don't have permission to comment.</h3>
@@ -115,7 +116,7 @@ export default function PostDetails({ post, togglePostLike, updatePost }) {
           </div>
         ))}
       </div>
-      <p>Likes: {post.likedBy.length}</p>
+
       <div className="button-group">
         <Button onClick={handleBack}>Back</Button>
         {(userData.handle === post.author || userData.role === "admin") && (

@@ -7,8 +7,8 @@ body {
 
 /* Post Details Container */
 .post-details {
-    width: 40%;
-    margin: 0 auto;
+    width: 80%;
+    margin: 30px auto 20px auto;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     border-radius: 10px;
@@ -21,7 +21,7 @@ body {
 }
 
 /* Textarea for editing and commenting */
-textarea {
+.comment-section textarea {
     width: 100%; /* Adjusted for better fit in container */
     padding: 10px;
     margin-top: 10px;
@@ -60,8 +60,15 @@ textarea {
 
 .comment-item {
     margin-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 16px; 
+    transition: font-size 0.3s;
 }
 
+.comment-item:hover {
+    font-size: 20px;
+}
 /* Animation */
 @keyframes slideIn {
     0% {
@@ -77,4 +84,8 @@ textarea {
 /* Additional styles for the button group at the bottom */
 .button-group {
     margin-top: 20px;
+}
+
+.post-details > textarea:nth-child(2) {
+    min-height: 200px;
 }
