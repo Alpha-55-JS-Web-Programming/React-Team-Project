@@ -105,7 +105,9 @@ const Trending = () => {
               {" "}thumb_up{" "} <span className="like-count"> {" "} {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
             </span>
           </div>
-          <button onClick={() => navigate(`/posts/${post.id}`, { state: { from: 'trending' } })} className="button-details"> Details </button>
+          {/* <button onClick={() => navigate(`/posts/${post.id}`, { state: { from: 'trending' } })} className="button-details"> Details </button> */}
+          {userData ? <button onClick={() => navigate(`/posts/${post.id}`, { state: { from: 'trending' } })} className="button-details"> Details </button> : <button onClick={() => navigate(`/login`)} className="button-details"> Details </button>}
+
         </div>
       </div>
     </div>
