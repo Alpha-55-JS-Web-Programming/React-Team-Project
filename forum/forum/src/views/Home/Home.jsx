@@ -146,6 +146,14 @@ export default function Home() {
     setTags(updatedTags);
   };
 
+  const formatTagName = (tagName) => {
+    return tagName
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+
   return (
     <>
       <div className="content">
@@ -153,7 +161,6 @@ export default function Home() {
           <title>{(document.title = "Home")}</title>
           <h1 className="home">Home</h1>
         </div>
-        {/* <h1 className="all-postsi-title">All posts</h1> */}
 
         <div className="sort-search-container">
           <Sort onSortChange={sortPosts} className="sort" />
@@ -174,7 +181,9 @@ export default function Home() {
             <p>Tags: </p>
             <div className="tags-container">
               {tags.map((tag, i) => (
-                <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>{tag.name}</span>
+                <span key={`tag-${i}`} className={`tag ${tag.selected ? "selected" : ""}`} onClick={() => handleTagSelect(tag)}>
+                  {formatTagName(tag.name)}
+                </span>
               ))}
             </div>
           </div>
