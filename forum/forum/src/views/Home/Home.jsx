@@ -19,6 +19,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [usersCount, setUsersCount] = useState(0);
   const [postsCount, setPostsCount] = useState(0);
+  const [currentSortCriterion, setCurrentSortCriterion] = useState('choose-sort');
 
   useEffect(() => {
     getUsersCount().then((count) => setUsersCount(count));
@@ -36,7 +37,7 @@ export default function Home() {
 
   useEffect(() => {
     applyPostsFilter();
-  }, [posts, search, tags]);
+  }, [posts, search, tags, currentSortCriterion]);
 
   const loadPosts = async () => {
     try {
@@ -65,37 +66,38 @@ export default function Home() {
         post.tags?.some((t) => selectedTagNames.includes(t));
       return searchCriterion && tagsCriterion;
     });
-    setSortedPosts(filteredPosts);
-  };
 
-  const sortPosts = (sortBy) => {
-    console.log({ posts });
-
-    let sorted;
-    switch (sortBy) {
+    let sorted = [...filteredPosts];
+    switch (currentSortCriterion) {
       case "choose-sort":
-        return setSortedPosts(posts);
+        return setSortedPosts(filteredPosts);
       case "most-liked":
-        sorted = [...posts].sort((a, b) => b.likedBy.length - a.likedBy.length);
+        sorted = [...filteredPosts].sort((a, b) => b.likedBy.length - a.likedBy.length);
         return setSortedPosts(sorted);
       case "most-commented":
-        sorted = Object.keys(posts).sort((a, b) => {
-          const commentsA = posts[a].comments
-            ? Object.keys(posts[a].comments).length
+        sorted = Object.keys(filteredPosts).sort((a, b) => {
+          const commentsA = filteredPosts[a].comments
+            ? Object.keys(filteredPosts[a].comments).length
             : 0;
-          const commentsB = posts[b].comments
-            ? Object.keys(posts[b].comments).length
+          const commentsB = filteredPosts[b].comments
+            ? Object.keys(filteredPosts[b].comments).length
             : 0;
           return commentsB - commentsA;
         });
-        return setSortedPosts(sorted.map((postKey) => posts[postKey]));
+        return setSortedPosts(sorted.map((postKey) => filteredPosts[postKey]));
       case "newest":
-        sorted = [...posts].sort(
+        sorted = [...filteredPosts].sort(
           (a, b) =>
             new Date(b.createdOnReadable) - new Date(a.createdOnReadable)
         );
         return setSortedPosts(sorted);
     }
+
+    setSortedPosts(filteredPosts);
+  };
+
+  const sortPosts = (sortBy) => {
+    setCurrentSortCriterion(sortBy);
   };
 
   const handleSearchChange = (e) => {
@@ -214,7 +216,7 @@ export default function Home() {
                     thumb_up <span className="like-count"> {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
                   </span>
                 </div>
-               {userData ? <button onClick={() => navigate(`/posts/${post.id}`)} className="button-details"> Details </button> : <button onClick={() => navigate(`/login`)} className="button-details"> Details </button>}
+                {userData ? <button onClick={() => navigate(`/posts/${post.id}`)} className="button-details"> Details </button> : <button onClick={() => navigate(`/login`)} className="button-details"> Details </button>}
               </div>
             </div>
           ))}
