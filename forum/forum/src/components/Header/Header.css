@@ -11,10 +11,6 @@
   transition: all 0.3s ease;
   z-index: 1000;
 }
-/* 
-.sticky-header button {
-  margin: 0 10px;
-} */
 
 .header-main {
   width: 100%;

@@ -152,11 +152,11 @@ export const getMostRecentPosts = async () => {
   const posts = Object.keys(snapshot.val())
     .map(key => ({
       id: key,
-      createdOn: new Date(snapshot.val()[key].createdOnReadable).getTime(), // Use createdOnReadable or a consistent timestamp
+      createdOn: new Date(snapshot.val()[key].createdOnReadable).getTime(),
       ...snapshot.val()[key],
     }))
-    .sort((a, b) => b.createdOn - a.createdOn) // Correctly sort in descending order
-    .slice(0, 10); // Get top 10 without reversing
+    .sort((a, b) => b.createdOn - a.createdOn)
+    .slice(0, 10);
 
   return posts;
 };

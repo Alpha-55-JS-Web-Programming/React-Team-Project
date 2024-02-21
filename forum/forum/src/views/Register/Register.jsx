@@ -2,9 +2,8 @@ import { useContext, useState } from "react";
 import { registerUser } from "../../services/auth.service";
 import { createUserProfile, getUserByHandle } from "../../services/users.service";
 import { AppContext } from "../../Context/AppContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Register.css";
-import { Link } from "react-router-dom";
 import phone from "../../../assets/phone.svg";
 
 export default function Register() {

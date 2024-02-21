@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { getUsers, getAllPosts, dislikePost, likePost } from "../../services/post.services";
+import { getUsers, getAllPosts, dislikePost, likePost, getPostsCount } from "../../services/post.services";
 import { AppContext } from "../../Context/AppContext";
 import Sort from "../../components/Sort/Sort";
 import "./Home.css";
 import { getUsersCount } from "../../services/users.service";
-import { getPostsCount } from "../../services/post.services";
 
 export default function Home() {
   const { userData } = useContext(AppContext);
@@ -107,11 +106,11 @@ export default function Home() {
   };
 
   const updateTags = () => {
-    const uniqueTagNames = [ ...new Set(posts.flatMap((post) => post.tags ?? []).filter(Boolean)) ];
+    const uniqueTagNames = [...new Set(posts.flatMap((post) => post.tags ?? []).filter(Boolean))];
     setTags((prevTags) => {
       const prevTagNames = prevTags.map(t => t.name);
       const newTagNames = uniqueTagNames.filter(newTagName => !prevTagNames.includes(newTagName));
-      const newTags = newTagNames.map(name => ({name, selected: false}));
+      const newTags = newTagNames.map(name => ({ name, selected: false }));
       return [...prevTags, ...newTags]
     });
   };

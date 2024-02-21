@@ -6,10 +6,10 @@
 
 .tags-container {
   display: flex;
-  flex-wrap: wrap; /* Ensures items can wrap onto the next line */
-  gap: 10px; /* Space between items */
-  padding: 10px; /* Consistent padding */
-  margin: 0 20px; /* Horizontal margin */
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  margin: 0 20px;
   border: 2px solid #ddd;
   border-radius: 10px;
   background-color: #fffdfd;
@@ -41,8 +41,9 @@
 }
 
 .post-tags strong {
-margin: 0 10px;
+  margin: 0 10px;
 }
+
 .home {
   text-align: center;
   font-size: 4em;
@@ -69,7 +70,7 @@ margin: 0 10px;
 
 .together p {
   text-align: center;
-  margin: 0 ;
+  margin: 0;
   padding: 10px 0;
   font-size: 25px;
   font-family: 'Arial';
@@ -133,6 +134,7 @@ margin: 0 10px;
   width: 100%;
   float: left;
 }
+
 .usersCount {
   float: right;
 }
@@ -255,9 +257,17 @@ margin: 0 10px;
 }
 
 @keyframes backgroundPulse {
-  0% { background-color: #ffffff; }
-  50% { background-color: #f0f0f0; }
-  100% { background-color: #ffffff; }
+  0% {
+    background-color: #ffffff;
+  }
+
+  50% {
+    background-color: #f0f0f0;
+  }
+
+  100% {
+    background-color: #ffffff;
+  }
 }
 
 .usersCount {

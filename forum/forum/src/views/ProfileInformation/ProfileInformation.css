@@ -1,16 +1,10 @@
 .infoAll {
-  /* display: flex;
-  flex-direction: column; */
   height: 100%;
   min-height: 100vh;
 }
 
 .infoHeader {
   margin-bottom: 40px;
-}
-
-.infoMain {
-  /* flex: 0.5; */
 }
 
 .info-about-user p {
@@ -26,35 +20,10 @@
   width: 300px;
   margin-top: 0;
 }
+
 .infoMain form label {
-margin-bottom: 0;
-padding-bottom: 0;
-}
-/* .file-input-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.file-input-container input[type="file"] {
-  position: absolute;
-  font-size: 20px;
-  opacity: 0;
-  right: 0;
-  top: 0;
-}
-
-.file-input-button {
-  background-color: #007bffc9;
-  border-radius: 50px;
-  color: #fff;
-  padding: 10px 20px;
-  cursor: pointer;
-  display: inline-block;
-} */
-
-.button-logout {
-  /* max-width: 25%; */
-  /* margin-left: 35%; */
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .info-about-user img {

@@ -1,13 +1,12 @@
-/* General Styles */
 body {
   font-family: Arial, sans-serif;
 }
+
 .all-create-post{
   padding: 85px;
   margin: 0 auto;
 }
 
-/* Container Styles */
 .create-post-container {
   width: 40%;
   margin: 0 auto;
@@ -17,7 +16,6 @@ body {
   animation: slideIn 1s ease;
 }
 
-/* Input Styles */
 input, textarea {
   width: 60%;
   padding: 10px;
@@ -27,7 +25,6 @@ input, textarea {
   box-sizing: border-box;
 }
 
-/* Button Styles */
 .button {
   background-color: #4CAF50;
   color: white;
@@ -45,7 +42,6 @@ input, textarea {
   background-color: #45a049;
 }
 
-/* Animations */
 @keyframes slideIn {
   0% {
     opacity: 0;

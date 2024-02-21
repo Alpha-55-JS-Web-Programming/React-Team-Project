@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import './Trending.css';
 import { AppContext } from "../../Context/AppContext";
 
-
 const Trending = () => {
   const [topCommentedPosts, setTopCommentedPosts] = useState([]);
   const [mostRecentPosts, setMostRecentPosts] = useState([]);
@@ -34,10 +33,6 @@ const Trending = () => {
       setAuthors((prevAuthors) => ({ ...prevAuthors, ...authors }))
     }).catch(console.error)
   }, [topCommentedPosts, mostRecentPosts]);
-
-  // useEffect(() => {
-  //   console.log('authors', authors);
-  // }, [authors]);
 
   const togglePostLike = async (handle, postId) => {
     const updatePostLikes = async (postsState, setPostsState) => {
@@ -80,9 +75,6 @@ const Trending = () => {
     <div key={post.id} className="all-posts">
       <div className="post-id">
         <div className="post-header">
-          {/* {authors[post.author]?.image ? (
-            <img className="post-author-avatar" src={authors[post.author].image} />
-          ) : null} */}
           <img className="post-author-avatar" src={authors[post.author]?.image ?? 'assets/default.png'} />
           <h2 className="post-author">{post.author}</h2>
           <p className="post-created">{post.createdOnReadable}</p>
@@ -94,7 +86,6 @@ const Trending = () => {
 
         <div className="post-body">
           <h3 className="post-title">{post.title}</h3>
-          {/* <p className="post-content"><strong>Context:</strong> {post.content}</p> */}
           <p className="post-content">{post.content.length > 250 ? post.content.slice(0, 250) + '...' : post.content}</p>
 
         </div>
@@ -105,9 +96,7 @@ const Trending = () => {
               {" "}thumb_up{" "} <span className="like-count"> {" "} {post.likedBy ? Object.keys(post.likedBy).length : 0} </span>
             </span>
           </div>
-          {/* <button onClick={() => navigate(`/posts/${post.id}`, { state: { from: 'trending' } })} className="button-details"> Details </button> */}
           {userData ? <button onClick={() => navigate(`/posts/${post.id}`, { state: { from: 'trending' } })} className="button-details"> Details </button> : <button onClick={() => navigate(`/login`)} className="button-details"> Details </button>}
-
         </div>
       </div>
     </div>

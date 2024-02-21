@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPostById } from "../../services/post.services";
+import { getPostById, likePost, dislikePost } from "../../services/post.services";
 import PostDetails from "./PostDetails";
-import { likePost, dislikePost } from "../../services/post.services";
 import "./PostDetails.css";
 
 export default function SinglePost() {

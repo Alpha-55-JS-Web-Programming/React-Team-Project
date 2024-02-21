@@ -21,8 +21,6 @@ import Admin from "./views/Admin/Admin";
 import Health from "./views/HealthAndWellness/Health";
 import Wellness from "./views/HealthAndWellness/Wellness";
 import ProfileUpdate from "./views/ProfileInformation/ProfileUpdate";
-import { ref, get, query } from 'firebase/database';
-import { db } from './config/firebase-config'; // for dev purposes
 import TopBarProgress from 'react-topbar-progress-indicator';
 
 
@@ -75,7 +73,6 @@ function App() {
 
 export default App;
 
-
 function LoadRoutes({ children }) {
   const [progress, setProgress] = useState(false);
   const [prevLoc, setPrevLoc] = useState('');
@@ -89,7 +86,6 @@ function LoadRoutes({ children }) {
     shadowBlur: 0
   });
   useEffect(() => {
-    // console.log(location.pathname, prevLoc);
     setPrevLoc(location.pathname);
     setProgress(true);
     if (location.pathname === prevLoc) {
@@ -98,7 +94,6 @@ function LoadRoutes({ children }) {
   }, [location]);
 
   useEffect(() => {
-    // console.log('progress', progress);
     setProgress(false);
   }, [prevLoc]);
   return (

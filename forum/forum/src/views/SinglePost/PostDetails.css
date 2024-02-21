@@ -1,28 +1,24 @@
-/* PostDetails.css: Styling for Post Details View */
-
-/* General Styles, mirroring CreatePost.css */
 body {
     font-family: Arial, sans-serif;
 }
 
-/* Post Details Container */
 .post-details {
     width: 80%;
     margin: 30px auto 20px auto;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     animation: slideIn 1s ease;
 }
 
-/* Typography */
-.post-details-title, .post-content, .post-meta {
+.post-details-title,
+.post-content,
+.post-meta {
     margin-bottom: 20px;
 }
 
-/* Textarea for editing and commenting */
 .comment-section textarea {
-    width: 100%; /* Adjusted for better fit in container */
+    width: 100%;
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
@@ -30,7 +26,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Button Styles, consistent with CreatePost */
 .button {
     background-color: #4CAF50;
     color: white;
@@ -47,14 +42,13 @@ body {
     background-color: #45a049;
 }
 
-/* Success message styling */
 .success-message {
     color: green;
     margin-bottom: 15px;
 }
 
-/* Comments list */
-.comments-list, .post-comments {
+.comments-list,
+.post-comments {
     margin-top: 20px;
 }
 
@@ -62,30 +56,30 @@ body {
     margin-bottom: 10px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
-    font-size: 16px; 
+    font-size: 16px;
     transition: font-size 0.3s;
 }
 
 .comment-item:hover {
     font-size: 20px;
 }
-/* Animation */
+
 @keyframes slideIn {
     0% {
         opacity: 0;
         transform: translateY(-50px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* Additional styles for the button group at the bottom */
 .button-group {
     margin-top: 20px;
 }
 
-.post-details > textarea:nth-child(2) {
+.post-details>textarea:nth-child(2) {
     min-height: 200px;
 }

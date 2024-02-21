@@ -121,7 +121,6 @@ export default function ProfileInformation() {
             <label htmlFor="image">Image: </label>
             <br />
             <div className="file-input-container">
-              {/* <span className="file-input-button">Browse...</span> */}
               <input onChange={handleFileChange} type="file" accept="image/*" name="image" id="image" />
             </div>
             <br />

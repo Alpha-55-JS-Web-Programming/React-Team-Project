@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '../../components/Button/Button';
 import { addPost } from '../../services/post.services';
 import { AppContext } from '../../Context/AppContext';
@@ -22,7 +22,7 @@ export default function CreatePost() {
   };
 
   const handleTagChange = (selectedTag) => {
-    setSelectedTag(selectedTag); // Update to manage the selected tag from the state
+    setSelectedTag(selectedTag);
     setPost({
       ...post,
       tags: selectedTag ? [selectedTag] : [],

@@ -4,7 +4,6 @@ import './TagPicker.css';
 export default function TagPicker({ onTagChange, selectedTag }) {
     const [tag, setTag] = useState('');
 
-    // Update to useEffect to synchronize tag state with prop
     useEffect(() => {
         setTag(selectedTag);
     }, [selectedTag]);
