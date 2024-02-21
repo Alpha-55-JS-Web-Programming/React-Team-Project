@@ -107,11 +107,13 @@ export default function Home() {
   };
 
   const updateTags = () => {
-    const uniqueTagNames = [
-      ...new Set(posts.flatMap((post) => post.tags ?? []).filter(Boolean)),
-    ];
-    const tags = uniqueTagNames.map((name) => ({ name, selected: false }));
-    setTags(tags);
+    const uniqueTagNames = [ ...new Set(posts.flatMap((post) => post.tags ?? []).filter(Boolean)) ];
+    setTags((prevTags) => {
+      const prevTagNames = prevTags.map(t => t.name);
+      const newTagNames = uniqueTagNames.filter(newTagName => !prevTagNames.includes(newTagName));
+      const newTags = newTagNames.map(name => ({name, selected: false}));
+      return [...prevTags, ...newTags]
+    });
   };
 
   const togglePostLike = (handle, postId) => {
