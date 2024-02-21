@@ -114,7 +114,7 @@ export default function Register() {
 
               <div className="login__box-input">
                 <input value={form.handle} onChange={updateForm("handle")} type="text" className="login__input" id="handle" name="handle" required />
-                <label htmlFor="handle" className="login__label"> {" "}Handle:{" "} </label>
+                <label htmlFor="handle" className="login__label"> {" "}Username:{" "} </label>
                 <i className="ri-eye-off-line login__eye" id="login-eye"></i>
               </div>
             </div>
