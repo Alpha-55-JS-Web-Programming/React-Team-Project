@@ -124,14 +124,9 @@ export default function ProfileInformation() {
               <input onChange={handleFileChange} type="file" accept="image/*" name="image" id="image" />
             </div>
             <br />
-
             <label htmlFor="full-name">Full name: </label>
             <br />
             <input value={form.FullName} onChange={updateForm("FullName")} type="text" name="full-name" id="full-name" /><br />
-            <br />
-            <label htmlFor="handle">Handle: </label>
-            <br />
-            <input value={form.handle} onChange={updateForm("handle")} type="text" name="handle" id="handle" /><br />
             <br />
             <label htmlFor="email">Email: </label>
             <br />
