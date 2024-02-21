@@ -47,7 +47,7 @@ a {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url('src/img/login-bg.png');
+  background-image: url('src/img/ist.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -59,7 +59,7 @@ a {
   position: relative;
   height: 100vh;
   width: 100vw;
-  background-image: url('src/img/login-bg.png');
+  background-image: url('src/img/ist.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
