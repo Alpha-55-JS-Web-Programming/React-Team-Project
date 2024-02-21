@@ -110,7 +110,7 @@ export default function ProfileInformation() {
           <div className="info-about-user">
             <img src={form.image} alt="Profile" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
             <p><strong>Full name:</strong> {userData.FullName}</p>
-            <p><strong>Handle:</strong> {userData.handle}</p>
+            <p><strong>Username:</strong> {userData.handle}</p>
             <p><strong>Email:</strong> {userData.email}</p>
             <p><strong>Mobile:</strong> {userData.mobile}</p>
           </div>

@@ -46,7 +46,6 @@ function App() {
       <AppContext.Provider value={{ ...context, setContext }}>
         <Header />
 
-        {/* <Routes> */}
         <LoadRoutes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -60,7 +59,6 @@ function App() {
           <Route path="/update-profile" element={<Authenticated><ProfileUpdate /></Authenticated>} />
           <Route path="*" element={<NotFound />} />
           </LoadRoutes>
-        {/* </Routes> */}
         <Footer />
       </AppContext.Provider>
     </BrowserRouter>
