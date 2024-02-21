@@ -40,9 +40,16 @@ export default function Admin() {
       const userSnapshot = await get(userRef);
       const userData = userSnapshot.val();
 
+      const newIsBlockedStatus = !userData.isBlocked;
       await update(userRef, {
-        isBlocked: !userData.isBlocked,
+        isBlocked: newIsBlockedStatus,
       });
+
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, isBlocked: newIsBlockedStatus } : user
+        )
+      );
 
       console.log("User isBlocked updated successfully.");
     } catch (error) {
