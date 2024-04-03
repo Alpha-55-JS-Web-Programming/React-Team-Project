@@ -1,0 +1,17 @@
+.footer {
+    clear:both;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 25px auto;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 100%;
+}
+
+.footer-text {
+    text-align: center;
+
+}
