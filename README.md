@@ -1,155 +1,86 @@
-<img src="https://webassets.telerikacademy.com/images/default-source/logos/telerik-academy.svg" alt="logo" width="300px" style="margin-top: 20px;"/>
+# Health & Wellness Forum
 
-# React Forum 
+### Description
 
-### 1. Description
+This Health and Wellness forum is a dedicated space where users celebrate healthy living by sharing insights, engaging in discussions, and valuing contributions through upvotes and comments. Each user could explore topics, sort content, and select tags to dive into a world prioritizing wellness and community support.
 
-Design and implement a Forum System, where the users can create posts, add comments, and upvote/downvote the things that they like or dislike the most. Choose what your forum will be about and stick with it. Examples: an automotive fanbase forum, java technical learning forum, crypto trading forum, fashion forum, etc. The forum should revolve around one or two general topics.
-<br />
+### Creators
 
-## 2. Functional Requirements
+- Andrey Raychev - [@Andrey-Raychev](https://github.com/Andrey-Raychev)
+- Martin Andreev - [@Martin-Andreev-288](https://github.com/Martin-Andreev-288)
+- Zvezda Neycheva - [@DreamersJS](https://github.com/DreamersJS)
 
-## Entities (documents)
-· Authentication is handled by Firebase, there is no need for auth entity
+### Technologies used
 
-· Each **user** must have a first and last name, email and/or username
+- JavaScript
+- React
+- HTML
+- CSS
+- Firebase
+- ESLint
+- git
 
-    o First name and last name must be between 4 and 32 symbols.
+### Instalation
 
-    o Email must be a valid email and unique in the system.
+```
+npm install
+```
 
-· Each **admin** must have a first and last name, email, and may have a phone number.
+### Run the application
 
-    o First name and last name must be between 4 and 32 symbols.
+```
+npm start
+```
 
-    o Email must be a valid email and unique in the system.
+### Usage
 
-· Each **post** must have a user who created it, a title, content, comments and how many likes it has received.
+- **Public part: Explore the Pulse of Health & Wellness Forum**
+  <br />In the forum's public view, visitors can browse, sort, and search through all posts, including the top 10 trending topics, filtering by tags for tailored exploration. View real-time stats on users and posts. Interactions and deeper insights prompt a seamless sign-in or sign-up process for full engagement.
 
-    o The title must be between 16 and 64 symbols.
+<img src="./assets/images/publicpart.png"/>
+<br/>
 
-    o The content must be between 32 symbols and 8192 symbols.
+- **Home for Members**
+  <br />Upon login, the forum members are welcomed to a dynamic space where they not only explore, sort, and search posts but also dive deep into discussions. With the ability to react to posts and access detailed insights, users enjoy a richer, interactive experience, fostering meaningful health and wellness conversations.
 
-    o The post must have a user who created it.
+ <img src="./assets/images/privatepart.png"/>
+ <br />
 
-    o Other users must be able to post replies.
+- **Deep Dive into Discussions**
+  <br />Clicking "details" on any post within the Health & Wellness Forum reveals the full story, inviting users to read extended content and contribute their thoughts through comments. Administrative privileges, such as editing and deleting posts, are enabled for users with admin status.
 
-<br />
+<img src="./assets/images/singlepost.png"/>
+<br/>
 
-## Public Part
+- **Explore What's Trending**
+  <br />The Top 10 Trending page showcases the pulse of the Health & Wellness Forum, featuring two dynamic lists: the most commented posts and the most recently created posts. Accessible to everyone, this space highlights the forum's most engaging and current discussions.
 
-The public part must be accessible without authentication.
+<img src="./assets/images/top10.png"/>
+<br/>
 
-On the home page, anonymous users must be presented with the core features of the platform as well as how many people are using it and how many posts have been created so far.
+- **Craft Your Contribution**
+  <br/>Embark on post creation by selecting a captivating title and drafting insights or experiences in the content section. Enhance discoverability by optionally tagging the post, guiding it towards like-minded members of the Health & Wellness Forum.
 
-Anonymous users must be able to register and log in.
+<img src="./assets/images/createpost.png"/>
+<br/>
 
-Anonymous users should be able to see a list of the top 10 most commented posts and a list of the 10 most recently created posts. 
+- **Admin Panel: Empowering Forum Management**
+  <br/>Exclusive to administrators, the Admin Panel serves as the command center for maintaining the Health & Wellness Forum's integrity and user experience. Admins wield the ability to search for users, toggle their roles between admin and user, and enforce forum participation rules by blocking or unblocking access as necessary.
 
-<br />
+<img src="./assets/images/adminpannel.png"/>
+<br/>
 
-## Private part
+- **Personalize the Forum Experience**
+  <br/>The Profile Information page enables users to express individuality and manage forum presence. Uploading a profile image adds a personal touch, while editing profile details ensures information remains current. The logout option is also provided for privacy and security within the Health & Wellness Forum.
 
-Accessible only if the user is authenticated.
+<img src="./assets/images/profilepannel.png"/>
+<br/>
 
-The user must be able to log in and log out.
+### Test Accounts:
 
-Users must be able to browse posts created by the other users with an option to sort and filter them.
-
-Users must be able to view a single post including its title, content, comments, likes, etc. The details of the post and any available user actions (comment/like/edit) should be presented on the same page.
-
-Users must be able to update their profile information. Users should not be able to change their username once registered. Users could upload a profile photo.
-
-Users must be able to create a new post with at least a title and content.
-
-Each user must be able to edit only personal posts or comments.
-
-Each user must be able to view all their or any other user’s posts and comments (with the option to filter and sort them).
-
-Each user must be able to remove one or more of their own posts. Deleting a post should be available while reading the details of an individual post or when browsing the list of all posts.
-
-Each user must be able to comment/reply to any other forum post.
-
-<br />
-
-## Administrative part
-
-Accessible to users with administrative privileges.
-
-Admin must be able to search for a user by their username, email, or display name.
-
-Admin must be able to block or unblock individual users. A blocked user must not be able to create posts or comments.
-
-Admin must be able to delete any post.
-
-Admin must be able to view a list of all posts with an option to filter and sort them.
-
-<br />
-
-## Optional feature
-
-Post Tags – In order for the users to navigate easier and find certain topics faster, you can implement tags. A tag is additional information that can be put under each post after creating the post. The process of adding a tag/s to a post is as follows: The user creates a post, then proceeds to edit the post, once on the edit post page, the user can add a tag/s under it. If the tag does not exist, a new one must be added to the database. If the tag exists, a new one must not be created, the one already in the database must be reused. All tags should be lowercase only.
-
-After the post is tagged, other users can find it by typing in the tag in the search bar. For example: your forum is about cars, a post is marked with the tags: “mercedes” and “tuning,” when “mercedes” is typed in the search bar, all posts that are tagged with “mercedes” should appear in the front-end.
-
-A User must be able to add/remove/edit tags only on its own posts. Admins must be able to add/remove/edit tags on all posts.
-
-<br />
-
-## Firebase Realtime Database 
-
-All data should be stored in the document (NoSQL) database hosted by Google Firebase. You must think of a way to organize your documents to achieve the functionalities described above.
-
-<br />
-
-#### Scenario 1
-
-A friend of Pavel’s told him about this amazing forum, where lots of people share their ideas and perspectives on the crypto/stock market. Pavel enters the website and sees a feed of posts. He can sort them by most liked or newest. He can also filter them by a certain word/s. He is an anonymous user so he cannot create a post yet. He registers and then logs in to the forum. He can now start sharing his ideas with his buddy crypto “holders.” 
-
-#### Scenario 2
-
-
-Your forum has accumulated thousands of new users. Most of them are proactively helpful and positive, but some of them started posting spam or/and irrelevant information to the forum. You hire a moderator. You instruct the moderator to enter the forum and create a first-time registration. You as an admin give admin rights to your moderator through the forum. They can now start deleting posts and ban users that do not follow the forum rules! 
-
-<br />
-
-## 2. Technical Requirements
-
-## General
-
-· Follow OOP principles when coding (if and when applicable) · Follow KISS, SOLID, DRY principles when coding
-
-· Follow the functional programming principles (use pure functions, avoid side effects, make use of array methos and higher-order functions where applicable)
-
-· Use tiered project structure (separate the application in layers)
-
-· You should implement proper exception handling and propagation
-
-· Try to think ahead. When developing something, think – “How hard would it be to change/modify this later?”
-
-## Git
-
-Commits in the GitHub repository should give a good overview of how the project was developed, which features were created first and the people who contributed. Contributions from all team members must be evident through the git commit history! The repository must contain the complete application source code and any scripts (database scripts, for example).
-
-Provide a link to a GitHub repository with the following information in the README.md file:
-
-· Project description
-
-· Link to the hosted project (if hosted online)
-
-· Instructions on how to setup and run the project locally.
-
-· Scheme (structure) of the documents in the database (must)
-
-## Optional Requirements
-
-· Integrate your project with a Continuous Integration server and configure your unit tests to run on each commit to your master branch
-
-· Use branches while working with git
-
-· Host the entire application in Firebase (Firebase Realtime Database + Firebase Hosting)
-<br />
-
-## 3. Teamwork Guidelines
-
-Refer to the teamwork guidelines document found along with the project requirements.
+- User:
+  - email: johnnycash@abv.bg
+  - pass: 123456
+- Admin:
+  - email: whitedove@yahoo.com
+  - pass: 123456
